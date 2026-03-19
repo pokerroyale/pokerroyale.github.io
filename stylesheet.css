@@ -1,0 +1,520 @@
+@font-face{
+		font-family: 'Din';
+/*		src: url('fonts/regular.ttf') format('truetype'),
+			url('fonts/regular.woff') format('woff'); -->		*/
+		font-weight: normal;
+		font-style: normal;
+	}
+	@font-face{
+		font-family: 'Din';
+/*		src: url('fonts/bold.ttf') format('truetype'),
+			url('fonts/bold.woff') format('woff'); -->			*/
+		font-weight: bold;
+		font-style: normal;
+	}
+	html, body{
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		font-family: Din, Tahoma, sans-serif;
+		font-size: 9px;
+		text-align: center;
+	}
+	div, span{
+		box-sizing: border-box;
+	}
+	
+	a{
+		display: block;
+		font-weight: bold;
+		text-decoration: none;
+		background: #ff0000;
+		background-image: linear-gradient(#eeeeee, #dddddd 50%);
+		color: #ffffff;
+		margin: 0;
+	}
+	
+	body{}
+	
+	div#menu{
+		position: fixed;
+		display: table;
+		width: 98%;
+		height: 18px;
+		margin: 1%;
+	}
+	
+	input[type=radio], input[type=checkbox]{
+		visibility: hidden;
+		display: none;
+	}
+	label{
+		display: table-cell;
+		width: 33.33%;
+		color: #000000;
+		background: #eeeeee;
+		background-image: linear-gradient(#eeeeee, #dddddd 50%);
+		font-size: 10px;
+		font-weight: bold;
+		vertical-align: middle;
+	}
+	input[type=radio]#header_levels + label{ border-radius: 5px 0 0 5px; }
+	input[type=radio]#header_game + label{ width: 33.34%; }
+	input[type=radio]#header_config + label{ border-radius: 0 5px 5px 0; }
+	
+	input[type=radio]:checked + label, input[type=checkbox]:checked + label{
+		color: #ffffff;
+		background-image: linear-gradient(#ff0000, #660000 50%);
+	}
+	input[type=checkbox] + label{ font-size: 10px; }
+	input[type=checkbox] + label::before{ content: "\2610"; }
+	input[type=checkbox]:checked + label::before{ content: "\2611"; }
+	
+	div#main{
+		display: flex;
+		position: relative;
+		width: 300%;
+		height: 95%;
+		margin-top: 22px;
+		margin-left: -200%;
+	}
+	
+	/* STYLES FOR LEVELS SCREEN */
+	div#levels{
+		width: 33.33%;
+		height: 100%;
+	}
+	
+	div#levels .hand{
+		display: flex;
+		place-items: center;
+		gap: 0.5%;
+		padding: 0.5%;
+		width: 98%;
+		height: 5%;
+		border-radius: 5px;
+		margin: 0 auto;
+	}
+	div#levels .hand.even{ background-color: #eeeeee; }
+	div#levels .hand.odd{}
+	div#levels .hand.active{ background-image: linear-gradient(#aaffaa, #44ff44 50%); }
+	div#levels .hand span{
+		display: flex;
+		place-items: center;
+		justify-content: center;
+		height: 100%;
+	}
+	div#levels .hand .label{
+		width: 29.5%;
+		font-size: 10px;
+	}
+	div#levels .hand .sample{
+		width: 18%;
+		font-size: 12px;
+	}
+	div#levels .hand .sample span{ }
+	div#levels .hand .sample span.red{ color: #ff0000; }
+	div#levels .hand .sample span.black{ color: #000000; }
+	div#levels .hand .plays{ width: 5%; }
+	div#levels .hand .level{
+		width: 15%;
+		font-size: 14px;
+		font-weight: bold;
+	}
+	div#levels .hand .button{
+		width: 7.25%;
+		background-image: linear-gradient(#ff0000, #660000 50%);
+		font-size: 14px;
+		font-weight: bold;
+		color: #eeeeee;
+		border-radius: 6px;
+		display: none;
+	}
+	div#levels .hand .button.up{}
+	div#levels .hand .button.down{}
+	div#levels .hand .button.up.disabled, div#levels .hand .button.down.disabled{
+		background-image: linear-gradient(#eeeeee, #dddddd 50%);
+	}
+	
+	div#levels .hand.active .level{ display: none; }
+	div#levels .hand.active .button{ display: flex; }
+	
+	div#levels .hand .points, div#levels .hand .multi{
+		width: 15%;
+		color: #eeeeee;
+		text-shadow: 1px 1px 2px #000000;
+		font-size: 11px;
+		font-weight: bold;
+		border-radius: 3px;
+	}
+	div#levels .hand .points{ background-color: #2222ff; }
+	div#levels .hand .multi{ background-color: #ff5500; }
+	
+	div#levels #levels_header{ height: 2.5%; }
+	div#levels #levels_header span{
+		background-color: #cccccc;
+		font-size: 6px;
+		font-weight: normal;
+		color: #000000;
+		text-shadow: none;
+		border-radius: 0; }
+	div#levels #levels_header .label{ width: 48%; }
+/*	div#levels #levels_header .sample{ width: 0; }	*/
+	div#levels #levels_header .plays{}
+	div#levels #levels_header .level{}
+	div#levels #levels_header .points, div#levels #levels_header .multi{}
+	
+	div#levels .stats{
+		display: table;
+		margin-top: 3px;
+		width: 98%;
+		height: 2%;
+	}
+	div#levels .stats span{
+		display: table-cell;
+		vertical-align: middle;
+	}
+	div#levels .stats .label{	width: 38%; text-align: right; }
+	div#levels .stats .counter{ width: 12%; text-align: center; }
+	
+	div#levels .levels_footer{
+		position: absolute;
+		display: flex;
+		place-items: center;
+		justify-content: center;
+		gap: 0.5%;
+		padding: 0.25%;
+		width: 32.66%;
+		margin: 0 0.33%;
+		height: 5%;
+		border-radius: 5px;
+		background-image: linear-gradient(#eeeeee, #dddddd 50%);
+	}
+	div#levels .levels_footer.active{
+		color: #eeeeee;
+		text-shadow: 1px 1px 2px #000000;
+	}
+	
+	div#levels .levels_footer span{
+		display: flex;
+		place-items: center;
+		justify-content: center;
+		height: 100%;
+		font-size: 12px;
+		font-weight: bold;
+	}
+	div#levels .levels_footer .label{ width: 47%; }
+	div#levels .levels_footer .counter{ width: 10%; }
+	div#levels .levels_footer .button{
+		width: 20%;
+		background-image: linear-gradient(#dddddd, #cccccc 50%);
+		font-size: 14px;
+		font-weight: bold;
+		color: #eeeeee;
+		border-radius: 6px;
+	}
+	div#levels .levels_footer .button.down{}
+	div#levels .levels_footer .button.up{}
+	div#levels .levels_footer .button.disabled{
+		background-image: linear-gradient(#dddddd, #cccccc 50%) !important;
+	}
+	
+	div#levels #tokens{ bottom: 0; }
+	div#levels #max_discards{ bottom: 6%; }
+	div#levels #max_hands{ bottom: 12%; }
+	
+	div#levels #tokens .label{ }
+	div#levels #tokens .button{ width: 9.5%; }
+	div#levels #tokens .counter{ }
+	
+	div#levels #max_hands.active{
+		background-image: linear-gradient(#009999, #006666 50%);
+		color: #eeeeee;
+	}
+	div#levels #max_discards.active{
+		background-image: linear-gradient(#999900, #666600 50%);
+		color: #eeeeee;
+	}
+	div#levels #tokens.active{
+		background-image: linear-gradient(#666666, #222222 50%);
+		color: #eeeeee;
+	}
+	div#levels .levels_footer.active .button{
+		background-image: linear-gradient(#ff0000, #660000 50%);
+	}
+	
+	/* STYLES FOR GAME SCREEN */
+	div#game{
+		width: 33.34%;
+		height: 100%;
+	}
+	
+	div#game div#game_header{
+		display: table;
+		width: 98%;
+		height: 2%;
+		margin: 0 auto;
+		font-size: 9px;
+		background-color: #0000ff;
+		color: white;
+		text-shadow: 0 0 1px #000000;
+	}
+	div#game div#game_header.suddeath{ background-color: #ff0000; }
+	
+	div#game div#game_header span{
+		display: table-cell;
+		width: 33.33%;
+	}
+	div#game div#game_header span#goal{ width: 33.34%; }
+	
+	div#game div#played div.discard{
+		position: relative;
+		display: inline-block;
+		width: 98%;
+		margin: 1% auto 0;
+		border: 1px solid #ff0000;
+		background-color: #ffaaaa;
+		color: #ff0000;
+		font-size: 8px;
+		border-radius: 3px;
+	}
+	
+	div#game form{
+		position: relative;
+		display: grid;
+		grid-template-columns: 5;
+		grid-gap: 1%;
+		width: 98%;
+		margin: 1% auto;
+		border-radius: 5px;
+		background-color: #ccccff;
+		box-sizing: border-box;
+		padding: 1%;
+	}
+	
+	div#game form div{
+		display: grid;
+		place-items: center;
+		height: 30px;
+		border: 1px solid blue;
+		border-radius: 4px;
+		background-color: #cccccc;
+		font-size: 12px;
+		font-weight: bold;
+		color: #ffffff;
+		text-shadow: 1px 1px 3px #000000;
+	}
+	
+	div#game form #play_hand{
+		grid-column: 1;
+		grid-row: 1;
+	}
+	
+	div#game form #play_points{
+		grid-column: 2;
+		grid-row: 1;
+		background-color: #2222ff;
+	}
+	div#game form #play_multi{
+		grid-column: 3;
+		grid-row: 1;
+		background-color: #ff5500;;
+	}
+	div#game form #play_total{
+		grid-column: 4 / 6;
+		grid-row: 1;
+	}
+	div#game form #play_reset{
+		grid-column: 1;
+		grid-row: 2;
+	}
+	div#game form #play_discard{
+		grid-column: 2 / 4;
+		background-image: linear-gradient(#ff0000, #660000 50%);
+		grid-row: 2;
+	}
+	div#game form #play_confirm{
+		grid-column: 4 / 6;
+		grid-row: 2;
+		background-image: linear-gradient(#00ee00, #006600 50%);
+	}
+	div#game form #play_discard.disabled, div#game form #play_confirm.disabled{
+		background-image: linear-gradient(#eeeeee, #dddddd 50%);
+	}
+	
+	div#game div#next_round{
+		display: flex;
+		justify-content: center;
+		position: relative;
+		height: 4%;
+		width: 80%;
+		margin: 1% auto;
+		border-radius: 20px;
+		font-size: 12px;
+		font-weight: bold;
+		background-image: linear-gradient(#ff0000, #660000 50%);
+		color: white;
+		text-shadow: 0 0 3px #000000;
+	}
+	
+	div#game div#game_footer{
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1%;
+		width: 33.34%;
+		height: 6%;
+		margin: 0 auto;
+		bottom: 0;
+		BORDER: 1PX SOLID BLUE;
+	}
+	div#game div#game_footer span{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5%;
+		font-size: 14px;
+		font-weight: bold;
+		height: 100%;
+		width: 24%;
+		border-radius: 5px;
+		color: #eeeeee;
+		text-shadow: 1px 1px 2px #000000;
+	}
+	div#game div#game_footer span#cards{
+		background-image: linear-gradient(#990099, #660066 50%);
+		
+	}
+	div#game div#game_footer span#dice{
+		background-image: linear-gradient(#eeeeee, #cccccc 50%);
+		font-size: 28px;
+		color: #000000;
+		text-shadow: none;
+	}
+	div#game div#game_footer span#dice::before{ content: "\2684"; }
+	
+	div#game div#game_footer span#discards_left{
+		background-image: linear-gradient(#999900, #666600 50%);
+	}
+	div#game div#game_footer span#hands_left{
+		background-image: linear-gradient(#009999, #006666 50%);
+	}
+	
+	div#game div#game_footer span#hands_button_down, div#game div#game_footer span#hands_button_up{
+		background-image: linear-gradient(#00ee00, #006600 50%);
+	}
+	
+	div#game div#counters span#discards_button_down, div#game div#counters span#discards_button_up{
+		background-image: linear-gradient(#ee0000, #660000 50%);
+	}
+	
+	div#game div#counters span.button.disabled{
+		background-image: linear-gradient(#eeeeee, #dddddd 50%) !important;
+	}
+	div#game div#counters span#hands_counter{ color: #006600; }
+	div#game div#counters span#discards_counter{ color: #660000; }
+	
+	/* STYLES FOR OPTIONS SCREEN */
+	div#config{
+		width: 33.33%;
+		height: 100%;
+	}
+	
+	div#config #logo{
+		position: relative;
+		display: flex;
+		margin: 1% auto;
+		align-items: center;
+		justify-content: center;
+		width: 80%;
+		height: 60px;
+		border-radius: 50px;
+		border: 10px solid transparent;
+		background: linear-gradient(45deg, red, blue) border-box;
+		mask:
+			linear-gradient(#ffff00 0 0) padding-box,
+			linear-gradient(#ff0000 0 0);
+		mask-composite: exclude;
+		color: white;
+		font-size: 18px;
+		font-weight: bold;
+		text-shadow: 1px 1px 2px #000000;
+	}
+	
+	div#config div.options{
+		position: relative;
+		display: table;
+		width: 90%;
+		height: 30px;
+		margin: 1% auto;
+	}
+	div#config div.options span{
+		display: table-cell;
+		width: 12%;
+		text-align: center;
+		vertical-align: middle;
+	}
+	div#config div.options span.label{
+		display: table-cell;
+		width: 64%;
+		text-align: right;
+		padding-right: 8px;
+		font-size: 10px;
+	}
+	div#config div.options span.button{
+		background-image: linear-gradient(#ff0000, #660000 50%);
+		font-size: 12px;
+		font-weight: bold;
+		color: #eeeeee;
+		border: 2px solid white;
+		border-radius: 8px;
+	}
+	div#config div.options span.button.disabled{
+		background-image: linear-gradient(#eeeeee, #dddddd 50%);
+	}
+	div#config div.options span#rounds{
+		font-size: 12px;
+		font-weight: bold;
+	}
+	
+	div#config div.options span label{
+		display: inline-block;
+		width: 100%;
+		font-size: 16px;
+		border-radius: 5px;
+		padding-bottom: 2px;
+	}
+	
+	div#config div#new_game{
+		position: relative;
+		display: table;
+		height: 10%;
+		width: 80%;
+		margin: 20% auto;
+		border-radius: 60px;
+		background-image: linear-gradient(#ff0000, #660000 50%);
+		font-size: 14px;
+		font-weight: bold;
+		padding: auto;
+		color: #ffffff;
+		text-shadow: 0 0 8px #000000;
+	}
+	div#config div#new_game span{
+		display: table-cell;
+		width: 40%;
+		text-align: center;
+		vertical-align: middle;
+	}
+	div#config div#new_game span.red, div#config div#new_game span.black{
+		width: 15%;
+		font-size: 28px;
+		text-shadow: 0 0 8px #ffffff;
+		padding-bottom: 6px;
+	}
+	div#config div#new_game span.red { color: #ff0000; }
+	div#config div#new_game span.black { color: #000000; }
+	
+	@media screen (max-height: 640px){}
