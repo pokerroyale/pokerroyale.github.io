@@ -224,10 +224,10 @@
 			<div id="next_round" onClick="next_blind()";>Siguiente</div>
 			
 			<div id="game_footer">
-				<div id="cards">
+				<div id="cards" onClick="change_cards(0);">
 					<span class="counter"></span>
-					<span class="button down">-</span>
-					<span class="button up">+</span>
+					<span class="button down" onClick="change_cards(-1);">-</span>
+					<span class="button up" onClick="change_cards(1);">+</span>
 				</div>
 				<div id="dice"></div>
 				<div id="discards_left">
@@ -248,9 +248,9 @@
 			
 			<div class="options">
 				<span class="label">Rondas para muerte súbita:</span>
-				<span class="button down" onClick="change_rounds(-1);">-</span>
-				<span id="rounds">6</span>
-				<span class="button up" onClick="change_rounds(+1);">+</span>
+				<span class="button down" onClick="change_suddeath(-1);">-</span>
+				<span id="suddeath"></span>
+				<span class="button up" onClick="change_suddeath(+1);">+</span>
 			</div>
 			<div class="options">
 				<span class="label">Variante sin figuras:</span>

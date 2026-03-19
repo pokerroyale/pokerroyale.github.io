@@ -47,7 +47,6 @@
 	
 	var level = new Array();
 	var plays = new Array();
-	var rounds = 6;
 	var max_hands, max_discards;
 	var hands_left, discards_left;
 	var blind, goal, total_points;
@@ -55,7 +54,8 @@
 	var played_discards, not_played_discards;
 	var defeated_blinds, not_defeated_blinds;
 	var increased_levels;
-	var nofigures;
+	var suddeath;
+	var nofigures, balanced;
 	var cards;
 	var tokens;
 	
@@ -72,14 +72,7 @@
 		if(1 == 0){
 		//
 		//		CARGAR DATOS DESDE COOKIES
-		//		rounds
-		//		level
-		//		plays
-		//		hands
-		//		discards
-		//		blind
-		//
-			rounds = 6;				// BORRAR
+	
 			max_hands = 4;			// BORRAR
 			hands_left = max_hands;	// BORRAR
 			max_discards = 3;		// BORRAR
@@ -94,17 +87,17 @@
 			defeated_blinds = 0;	// BORRAR
 			not_defeated_blinds = 0;// BORRAR
 			increased_levels = 0;	// BORRAR
+			suddeath = 6;			// BORRAR
 			nofigures = false;		// BORRAR
-			cards = ($("#nofigures").is(":checked")) ? 40 : 52;	// BORRAR
+			balanced = false;		// BORRAR
+			cards = 0				// BORRAR
 			tokens = 4;				// BORRAR
 			
 			$("#config #savegame").prop("checked", true);
-			$("#config #nofigures").prop("checked", nofigures);
 			
 			show_game();
 		}
 		else{
-			rounds = 6;
 			max_hands = 4;
 			hands_left = max_hands;
 			max_discards = 3;
@@ -118,7 +111,9 @@
 			defeated_blinds = 0;
 			not_defeated_blinds = 0;
 			increased_levels = 0;
+			suddeath = 6;
 			nofigures = false;
+			balanced = false;
 			cards = 0;
 			tokens = 4;
 			
@@ -159,7 +154,9 @@
 		$("#game #game_footer #discards_left .counter").text(discards_left);
 		$("#game #game_footer #hands_left .counter").text(hands_left);
 		
-		$("#config #rounds").text(rounds);
+		$("#config #suddeath").text(suddeath);
+		$("#config #nofigures").prop("checked", nofigures);
+		$("#config #balanced").prop("checked", balanced);
 	}
 	
 	function save_game(){
@@ -179,25 +176,24 @@
 	}
 	
 	function new_game(){
-		var apply = true;
-		if((played_hands) || (played_discards)) apply = confirm("Esto borrará la partida en curso. ¿Continuar?");
-		
-		if(apply){
-		//	PRIMERO: BORRAR COOKIES
-			
-			$("#game #game_header").removeClass("suddeath");
-			$("#game #played").text("");
-			
-			$("#config #rounds_down").removeClass("disabled");
-			$("#config #rounds_up").removeClass("disabled");
-			$("#config #nofigures").prop("disabled", false);
-			$("#config #balanced").prop("disabled", false);
-
-			load_game();
-			save_game();
+		if((played_hands) || (played_discards)){
+			if(confirm("Esto borrará la partida en curso. ¿Continuar?")){
+				
+				//	PRIMERO: BORRAR COOKIES
+				
+				$("#game #game_header").removeClass("suddeath");
+				$("#game #played").text("");
+				
+				if(suddeath > 1) $("#config .button.down").removeClass("disabled");
+				if(suddeath < 12) $("#config .button.up").removeClass("disabled");
+				$("#config #nofigures").prop("disabled", false);
+				$("#config #balanced").prop("disabled", false);
+				
+				load_game();
+				save_game();
+			}
 		}
-		
-		show_game();
+		else show_game();
 	}
 	
 	function show_levels(){
@@ -338,7 +334,20 @@
 	}
 	
 	function change_cards(inc){
+		clearTimeout(timeout);
 		
+		if(!$("#game #game_footer #cards").hasClass("active")){
+			deactivate_all();
+			
+			$("#game #game_footer #cards").addClass("active");
+			
+			timeout = setTimeout(function(){
+				$("#game #game_footer #cards").removeClass("active");
+			}, delay);
+		}
+		else{
+			
+		}
 	}
 	
 	function change_hands(inc){
@@ -362,17 +371,17 @@
 		clearTimeout(timeout);
 	}
 	
-	function change_rounds(inc){
-		if(Math.trunc((blind - 0.1) / 3) + 1 <= rounds){
-			if(((inc < 0) && (rounds > 1)) || ((inc > 0) && (rounds < 12))) rounds += inc;
-			if((inc < 0) && (rounds == 1)) $("#config #rounds_down").addClass("disabled");
-			else if ((inc > 0) && (rounds == 12)) $("#config #rounds_up").addClass("disabled");
+	function change_suddeath(inc){
+		if(Math.trunc((blind - 0.1) / 3) + 1 <= suddeath){
+			if(((inc < 0) && (suddeath > 1)) || ((inc > 0) && (suddeath < 12))) suddeath += inc;
+			if((inc < 0) && (suddeath == 1)) $("#config .button.down").addClass("disabled");
+			else if ((inc > 0) && (suddeath == 12)) $("#config .button.up").addClass("disabled");
 			else{
 				$("#config .button.down").removeClass("disabled");
-				$("#config .button_up").removeClass("disabled");
+				$("#config .button.up").removeClass("disabled");
 			}
 			
-			$("#rounds").text(rounds);
+			$("#config #suddeath").text(suddeath);
 		}
 	}
 

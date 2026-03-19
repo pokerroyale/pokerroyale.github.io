@@ -39,11 +39,11 @@
 	body{}
 	
 	div#menu{
-		position: fixed;
+		position: relative;
 		display: table;
 		width: 98%;
 		height: 3%;
-		margin: 0.5% 1%;
+		margin: 1%;
 	}
 	
 	input[type=radio], input[type=checkbox]{
@@ -68,16 +68,32 @@
 		color: #ffffff;
 		background-image: linear-gradient(#ff0000, #660000 50%);
 	}
+	input[type=radio]:disabled + label, input[type=checkbox]:disabled + label{
+		background-image: linear-gradient(#eeeeee, #dddddd 50%);
+	}
 	input[type=checkbox] + label{ font-size: 10px; }
 	input[type=checkbox] + label::before{ content: "\2610"; }
 	input[type=checkbox]:checked + label::before{ content: "\2611"; }
 	
+	span.button{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #ffffff;
+		background-image: linear-gradient(#ff0000, #660000 50%);
+		text-shadow: 1px 1px 2px #000000;
+	}
+	span.button.disabled{
+		background-image: linear-gradient(#eeeeee, #dddddd 50%);
+		color: #666666;
+	}
+	
 	div#main{
-		position: absolute;
+		position: relative;
 		display: flex;
 		width: 300%;
 		height: 95%;
-		margin-top: 3.5%;
+		margin-top: 0;
 		margin-left: -200%;
 	}
 	
@@ -107,7 +123,7 @@
 		height: 100%;
 	}
 	div#levels .hand .label{
-		width: 29.5%;
+		width: 27.5%;
 		font-size: 10px;
 	}
 	div#levels .hand .sample{
@@ -119,12 +135,12 @@
 	div#levels .hand .sample span.black{ color: #000000; }
 	div#levels .hand .plays{ width: 5%; }
 	div#levels .hand .level{
-		width: 15%;
+		width: 17%;
 		font-size: 14px;
 		font-weight: bold;
 	}
 	div#levels .hand .button{
-		width: 7.25%;
+		width: 8.25%;
 		background-image: linear-gradient(#ff0000, #660000 50%);
 		font-size: 14px;
 		font-weight: bold;
@@ -152,7 +168,7 @@
 	div#levels .hand .points{ background-color: #2222ff; }
 	div#levels .hand .multi{ background-color: #ff5500; }
 	
-	div#levels #levels_header{ height: 4%; }
+	div#levels #levels_header{ height: 3%; }
 	div#levels #levels_header span{
 		background-color: #cccccc;
 		font-size: 7px;
@@ -160,7 +176,7 @@
 		color: #000000;
 		text-shadow: none;
 		border-radius: 0; }
-	div#levels #levels_header .label{ width: 48%; }
+	div#levels #levels_header .label{ width: 46%; }
 /*	div#levels #levels_header .sample{ width: 0; }	*/
 	div#levels #levels_header .plays{}
 	div#levels #levels_header .level{}
@@ -387,7 +403,6 @@
 	}
 	div#game div#game_footer div#cards{
 		background-image: linear-gradient(#990099, #660066 50%);
-		
 	}
 	div#game div#game_footer div#dice{
 		background-image: linear-gradient(#eeeeee, #cccccc 50%);
@@ -404,10 +419,17 @@
 		background-image: linear-gradient(#009999, #006666 50%);
 	}
 	
-	div#game div#game_footer div#hands_button_down, div#game div#game_footer div#hands_button_up{
-		background-image: linear-gradient(#00ee00, #006600 50%);
+	div#game div#game_footer div span.counter{
 	}
-	
+	div#game div#game_footer div span.button{
+		display: none;
+	}
+	div#game div#game_footer div.active span.counter{
+		display: none;
+	}
+	div#game div#game_footer div.active span.button{
+		display: flex;
+	}
 	
 	/* STYLES FOR OPTIONS SCREEN */
 	div#config{
@@ -466,7 +488,7 @@
 	div#config div.options span.button.disabled{
 		background-image: linear-gradient(#eeeeee, #dddddd 50%);
 	}
-	div#config div.options span#rounds{
+	div#config div.options span#suddeath{
 		font-size: 12px;
 		font-weight: bold;
 	}
