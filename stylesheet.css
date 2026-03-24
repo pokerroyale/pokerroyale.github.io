@@ -1,12 +1,12 @@
 	@font-face{
 		font-family: 'Bahnschrift';
-		src: url('fonts/bahnschrift_regular.ttf') format('truetype');
+		src: url('bahnschrift_regular.ttf') format('truetype');
 		font-weight: normal;
 		font-style: normal;
 	}
 	@font-face{
 		font-family: 'Bahnschrift';
-		src: url('fonts/bahnschrift_bold.ttf') format('truetype');
+		src: url('bahnschrift_bold.ttf') format('truetype');
 		font-weight: bold;
 		font-style: normal;
 	}
@@ -405,7 +405,6 @@
 		height: 6%;
 		margin: 0 auto;
 		bottom: 0;
-		BORDER: 1PX SOLID BLUE;
 	}
 	div#game div#game_footer div{
 		display: flex;
