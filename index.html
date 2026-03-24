@@ -21,9 +21,9 @@
 </head/>
 <body onLoad="load_game();" onBeforeUnload="// return confirm();">
 	<div id="menu">
-		<input type="radio" id="header_levels" name="swap" onclick="show_levels();"><label for="header_levels">NIVELES</label>
-		<input type="radio" id="header_game" name="swap" onclick="show_game();"><label for="header_game">JUEGO</label>
-		<input type="radio" id="header_config" name="swap" onClick="show_config();"><label for="header_config">OPCIONES</label>
+		<input type="radio" id="header_levels" name="swap" onclick="show_levels();"  /><label for="header_levels">NIVELES</label>
+		<input type="radio" id="header_game" name="swap" onclick="show_game();" /><label for="header_game">JUEGO</label>
+		<input type="radio" id="header_config" name="swap" onClick="show_config();" checked /><label for="header_config">OPCIONES</label>
 	</div>
 	
 	<div id="main">
@@ -37,7 +37,7 @@
 			</div>
 			<div class="hand even" id="hand_12" onClick="change_level(12, 0);">
 				<span class="label" >5 de color</span>
-				<span class="sample"><span class="black">&#127137;&#127137;&#127137;&#127137;&#127137;</span></span>
+				<span class="sample"><span class="black">&#127137;&nbsp;&#127137;&nbsp;&#127137;&nbsp;&#127137;&nbsp;&#127137;</span></span>
 				<span class="plays"></span>
 				<span class="level"></span>
 				<span class="button down" onClick="change_level(12, -1);">-</span>
@@ -47,7 +47,7 @@
 			</div>
 			<div class="hand odd" id="hand_11" onClick="change_level(11, 0);">
 				<span class="label">Full de color</span>
-				<span class="sample"><span class="red">&#127162;&#127162;&#127162;&#127156;&#127156;</span></span>
+				<span class="sample"><span class="red">&#127162;&nbsp;&#127162;&nbsp;&#127162;&nbsp;&#127156;&nbsp;&#127156;</span></span>
 				<span class="plays"></span>
 				<span class="level"></span>
 				<span class="button down" onClick="change_level(11, -1);">-</span>
@@ -57,7 +57,7 @@
 			</div>
 			<div class="hand even" id="hand_10" onClick="change_level(10, 0);">
 				<span class="label">Repóker</span>
-				<span class="sample"><span class="black">&#127137;</span><span class="red">&#127153;</span><span class="black">&#127185;</span><span class="red">&#127169;</span><span class="black">&#127137;</span></span>
+				<span class="sample"><span class="black">&#127137;</span>&nbsp;<span class="red">&#127153;</span>&nbsp;<span class="black">&#127185;</span>&nbsp;<span class="red">&#127169;</span>&nbsp;<span class="black">&#127137;</span></span>
 				<span class="plays"></span>
 				<span class="level"></span>
 				<span class="button down" onClick="change_level(10, -1);">-</span>
@@ -67,7 +67,7 @@
 			</div>
 			<div class="hand odd" id="hand_9" onClick="change_level(9, 0);">
 				<span class="label">Esc. color / Real</span>
-				<span class="sample"><span class="red">&#127153;&#127166;&#127165;&#127163;&#127162;</span></span>
+				<span class="sample"><span class="red">&#127153;&nbsp;&#127166;&nbsp;&#127165;&nbsp;&#127163;&nbsp;&#127162;</span></span>
 				<span class="plays"></span>
 				<span class="level"></span>
 				<span class="button down" onClick="change_level(9, -1);">-</span>
@@ -77,7 +77,7 @@
 			</div>
 			<div class="hand even" id="hand_8" onClick="change_level(8, 0);;">
 				<span class="label">Póker</span>
-				<span class="sample"><span class="black">&#127137;</span><span class="red">&#127153;</span><span class="black">&#127185;</span><span class="red">&#127169;</span></span>
+				<span class="sample"><span class="black">&#127137;</span>&nbsp;<span class="red">&#127153;</span>&nbsp;<span class="black">&#127185;</span>&nbsp;<span class="red">&#127169;</span></span>
 				<span class="plays"></span>
 				<span class="level"></span>
 				<span class="button down" onClick="change_level(8, -1);">-</span>
@@ -87,7 +87,7 @@
 			</div>
 			<div class="hand odd" id="hand_7" onClick="change_level(7, 0);">
 				<span class="label">Full</span>
-				<span class="sample"><span class="red">&#127175;</span><span class="black">&#127191;</span><span class="red">&#127159;</span><span class="black">&#127140;</span><span class="red">&#127156;</span></span>
+				<span class="sample"><span class="red">&#127175;</span>&nbsp;<span class="black">&#127191;</span>&nbsp;<span class="red">&#127159;</span>&nbsp;<span class="black">&#127140;</span>&nbsp;<span class="red">&#127156;</span></span>
 				<span class="plays"></span>
 				<span class="level"></span>
 				<span class="button down" onClick="change_level(7, -1);">-</span>
@@ -97,7 +97,7 @@
 			</div>
 			<div class="hand even" id="hand_6" onClick="change_level(6, 0);">
 				<span class="label">Color</span>
-				<span class="sample"><span class="red">&#127178;&#127175;&#127173;&#127171;&#127170;</span></span>
+				<span class="sample"><span class="red">&#127178;&nbsp;&#127175;&nbsp;&#127173;&nbsp;&#127171;&nbsp;&#127170;</span></span>
 				<span class="plays"></span>
 				<span class="level"></span>
 				<span class="button down" onClick="change_level(6, -1);">-</span>
@@ -107,7 +107,7 @@
 			</div>
 			<div class="hand odd" id="hand_5" onClick="change_level(5, 0);">
 				<span class="label">Escalera</span>
-				<span class="sample"><span class="black">&#127190;</span><span class="red">&#127173;</span><span class="black">&#127140;</span><span class="red">&#127155;</span><span class="black">&#127186;</span></span>
+				<span class="sample"><span class="black">&#127190;</span>&nbsp;<span class="red">&#127173;</span>&nbsp;<span class="black">&#127140;</span>&nbsp;<span class="red">&#127155;</span>&nbsp;<span class="black">&#127186;</span></span>
 				<span class="plays"></span>
 				<span class="level"></span>
 				<span class="button down" onClick="change_level(5, -1);">-</span>
@@ -117,7 +117,7 @@
 			</div>
 			<div class="hand even" id="hand_4" onClick="change_level(4, 0);">
 				<span class="label">Trío</span>
-				<span class="sample"><span class="red">&#127171;</span><span class="black">&#127139;</span><span class="red">&#127155;</span></span>
+				<span class="sample"><span class="red">&#127171;</span>&nbsp;<span class="black">&#127139;</span>&nbsp;<span class="red">&#127155;</span></span>
 				<span class="plays"></span>
 				<span class="level"></span>
 				<span class="button down" onClick="change_level(4, -1);">-</span>
@@ -127,7 +127,7 @@
 			</div>
 			<div class="hand odd" id="hand_3" onClick="change_level(3, 0);">
 				<span class="label">Doble pareja</span>
-				<span class="sample"><span class="black">&#127145;</span><span class="red">&#127161;</span><span class="black">&#127188;</span><span class="red">&#127172;</span></span>
+				<span class="sample"><span class="black">&#127145;</span>&nbsp;<span class="red">&#127161;</span>&nbsp;<span class="black">&#127188;</span>&nbsp;<span class="red">&#127172;</span></span>
 				<span class="plays"></span>
 				<span class="level"></span>
 				<span class="button down" onClick="change_level(3, -1);">-</span>
@@ -137,7 +137,7 @@
 			</div>
 			<div class="hand even" id="hand_2" onClick="change_level(2, 0);">
 				<span class="label">Pareja</span>
-				<span class="sample"><span class="red">&#127173;</span><span class="black">&#127189;</span></span>
+				<span class="sample"><span class="red">&#127173;</span>&nbsp;<span class="black">&#127189;</span></span>
 				<span class="plays"></span>
 				<span class="level"></span>
 				<span class="button down" onClick="change_level(2, -1);">-</span>
@@ -203,7 +203,7 @@
 		</div>
 		
 		<div id="game">
-			<div id="game_header">
+			<div id="game_header" onClick="change_boss();">
 				<span id="round"></span>
 				<span id="blind"></span>
 				<span id="goal"></span>
@@ -230,15 +230,15 @@
 					<span class="button up" onClick="change_cards(1);">+</span>
 				</div>
 				<div id="dice"></div>
-				<div id="discards_left">
+				<div id="discards_left" onClick="change_discards(0);">
 					<span class="counter"></span>
-					<span class="button down">-</span>
-					<span class="button up">+</span>
+					<span class="button down" onClick="change_discards(-1);">-</span>
+					<span class="button up" onClick="change_discards(1);">+</span>
 				</div>
-				<div id="hands_left">
+				<div id="hands_left" onClick="change_hands(0);">
 					<span class="counter"></span>
-					<span class="button down">-</span>
-					<span class="button up">+</span>
+					<span class="button down" onClick="change_hands(-1);">-</span>
+					<span class="button up" onClick="change_hands(1);">+</span>
 				</div>
 			</div>
 		</div>
@@ -253,22 +253,13 @@
 				<span class="button up" onClick="change_suddeath(+1);">+</span>
 			</div>
 			<div class="options">
-				<span class="label">Variante sin figuras:</span>
-				<span></span>
-				<span id="nofigures_checkbox"><input type="checkbox" name="nofigures" id="nofigures" /><label for="nofigures"></label></span>
-				<span></span>
+				<input type="checkbox" name="nofigures" id="nofigures" onChange="$('#cards .counter').text((this.checked) ? 40 : 52);" /><label for="nofigures">Variante sin figuras</label>
 			</div>
 			<div class="options">
-				<span class="label">Variante equilibrada:</span>
-				<span></span>
-				<span id="balanced_checkbox"><input type="checkbox" name="balanced" id="balanced" /><label for="balanced"></label></span>
-				<span></span>
+				<input type="checkbox" name="balanced" id="balanced" /><label for="balanced">Variante equilibrada</label>
 			</div>
 			<div class="options">
-				<span class="label">Guardar partida (usa cookies):</span>
-				<span></span>
-				<span id="savegame_checkbox"><input type="checkbox" name="savegame" id="savegame" onClick="save_game();" /><label for="savegame"></label></span>
-				<span></span>
+				<input type="checkbox" name="savegame" id="savegame" onClick="save_game();" /><label for="savegame">Guardar partida (usa cookies)</label>
 			</div>
 			
 			<div id="new_game" onClick="new_game();">

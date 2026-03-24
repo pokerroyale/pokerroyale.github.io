@@ -49,15 +49,17 @@
 	var plays = new Array();
 	var max_hands, max_discards;
 	var hands_left, discards_left;
-	var blind, goal, total_points;
+	var round, blind, goal, total_points;
 	var played_hands, not_played_hands;
 	var played_discards, not_played_discards;
 	var defeated_blinds, not_defeated_blinds;
 	var increased_levels;
-	var suddeath;
-	var nofigures, balanced;
 	var cards;
 	var tokens;
+	var suddeath;
+	var nofigures, balanced;
+	var timeout = 0;
+	var delay = 1500;
 	
 	function load_game(){
 //			var cookie = document.cookie;
@@ -77,6 +79,7 @@
 			hands_left = max_hands;	// BORRAR
 			max_discards = 3;		// BORRAR
 			discards_left = max_discards;// BORRAR
+			round = 1;			// BORRAR
 			blind = 1;				// BORRAR
 			goal = 300;				// BORRAR
 			total_points = 0;		// BORRAR
@@ -102,6 +105,7 @@
 			hands_left = max_hands;
 			max_discards = 3;
 			discards_left = max_discards;
+			round = 1;
 			blind = 1;
 			goal = 300;
 			played_hands = 0;
@@ -112,8 +116,8 @@
 			not_defeated_blinds = 0;
 			increased_levels = 0;
 			suddeath = 6;
-			nofigures = false;
-			balanced = false;
+			nofigures = $("#nofigures").is(":checked");
+			balanced = $("#balanced").is(":checked");
 			cards = 0;
 			tokens = 4;
 			
@@ -121,8 +125,6 @@
 				level[i] = 1;
 				plays[i] = 0;
 			}
-			
-			show_config();
 		}
 		
 		for(var i = 12; i >= 1; i--){
@@ -150,7 +152,7 @@
 		$("#game #game_header #blind").text("Ciega PEQUEÑA");
 		$("#game #game_header #goal").html("&#9672; " + goal + " &#9672;");
 		
-		$("#game #game_footer #cards .counter").text(cards + ($("#nofigures").is(":checked")) ? 40 : 52);
+		$("#game #game_footer #cards .counter").text((nofigures ? 40 : 52) + cards);
 		$("#game #game_footer #discards_left .counter").text(discards_left);
 		$("#game #game_footer #hands_left .counter").text(hands_left);
 		
@@ -178,9 +180,9 @@
 	function new_game(){
 		if((played_hands) || (played_discards)){
 			if(confirm("Esto borrará la partida en curso. ¿Continuar?")){
-				
+				//
 				//	PRIMERO: BORRAR COOKIES
-				
+				//
 				$("#game #game_header").removeClass("suddeath");
 				$("#game #played").text("");
 				
@@ -188,12 +190,13 @@
 				if(suddeath < 12) $("#config .button.up").removeClass("disabled");
 				$("#config #nofigures").prop("disabled", false);
 				$("#config #balanced").prop("disabled", false);
-				
-				load_game();
-				save_game();
 			}
 		}
 		else show_game();
+		
+		load_game();
+		save_game();
+		
 	}
 	
 	function show_levels(){
@@ -211,20 +214,10 @@
 		$("#main").animate({ left: "0" }, 200);
 	}
 	
-	var timeout = 0;
-	var delay = 1500;
-	function deactivate_all(){
-		$("#levels .hand").removeClass("active");
-		$("#levels .levels_footer").removeClass("active");
-		$("#game #game_footer span").removeClass("active");
-	}
-	
 	function change_level(hand, inc){
 		clearTimeout(timeout);
-		
 		if((!$("#hand_" + hand).hasClass("active")) || (!inc)){
-			deactivate_all();
-			
+			$(".active").removeClass("active");
 			$("#hand_" + hand).addClass("active");
 			
 			timeout = setTimeout(function(){
@@ -235,8 +228,8 @@
 			level[hand] += inc;
 			increased_levels += inc;
 			
-			if(level[hand] > 1) $("#hand_" + hand + " .button.down").removeClass("disabled");
-			else $("#hand_" + hand + " .button.down").addClass("disabled");
+			if(level[hand] == 1) $("#hand_" + hand + " .button.down").addClass("disabled");
+			else $("#hand_" + hand + " .button.down").removeClass("disabled");
 			
 			$("#hand_" + hand).removeAttr("onClick");
 			
@@ -250,16 +243,13 @@
 				$("#hand_" + hand).attr("onClick", "change_level(" + hand + ", 0);");
 			}, 1);
 		}
-		
 		save_game();
 	}
 	
 	function change_max_hands(inc){
 		clearTimeout(timeout);
-		
 		if(!$("#levels #max_hands").hasClass("active")){
-			deactivate_all();
-			
+			$(".active").removeClass("active");
 			$("#levels #max_hands").addClass("active");
 		}
 		else if((inc > 0) || (max_hands > 1)){
@@ -285,10 +275,8 @@
 	
 	function change_max_discards(inc){
 		clearTimeout(timeout);
-		
 		if(!$("#levels #max_discards").hasClass("active")){
-			deactivate_all();
-			
+			$(".active").removeClass("active");
 			$("#levels #max_discards").addClass("active");
 		}
 		else if((inc > 0) || (max_discards > 1)){
@@ -314,9 +302,8 @@
 	
 	function change_tokens(inc){
 		clearTimeout(timeout);
-		
 		if(!$("#levels #tokens").hasClass("active")){
-			deactivate_all();
+			$(".active").removeClass("active");
 			$("#levels #tokens").addClass("active");
 		}
 		else{
@@ -333,42 +320,99 @@
 		save_game();
 	}
 	
+	function change_boss(){
+		if(blind - (3 * (round - 1)) == 3){
+			if(!$("#game #game_header").hasClass("active")){
+				clearTimeout(timeout);
+				$(".active").removeClass("active");
+			
+			}
+		}
+	}
+	
 	function change_cards(inc){
 		clearTimeout(timeout);
-		
 		if(!$("#game #game_footer #cards").hasClass("active")){
-			deactivate_all();
-			
+			$(".active").removeClass("active");
 			$("#game #game_footer #cards").addClass("active");
 			
 			timeout = setTimeout(function(){
 				$("#game #game_footer #cards").removeClass("active");
 			}, delay);
 		}
-		else{
+		else if((inc > 0) || ((nofigures ? 40 : 52) + cards)){
+			cards += inc;
 			
+			if(!(((nofigures) ? 40 : 52) + cards)) $("#game #game_footer #cards .button.down").addClass("disabled");
+			else $("#game #game_footer #cards .button.down").removeClass("disabled");
+			
+			$("#game #game_footer #cards").removeAttr("onClick");
+			
+			$("#game #game_footer #cards .counter").text((nofigures ? 40 : 50) + cards);
+			$("#levels #cards").text(cards);
+			
+			$("#game #game_footer #cards").removeClass("active");
+			timeout = setTimeout(function(){
+				$("#game #game_footer #cards").attr("onClick", "change_cards(0);");
+			}, 1);
+			save_game();
 		}
 	}
 	
 	function change_hands(inc){
 		clearTimeout(timeout);
-		
 		if(!$("#game_footer #hands_left").hasClass("active")){
-			deactivate_all();
-			
+			$(".active").removeClass("active");
 			$("#game_footer #hands_left").addClass("active");
 			
 			timeout = setTimeout(function(){
 				$("#game_footer #hands_left").removeClass("active");
 			}, delay);
 		}
-		else{
+		else if((inc > 0) || (hands_left)){
+			hands_left += inc;
 			
+			if(!hands_left) $("#game #game_footer #hands_left .button.down").addClass("disabled");
+			else $("#game #game_footer #hands_left .button.down").removeClass("disabled");
+			
+			$("#game #game_footer #hands_left").removeAttr("onClick");
+			
+			$("#game #game_footer #hands_left .counter").text(hands_left);
+			
+			$("#game #game_footer #hands_left").removeClass("active");
+			timeout = setTimeout(function(){
+				$("#game #game_footer #hands_left").attr("onClick", "change_hands(0);");
+			}, 1);
+			save_game();
 		}
 	}
 	
 	function change_discards(inc){
 		clearTimeout(timeout);
+		if(!$("#game_footer #discards_left").hasClass("active")){
+			$(".active").removeClass("active");
+			$("#game_footer #discards_left").addClass("active");
+			
+			timeout = setTimeout(function(){
+				$("#game_footer #discards_left").removeClass("active");
+			}, delay);
+		}
+		else if((inc > 0) || (discards_left)){
+			discards_left += inc;
+			
+			if(!discards_left) $("#game #game_footer #discards_left .button.down").addClass("disabled");
+			else $("#game #game_footer #discards_left .button.down").removeClass("disabled");
+			
+			$("#game #game_footer #discards_left").removeAttr("onClick");
+			
+			$("#game #game_footer #discards_left .counter").text(discards_left);
+			
+			$("#game #game_footer #discards_left").removeClass("active");
+			timeout = setTimeout(function(){
+				$("#game #game_footer #discards_left").attr("onClick", "change_discards(0);");
+			}, 1);
+			save_game();
+		}
 	}
 	
 	function change_suddeath(inc){
@@ -387,20 +431,20 @@
 
 	function next_blind(){
 		blind++;
-		var cur_round = Math.trunc((blind + 2) / 3);
-		$("#game #game_header #round").html("Ronda <b>" + cur_round + "</b>");
+		var round = Math.trunc((blind + 2) / 3);
+		$("#game #game_header #round").html("Ronda <b>" + round + "</b>");
 		
-		var base_points = (rounds >= cur_round) ? 300 * (2 ** (cur_round - 1)) : 300 * (2 ** (cur_round - 1)) + 100 * (2 ** (cur_round - 1) * cur_round - 1) - 100 * (cur_round - 1);
-		goal = base_points * (0.5 * (blind - (3 * (cur_round - 1)) + 1));
+		var base_points = (suddeath >= round) ? 300 * (2 ** (round - 1)) : 300 * (2 ** (round - 1)) + 100 * (2 ** (round - 1) * round - 1) - 100 * (round - 1);
+		goal = base_points * (0.5 * (blind - (3 * (round - 1)) + 1));
 		
-		switch(blind - (3 * (cur_round - 1))){
+		switch(blind - (3 * (round - 1))){
 			case 1:	$("#game #game_header #blind").text("Ciega PEQUEÑA"); break;
 			case 2: $("#game #game_header #blind").text("Ciega GRANDE"); break;
 			case 3:	$("#game #game_header #blind").html("Ciega <b>JEFE</b>"); break;
 			default: break;
 		}
 		
-		if(rounds >= cur_round) $("#game #game_header #goal").html("&#9672; " + goal + " &#9672;");
+		if(suddeath >= round) $("#game #game_header #goal").html("&#9672; " + goal + " &#9672;");
 		else{
 			$("#game #game_header").addClass("suddeath");
 			$("#game #game_header #goal").html("&#9760; <b>" + goal + "</b> &#9760;");
@@ -440,6 +484,7 @@
 		if(discards_left > 0){
 			clearTimeout(timeout);
 			if($("#play #play_discard").hasClass("disabled")){
+				$(".active").removeClass("active");
 				$("#play #play_discard").removeClass("disabled");
 				
 				timeout = setTimeout(function(){
@@ -450,7 +495,8 @@
 				played_discards++;
 				discards_left--;
 				
-				$("#game #played").append("<div class='discard'>Descarte</div>");
+				$("#game #played").append("<div class='discard'></div>");
+				$("#game #played .discard").animate({ height: "18px" }, 250);
 				
 				$("#play #play_discard").addClass("disabled");
 				$("#game_footer #discards_left .counter").text(discards_left);

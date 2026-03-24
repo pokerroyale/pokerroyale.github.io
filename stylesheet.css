@@ -1,14 +1,12 @@
-@font-face{
-		font-family: 'Din';
-/*		src: url('fonts/regular.ttf') format('truetype'),
-			url('fonts/regular.woff') format('woff'); -->		*/
+	@font-face{
+		font-family: 'Bahnschrift';
+		src: url('fonts/bahnschrift_regular.ttf') format('truetype');
 		font-weight: normal;
 		font-style: normal;
 	}
 	@font-face{
-		font-family: 'Din';
-/*		src: url('fonts/bold.ttf') format('truetype'),
-			url('fonts/bold.woff') format('woff'); -->			*/
+		font-family: 'Bahnschrift';
+		src: url('fonts/bahnschrift_bold.ttf') format('truetype');
 		font-weight: bold;
 		font-style: normal;
 	}
@@ -18,13 +16,11 @@
 		margin: 0;
 		padding: 0;
 		overflow: hidden;
-		font-family: Din, Tahoma, sans-serif;
-		font-size: 9px;
+		font-family: Bahnschrift, Tahoma, Verdana, sans-serif; /*Din, Tahoma, sans-serif; */
+		font-size: 10px;
 		text-align: center;
 	}
-	div, span{
-		box-sizing: border-box;
-	}
+	div, span{ box-sizing: border-box; }
 	
 	a{
 		display: block;
@@ -32,7 +28,7 @@
 		text-decoration: none;
 		background: #ff0000;
 		background-image: linear-gradient(#eeeeee, #dddddd 50%);
-		color: #ffffff;
+		color: #eeeeee;
 		margin: 0;
 	}
 	
@@ -65,27 +61,38 @@
 	input[type=radio]#header_config + label{ border-radius: 0 5px 5px 0; }
 	
 	input[type=radio]:checked + label, input[type=checkbox]:checked + label{
-		color: #ffffff;
+		color: #eeeeee;
 		background-image: linear-gradient(#ff0000, #660000 50%);
+		border: 1px solid #660000;
 	}
 	input[type=radio]:disabled + label, input[type=checkbox]:disabled + label{
 		background-image: linear-gradient(#eeeeee, #dddddd 50%);
+		border: 1px solid #dddddd;
 	}
-	input[type=checkbox] + label{ font-size: 10px; }
-	input[type=checkbox] + label::before{ content: "\2610"; }
-	input[type=checkbox]:checked + label::before{ content: "\2611"; }
+	input[type=checkbox] + label{
+		font-size: 14px;
+		border-radius: 6px;
+	}
+	input[type=checkbox] + label::after{ content: " \2610"; }
+	input[type=checkbox]:checked + label::after{ content: " \2611"; }
 	
 	span.button{
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		color: #ffffff;
-		background-image: linear-gradient(#ff0000, #660000 50%);
+		height: 100%;
+		font-size: 14px;
+		font-weight: bold;
+		color: #eeeeee;
 		text-shadow: 1px 1px 2px #000000;
+		background-image: linear-gradient(#ff0000, #660000 50%);
+		border: 1px solid #660000;
+		border-radius: 6px;
 	}
 	span.button.disabled{
 		background-image: linear-gradient(#eeeeee, #dddddd 50%);
 		color: #666666;
+		border: 1px solid #dddddd;
 	}
 	
 	div#main{
@@ -109,7 +116,7 @@
 		gap: 0.5%;
 		padding: 0.5%;
 		width: 98%;
-		height: 5%;
+		height: 5.5%;
 		border-radius: 5px;
 		margin: 0 auto;
 	}
@@ -123,29 +130,30 @@
 		height: 100%;
 	}
 	div#levels .hand .label{
-		width: 27.5%;
-		font-size: 10px;
+		width: 38%;
+		font-size: 14px;
+		font-weight: bold;
+		text-shadow: 0 0 3px #eeeeee;
+		z-index: 1;
 	}
 	div#levels .hand .sample{
-		width: 18%;
-		font-size: 12px;
+		width: 38%;
+		margin-left: -38%;
+		font-size: 20px;
+		font-weight: bold;
+		opacity: 0.20;
 	}
-	div#levels .hand .sample span{ }
+	div#levels .hand .sample span{ text-shadow: 0 0 3px #eeeeee; }
 	div#levels .hand .sample span.red{ color: #ff0000; }
 	div#levels .hand .sample span.black{ color: #000000; }
-	div#levels .hand .plays{ width: 5%; }
+	div#levels .hand .plays{ width: 6%; }
 	div#levels .hand .level{
-		width: 17%;
-		font-size: 14px;
+		width: 26%;
+		font-size: 16px;
 		font-weight: bold;
 	}
 	div#levels .hand .button{
-		width: 8.25%;
-		background-image: linear-gradient(#ff0000, #660000 50%);
-		font-size: 14px;
-		font-weight: bold;
-		color: #eeeeee;
-		border-radius: 6px;
+		width: 12.75%;
 		display: none;
 	}
 	div#levels .hand .button.up{}
@@ -176,7 +184,7 @@
 		color: #000000;
 		text-shadow: none;
 		border-radius: 0; }
-	div#levels #levels_header .label{ width: 46%; }
+	div#levels #levels_header .label{ width: 38%; }
 /*	div#levels #levels_header .sample{ width: 0; }	*/
 	div#levels #levels_header .plays{}
 	div#levels #levels_header .level{}
@@ -200,8 +208,7 @@
 		display: flex;
 		place-items: center;
 		justify-content: center;
-		gap: 0.5%;
-		padding: 0.2%;
+		padding: 0.2% 0;
 		width: 32.66%;
 		margin: 0 0.33%;
 		height: 5%;
@@ -221,15 +228,17 @@
 		font-size: 12px;
 		font-weight: bold;
 	}
-	div#levels .levels_footer .label{ width: 47%; }
+	div#levels .levels_footer .label{ width: 40%; }
 	div#levels .levels_footer .counter{ width: 10%; }
 	div#levels .levels_footer .button{
-		width: 20%;
+		width: 24%;
 		background-image: linear-gradient(#dddddd, #cccccc 50%);
 		font-size: 14px;
 		font-weight: bold;
 		color: #eeeeee;
 		border-radius: 6px;
+		margin: 0 0.5%;
+		opacity: 0;
 	}
 	div#levels .levels_footer .button.down{}
 	div#levels .levels_footer .button.up{}
@@ -242,7 +251,7 @@
 	div#levels #max_hands{ bottom: 12%; }
 	
 	div#levels #tokens .label{ }
-	div#levels #tokens .button{ width: 9.5%; }
+	div#levels #tokens .button{ width: 11.5%; }
 	div#levels #tokens .counter{ }
 	div#levels #tokens .counter.negative{ color: #ff0000; }
 	
@@ -260,6 +269,7 @@
 	}
 	div#levels .levels_footer.active .button{
 		background-image: linear-gradient(#ff0000, #660000 50%);
+		opacity: 1;
 	}
 	
 	/* STYLES FOR GAME SCREEN */
@@ -271,9 +281,10 @@
 	div#game div#game_header{
 		display: table;
 		width: 98%;
-		height: 2%;
+		height: 4%;
 		margin: 0 auto;
-		font-size: 9px;
+		font-size: 12px;
+		font-weight: bold;
 		background-color: #0000ff;
 		color: white;
 		text-shadow: 0 0 1px #000000;
@@ -283,20 +294,27 @@
 	div#game div#game_header span{
 		display: table-cell;
 		width: 33.33%;
+		vertical-align: middle;
 	}
 	div#game div#game_header span#goal{ width: 33.34%; }
 	
 	div#game div#played div.discard{
 		position: relative;
-		display: inline-block;
-		width: 98%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		margin: 1% auto 0;
-		border: 1px solid #ff0000;
-		background-color: #ffaaaa;
-		color: #ff0000;
-		font-size: 8px;
+		width: 98%;
+		height: 0;
+		border: 1px solid #666600;
+		background-color: #999900;
+		font-size: 10px;
+		font-weight: bold;
+		color: #eeeeee;
+		text-shadow: 0 0 2px #000000;
 		border-radius: 3px;
 	}
+	div#game div#played div.discard::before{ content: "\2718  Descarte"; }
 	
 	div#game form{
 		position: relative;
@@ -320,7 +338,7 @@
 		background-color: #cccccc;
 		font-size: 12px;
 		font-weight: bold;
-		color: #ffffff;
+		color: #eeeeee;
 		text-shadow: 1px 1px 3px #000000;
 	}
 	
@@ -349,22 +367,23 @@
 	}
 	div#game form #play_discard{
 		grid-column: 2 / 4;
-		background-image: linear-gradient(#ff0000, #660000 50%);
+		background-image: linear-gradient(#999900, #666600 50%);
 		grid-row: 2;
 	}
 	div#game form #play_confirm{
 		grid-column: 4 / 6;
 		grid-row: 2;
-		background-image: linear-gradient(#00ee00, #006600 50%);
+		background-image: linear-gradient(#009999, #006666 50%);
 	}
 	div#game form #play_discard.disabled, div#game form #play_confirm.disabled{
 		background-image: linear-gradient(#eeeeee, #dddddd 50%);
 	}
 	
 	div#game div#next_round{
-		display: flex;
-		justify-content: center;
 		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		height: 4%;
 		width: 80%;
 		margin: 1% auto;
@@ -392,8 +411,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.5%;
-		font-size: 14px;
+		padding: 0.5% 0;
+		font-size: 16px;
 		font-weight: bold;
 		height: 100%;
 		width: 24%;
@@ -401,9 +420,12 @@
 		color: #eeeeee;
 		text-shadow: 1px 1px 2px #000000;
 	}
+	div#game div#game_footer div span.counter{}
+	
 	div#game div#game_footer div#cards{
 		background-image: linear-gradient(#990099, #660066 50%);
 	}
+	div#game div#game_footer div#cards .counter::before{ content: "\1f0a1  "; }
 	div#game div#game_footer div#dice{
 		background-image: linear-gradient(#eeeeee, #cccccc 50%);
 		font-size: 28px;
@@ -419,10 +441,13 @@
 		background-image: linear-gradient(#009999, #006666 50%);
 	}
 	
-	div#game div#game_footer div span.counter{
-	}
+	
+	div#game div#game_footer div#discards_left .counter::before{ content: "\2718  "; }
+	div#game div#game_footer div#hands_left .counter::before{ content: "\2714  "; }
 	div#game div#game_footer div span.button{
 		display: none;
+		width: 48%;
+		margin: 0 1%;
 	}
 	div#game div#game_footer div.active span.counter{
 		display: none;
@@ -459,46 +484,38 @@
 	
 	div#config div.options{
 		position: relative;
-		display: table;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 90%;
 		height: 30px;
 		margin: 1% auto;
 	}
 	div#config div.options span{
-		display: table-cell;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 12%;
-		text-align: center;
-		vertical-align: middle;
 	}
 	div#config div.options span.label{
-		display: table-cell;
 		width: 64%;
-		text-align: right;
+		justify-content: right;
 		padding-right: 8px;
-		font-size: 10px;
-	}
-	div#config div.options span.button{
-		background-image: linear-gradient(#ff0000, #660000 50%);
 		font-size: 12px;
-		font-weight: bold;
-		color: #eeeeee;
-		border: 2px solid white;
-		border-radius: 8px;
 	}
-	div#config div.options span.button.disabled{
-		background-image: linear-gradient(#eeeeee, #dddddd 50%);
-	}
+	div#config div.options span.button{	}
+	div#config div.options span.button.disabled{}
 	div#config div.options span#suddeath{
-		font-size: 12px;
+		font-size: 14px;
 		font-weight: bold;
 	}
 	
-	div#config div.options span label{
-		display: inline-block;
+	div#config div.options label{
+		display: flex;
 		width: 100%;
-		font-size: 16px;
-		border-radius: 5px;
-		padding-bottom: 2px;
+		height: 100%;
+		align-items: center;
+		justify-content: center;
 	}
 	
 	div#config div#new_game{
@@ -512,7 +529,7 @@
 		font-size: 14px;
 		font-weight: bold;
 		padding: auto;
-		color: #ffffff;
+		color: #eeeeee;
 		text-shadow: 0 0 8px #000000;
 	}
 	div#config div#new_game span{
@@ -524,7 +541,7 @@
 	div#config div#new_game span.red, div#config div#new_game span.black{
 		width: 15%;
 		font-size: 28px;
-		text-shadow: 0 0 8px #ffffff;
+		text-shadow: 0 0 8px #eeeeee;
 		padding-bottom: 6px;
 	}
 	div#config div#new_game span.red { color: #ff0000; }
