@@ -26,6 +26,7 @@
 	// &#9861; &#x2685; // DADO 6
 	// &#10227; // flecha relanzar
 	// &#128472; reroll
+	// &plusmn; SÍMBOLO MÁS/MENOS
 	
 	const points = new Array();
 	const multi = new Array();
@@ -214,14 +215,28 @@
 		$("#main").animate({ left: "0" }, 200);
 	}
 	
+	function refresh(){
+		$(".active").removeClass("active");
+		
+		for(var i = 1; i <= 12; i++){
+			$("#hand_" + i + " .points").text(points[i] + inc_points[i] * (level[i] - 1));
+			$("#hand_" + i + " .multi").text(multi[i] + inc_multi[i] * (level[i] - 1));
+		}
+	}
+	
 	function change_level(hand, inc){
 		clearTimeout(timeout);
 		if((!$("#hand_" + hand).hasClass("active")) || (!inc)){
-			$(".active").removeClass("active");
+			refresh();
+			
 			$("#hand_" + hand).addClass("active");
+			$("#hand_" + hand + " .points").html(((level[hand] > 1) ? "&plusmn; " : "+ ") + inc_points[hand]);
+			$("#hand_" + hand + " .multi").html(((level[hand] > 1) ? "&plusmn; " : "+ ") + inc_multi[hand]);
 			
 			timeout = setTimeout(function(){
 				$("#hand_" + hand).removeClass("active");
+				$("#hand_" + hand + " .points").text(points[hand] + inc_points[hand] * (level[hand] - 1));
+				$("#hand_" + hand + " .multi").text(multi[hand] + inc_multi[hand] * (level[hand] - 1));
 			}, delay);
 		}
 		else if((inc > 0) || (level[hand] > 1)){
@@ -249,7 +264,7 @@
 	function change_max_hands(inc){
 		clearTimeout(timeout);
 		if(!$("#levels #max_hands").hasClass("active")){
-			$(".active").removeClass("active");
+			refresh();
 			$("#levels #max_hands").addClass("active");
 		}
 		else if((inc > 0) || (max_hands > 1)){
@@ -276,7 +291,7 @@
 	function change_max_discards(inc){
 		clearTimeout(timeout);
 		if(!$("#levels #max_discards").hasClass("active")){
-			$(".active").removeClass("active");
+			refresh();
 			$("#levels #max_discards").addClass("active");
 		}
 		else if((inc > 0) || (max_discards > 1)){
@@ -303,7 +318,7 @@
 	function change_tokens(inc){
 		clearTimeout(timeout);
 		if(!$("#levels #tokens").hasClass("active")){
-			$(".active").removeClass("active");
+			refresh();
 			$("#levels #tokens").addClass("active");
 		}
 		else{
@@ -322,9 +337,9 @@
 	
 	function change_boss(){
 		if(blind - (3 * (round - 1)) == 3){
+			clearTimeout(timeout);
 			if(!$("#game #game_header").hasClass("active")){
-				clearTimeout(timeout);
-				$(".active").removeClass("active");
+				refresh();
 			
 			}
 		}
@@ -333,7 +348,7 @@
 	function change_cards(inc){
 		clearTimeout(timeout);
 		if(!$("#game #game_footer #cards").hasClass("active")){
-			$(".active").removeClass("active");
+			refresh();
 			$("#game #game_footer #cards").addClass("active");
 			
 			timeout = setTimeout(function(){
@@ -362,7 +377,7 @@
 	function change_hands(inc){
 		clearTimeout(timeout);
 		if(!$("#game_footer #hands_left").hasClass("active")){
-			$(".active").removeClass("active");
+			refresh();
 			$("#game_footer #hands_left").addClass("active");
 			
 			timeout = setTimeout(function(){
@@ -390,7 +405,7 @@
 	function change_discards(inc){
 		clearTimeout(timeout);
 		if(!$("#game_footer #discards_left").hasClass("active")){
-			$(".active").removeClass("active");
+			refresh();
 			$("#game_footer #discards_left").addClass("active");
 			
 			timeout = setTimeout(function(){
@@ -500,11 +515,12 @@
 				
 				$("#play #play_discard").addClass("disabled");
 				$("#game_footer #discards_left .counter").text(discards_left);
-			}
+				$("#levels .stats #played_discards").text(played_discards);
 			
-			$("#config #nofigures").prop("disabled", true);
-			$("#config #balanced").prop("disabled", true);
-			save_game();
+				$("#config #nofigures").prop("disabled", true);
+				$("#config #balanced").prop("disabled", true);
+				save_game();
+			}
 		}
 	}
 	

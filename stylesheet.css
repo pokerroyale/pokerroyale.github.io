@@ -314,11 +314,12 @@
 	div#game form{
 		position: relative;
 		display: grid;
-		grid-template-columns: 5;
-		grid-gap: 1%;
+		grid-template-columns: 16% 20% 20% 40%;
+		grid-gap: 5% 1%;
 		width: 98%;
+		height: 20%;
 		margin: 1% auto;
-		border-radius: 5px;
+		border-radius: 3px;
 		background-color: #ccccff;
 		box-sizing: border-box;
 		padding: 1%;
@@ -327,11 +328,11 @@
 	div#game form div{
 		display: grid;
 		place-items: center;
-		height: 30px;
+		height: 100%;
 		border: 1px solid blue;
-		border-radius: 4px;
+		border-radius: 3px;
 		background-color: #cccccc;
-		font-size: 12px;
+		font-size: 18px;
 		font-weight: bold;
 		color: #eeeeee;
 		text-shadow: 1px 1px 3px #000000;
@@ -406,7 +407,7 @@
 		align-items: center;
 		justify-content: center;
 		padding: 0.5% 0;
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: bold;
 		height: 100%;
 		width: 24%;
@@ -478,17 +479,17 @@
 		align-items: center;
 		justify-content: center;
 		width: 90%;
-		height: 30px;
-		margin: 1% auto;
+		height: 6%;
+		margin: 2% auto;
 	}
 	div#config div.options span{
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 12%;
+		width: 15%;
 	}
 	div#config div.options span.label{
-		width: 64%;
+		width: 55%;
 		justify-content: right;
 		padding-right: 8px;
 		font-size: 12px;
@@ -496,16 +497,17 @@
 	div#config div.options span.button{	}
 	div#config div.options span.button.disabled{}
 	div#config div.options span#suddeath{
-		font-size: 14px;
+		font-size: 18px;
 		font-weight: bold;
 	}
 	
 	div#config div.options label{
 		display: flex;
-		width: 100%;
-		height: 100%;
 		align-items: center;
 		justify-content: center;
+		width: 100%;
+		height: 100%;
+		font-size: 18px;
 	}
 	
 	div#config div#new_game{
@@ -516,7 +518,7 @@
 		margin: 20% auto;
 		border-radius: 60px;
 		background-image: linear-gradient(#ff0000, #660000 50%);
-		font-size: 14px;
+		font-size: 18px;
 		font-weight: bold;
 		padding: auto;
 		color: #eeeeee;
@@ -530,7 +532,7 @@
 	}
 	div#config div#new_game span.red, div#config div#new_game span.black{
 		width: 15%;
-		font-size: 28px;
+		font-size: 30px;
 		text-shadow: 0 0 8px #eeeeee;
 		padding-bottom: 6px;
 	}
