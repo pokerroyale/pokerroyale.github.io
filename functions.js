@@ -225,7 +225,6 @@
 	}
 	
 	function refresh(){
-		clearTimeout(timeout);
 		$(".active").removeClass("active");
 		
 		for(var i = 1; i <= 12; i++){
@@ -509,19 +508,34 @@
 		
 	}
 	
-	function reset(play){
-		
+	function play_reset(){
+		clearTimeout(timeout);
+		if(!$("#play #play_reset").hasClass("active")){
+			refresh();
+			$("#play #play_reset").addClass("active");
+			
+			timeout = setTimeout(function(){
+				$("#play #play_reset").removeClass("active");
+			}, delay);
+		}
+		else{
+			
+			
+			
+			
+			$("#play #play_reset").removeClass("active");
+		}
 	}
 	
 	function play_discard(){
 		if(discards_left > 0){
 			clearTimeout(timeout);
-			if($("#play #play_discard").hasClass("disabled")){
-				$(".active").removeClass("active");
-				$("#play #play_discard").removeClass("disabled");
+			if(!$("#play #play_discard").hasClass("active")){
+				refresh();
+				$("#play #play_discard").addClass("active");
 				
 				timeout = setTimeout(function(){
-					$("#play #play_discard").addClass("disabled");
+					$("#play #play_discard").removeClass("active");
 				}, delay);
 			}
 			else{
@@ -531,7 +545,7 @@
 				$("#game #played").append("<div class='discard'></div>");
 				$("#game #played .discard").animate({ height: "18px" }, 250);
 				
-				$("#play #play_discard").addClass("disabled");
+				$("#play #play_discard").removeClass("active");
 				$("#game_footer #discards_left .counter").text(discards_left);
 				if(!discards_left) $("#game_footer #discards_left .button.down").addClass("disabled");
 				$("#levels .stats #played_discards").text(played_discards);
@@ -544,7 +558,23 @@
 		}
 	}
 	
-	function play_hand(){
+	function play_confirm(){
+		clearTimeout(timeout);
+		if(!$("#play #play_confirm").hasClass("active")){
+			refresh();
+			$("#play #play_confirm").addClass("active");
+			
+			timeout = setTimeout(function(){
+				$("#play #play_confirm").removeClass("active");
+			}, delay);
+		}
+		else{
+			
+			
+			
+			
+			$("#play #play_confirm").removeClass("active");
+		}
 	
 	}
 	
@@ -584,7 +614,7 @@
 			setTimeout(function(){
 				$("#game #die_" + die).attr("class", "die die_" + (1 + Math.floor(Math.random() * 12)));
 				roll_die(die, times - 1);
-			}, 10 * (20 - times));
+			}, 5 * (30 - times));
 		}
 		else $("#game #die_" + die).removeClass("rolling");
 	}
@@ -592,13 +622,15 @@
 	function roll_dice(){
 		clearTimeout(timeout);
 		
+		$("#game #roll").addClass("disabled");
 		$("#game #die_add").remove();
 		
 		timeout = setTimeout(function(){
+			$("#game #roll").removeClass("disabled");
 			$("#game #die_" + dice).after("<div id='die_add' class='die add' onClick='add_die();'></span>");
 		}, 2500);
 		
 		for(var i = 1; i <= dice; i++){
-			roll_die(i, 1 + Math.floor(Math.random() * 20));
+			roll_die(i, 20 + Math.floor(Math.random() * 10));
 		}
 	}

@@ -216,14 +216,12 @@
 				<div id="play_points" onClick="open_points_form(1);">0</div>
 				<div id="play_multi" onClick="open_multi_form(1);">0</div>
 				<div id="play_total">0</div>
-				<div id="play_reset" onClick="reset(1);">&#10226;</div>
-				<div id="play_discard" class="disabled" onClick="play_discard();">&#10008;</div>
-				<div id="play_confirm" class="disabled" onClick="play_hand();">&#10004;</div>
+				<div id="play_reset" onClick="play_reset();">&#10226;</div>
+				<div id="play_discard" onClick="play_discard();">&#10008;</div>
+				<div id="play_confirm" onClick="play_confirm();">&#10004;</div>
 			</form>
 			
 			<div id="next_round" onClick="next_blind()";>Siguiente</div>
-			
-			
 			
 			<div id="game_footer">
 				<div id="cards" onClick="change_cards(0);">
