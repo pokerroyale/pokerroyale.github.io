@@ -605,10 +605,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-image: url("teseract.png");
-		background-repeat: no-repeat;
-		background-position: center center;
-		background-size: 50%;
+		background: url("teseract.png") center/50% no-repeat;
 		font-size: 58px;
 		text-shadow: 0 0 10px #800080;
 		border: 3px solid #800080;
@@ -642,10 +639,10 @@
 		background: url("die_add.png") center/50% no-repeat, linear-gradient(#aaffaa, #44ff44 50%) center/cover;
 	}
 	div#game div#dice_form div.die.active{
-		background: url("die_remove.png") center/50% no-repeat, linear-gradient(#ff0000, #660000 50%) center/cover;
+		background: url("die_remove.png") center/50% no-repeat, linear-gradient(#ff0000, #660000 50%) center/cover !important;
 		border: 1px solid #660000;
 	}
-	div#game div#dice_form div.die.rolling{ background-color: #aaaaaa; }
+	div#game div#dice_form div.die.rolling{ background-color: #aaaaaa !important; }
 	
 	div#game div#dice_form span.button{ font-size: 24px; }
 	
@@ -661,16 +658,14 @@
 	div#game div#dice_form span#roll.disabled{}
 	div#game div#dice_form span#dice_switch{
 		grid-row: 5;
-		background-image: url("die_teseract.png"), radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080);
-		background-repeat: no-repeat;
-		background-position: center center;
-		background-size: 40%, cover;
-		border: 3px solid #800080;
+		background: url("die_teseract.png") center/40% no-repeat, radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080) center/cover !important;
+		border: 3px solid #800080 !important;
 	}
 	div#game div#dice_form span#dice_switch.regular{
-		background-image: url("die_regular.png"), radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080);
-		border-color: #808080;
+		background: url("die_regular.png") center/40% no-repeat, radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080) center/cover !important;
+		border-color: #808080 !important;
 	}
+	div#game div#dice_form span#dice_switch.disabled{ opacity: 0.5; }
 	div#game div#dice_form span#die_button{
 		grid-row: 5;
 		background-image: url("die_regular.png"), radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080);
