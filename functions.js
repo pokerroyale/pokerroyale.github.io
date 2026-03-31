@@ -672,13 +672,13 @@
 			clearTimeout(timeout);
 			$("#game #roll").addClass("disabled");
 			$("#game #die_" + dice).removeClass("button");
-			$("#game #die_add").remove();
+			$("#game #die_add").hide();
 			$("#game #dice_switch").addClass("disabled");
 			
 			timeout = setTimeout(function(){
 				$("#game #roll").removeClass("disabled");
 				if(dice > 1) $("#game #die_" + dice).addClass("button");
-				$("#game #die_" + dice).after("<div id='die_add' class='die add' onClick='add_die();'></span>");
+				$("#game #die_add").show();
 				$("#game #dice_switch").removeClass("disabled");
 			}, 2500);
 			
