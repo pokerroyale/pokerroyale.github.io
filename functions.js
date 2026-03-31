@@ -200,11 +200,16 @@
 				$("#config #balanced").prop("disabled", false);
 			}
 		}
-		else show_game();
+		else{
+			$("#game #hands_form").addClass("hidden");
+			$("#game #points_form").addClass("hidden");
+			$("#game #multi_form").addClass("hidden");
+			$("#game #dice_form").addClass("hidden");
+			show_game();
+		}
 		
 		load_game();
 		save_game();
-		
 	}
 	
 	function show_levels(){
@@ -357,9 +362,9 @@
 	
 	function refresh_game_header(){
 		switch(blind - (3 * (round - 1))){
-			case 1:	$("#game #game_header #blind").html("&#128963; Ciega PEQUEÑA"); break;
-			case 2: $("#game #game_header #blind").html("&#128967; Ciega GRANDE"); break;
-			case 3:	$("#game #game_header #blind").html("&#128973; Ciega <b>JEFE</b>"); break;
+			case 1:	$("#game #game_header #blind").html("&#9734; Ciega PEQUEÑA"); break;
+			case 2: $("#game #game_header #blind").html("&#9733; Ciega GRANDE"); break;
+			case 3:	$("#game #game_header #blind").html("&#10029; Ciega <b>JEFE</b>"); break;
 			default: break;
 		}
 	}
@@ -672,7 +677,7 @@
 			
 			timeout = setTimeout(function(){
 				$("#game #roll").removeClass("disabled");
-				$("#game #die_" + dice).addClass("button");
+				if(dice > 1) $("#game #die_" + dice).addClass("button");
 				$("#game #die_" + dice).after("<div id='die_add' class='die add' onClick='add_die();'></span>");
 				$("#game #dice_switch").removeClass("disabled");
 			}, 2500);

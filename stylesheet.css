@@ -77,8 +77,8 @@
 		text-shadow: none;
 	}
 	
-	input[type=checkbox] + label::after{ content: "\2610"; }
-	input[type=checkbox]:checked + label::after{ content: "\2611"; }
+	input[type=checkbox] + label::after{ content: "\00a0\2610"; }
+	input[type=checkbox]:checked + label::after{ content: "\00a0\2611"; }
 	
 	div.button, span.button{
 		display: flex;
@@ -555,7 +555,7 @@
 		background-color: #eeeeee;
 		border: 4px solid #cccccc;
 		border-radius: 3px;
-		transition: all 0.3s ease-out;
+		transition: all 0.25s ease-out;
 		opacity: 1;
 		transform: translateY(0);
 		visibility: visible;
@@ -581,7 +581,7 @@
 		background-color: #eeeeee;
 		border: 4px solid #cccccc;
 		border-radius: 3px;
-		transition: all 0.3s ease-out;
+		transition: all 0.25s ease-out;
 		opacity: 1;
 		transform: translateY(0);
 		visibility: visible;
@@ -666,13 +666,6 @@
 		border-color: #808080 !important;
 	}
 	div#game div#dice_form span#dice_switch.disabled{ opacity: 0.5; }
-	div#game div#dice_form span#die_button{
-		grid-row: 5;
-		background-image: url("die_regular.png"), radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080);
-		background-repeat: no-repeat;
-		background-position: center center;
-		background-size: 20%, cover;
-	}
 	div#game div#dice_form span#close{
 		grid-row: 5;
 		grid-column: 2 / 4;
