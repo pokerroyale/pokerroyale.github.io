@@ -339,9 +339,8 @@
 		color: #eeeeee;
 	}
 	
-	div#game form #play_hand{
-		background: url("hand.png") center center / 75% no-repeat, linear-gradient(#aaffaa, #44ff44 50%) center/cover;
-	}
+	div#game form #play_hand{}
+	div#game form #play_hand.empty{ background: url("hand.png") center center / 75% no-repeat, linear-gradient(#aaffaa, #44ff44 50%); }
 	
 	div#game form #play_points, div#game form #play_multi{ text-shadow: 1px 1px 2px #000000; }
 	div#game form #play_points{ background-color: #2222ff; }
@@ -424,6 +423,7 @@
 		background: url("confirm.png") 20% center / 25% no-repeat, linear-gradient(#009999, #006666 50%);
 		border: 1px solid #006666;
 	}
+	div#game div#game_footer div#cards.active{ background: linear-gradient(#990099, #660066 50%); }
 	div#game div#game_footer div#hands_left.active{ background: linear-gradient(#009999, #006666 50%); }
 	div#game div#game_footer div#discards_left.active{ background: linear-gradient(#999900, #666600 50%); }
 	
@@ -435,6 +435,7 @@
 	div#game div#game_footer div.active span.counter{ display: none; }
 	div#game div#game_footer div.active span.button{ display: flex; }
 	
+	/* STYLE FOR EMERGENT FORMS */
 	div#game div#hands_form{
 		position: absolute;
 		top: 0;
@@ -443,7 +444,7 @@
 		width: 33.34%;
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: 24% 24% 24% 24%;
+		grid-template-rows: repeat(4, 1fr);
 		grid-gap: 1%;
 		align-items: center;
 		background-color: #eeeeee;
@@ -462,52 +463,61 @@
 		visibility: hidden;
 	}
 	div#game div#hands_form div{
+		display: grid;
+		width: 100%;
 		height: 100%;
+		grid-template-columns: 49% 49%;
+		grid-template-rows: 24% 26% 24% 22%;
+		grid-gap: 1%;
+		align-items: center;
+		justify-content: center;
 		border: 3px solid #44ff44;
 		border-radius: 6px;
 	}
-	div#game div#hands_form div.disabled{}
-	div#game div#hands_form div span{}
-	div#game div#hands_form div span.label{
+	div#game div#hands_form div span{
 		display: flex;
+		width: 100%;
+		height: 100%;
 		align-items: center;
 		justify-content: center;
-		height: 25%;
+	}
+	div#game div#hands_form div span.label{
+		grid-row: 1;
+		grid-column: 1 / 3;
 		font-size: 18px;
 		font-weight: bold;
 	}
 	div#game div#hands_form div span.sample{
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 25%;
+		grid-row: 2;
+		grid-column: 1 / 3;
 		font-size: 32px;
 		padding-bottom: 10px;
 	}
+	div#game div#hands_form div span.sample span{ width: auto; }
 	div#game div#hands_form div span.sample span.red{ color: #ff0000; }
 	div#game div#hands_form div span.sample span.black{ color: #000000; }
-/*	div#game div#hands_form div span.level{
-		display: grid;
-		align-items: center;
-		height: 30%;
-		grid-template-columns: 20% 40% 40%;
-		grid-template-rows: 75% 25%;
-	}
-	div#game div#hands_form div span.level span{ font-size: 8px; } */
 	div#game div#hands_form div span.points, div#game div#hands_form div span.multi{
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		height: 25%;
-		width: 48%;
-		margin: 0 1%;
+		grid-row: 3;
+		width: 100%;
 		font-size: 18px;
 		font-weight: bold;
 		color: #eeeeee;
+		text-shadow: 1px 1px 2px #000000;
 		border-radius: 3px;
 	}
 	div#game div#hands_form div span.points{ background-color: #2222ff; }
 	div#game div#hands_form div span.multi{ background-color: #ff5500; }
+	div#game div#hands_form div span.level{
+		grid-row: 4;
+		font-size: 12px;
+		font-weight: bold;
+	}
+	div#game div#hands_form div span.level::before{ content: "Niv.:\00a0"; }
+	div#game div#hands_form div span.plays{
+		grid-row: 4;
+		font-size: 12px;
+	}
+	div#game div#hands_form div span.plays::before{ content: "Jug.:\00a0"; }
 	
 	div#game div#points_form{
 		position: absolute;
@@ -625,12 +635,13 @@
 	div#game div#dice_form span#roll.disabled{}
 	div#game div#dice_form span#dice_switch{
 		grid-row: 5;
-		background: url("die_teseract.png") center/40% no-repeat, radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080) center/cover !important;
-		border: 3px solid #800080 !important;
+		grid-column: 1;
+		background: url("die_teseract.png") center / 40% no-repeat, radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080);
+		border: 3px solid #800080;
 	}
 	div#game div#dice_form span#dice_switch.regular{
-		background: url("die_regular.png") center / 40% no-repeat, radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080) center/cover !important;
-		border-color: #808080 !important;
+		background: url("die_regular.png") center / 40% no-repeat, radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080);
+		border-color: #808080;
 	}
 	div#game div#dice_form span#dice_switch.disabled{}
 	div#game div#dice_form span#close{

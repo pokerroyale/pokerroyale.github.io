@@ -141,6 +141,8 @@
 			
 			$("#hands_form #s_hand_" + i + " .points").text(points[i] + inc_points[i] * (level[i] - 1));
 			$("#hands_form #s_hand_" + i + " .multi").text(multi[i] + inc_multi[i] * (level[i] - 1));
+			$("#hands_form #s_hand_" + i + " .level").text(level[i]);
+			$("#hands_form #s_hand_" + i + " .plays").text(plays[i]);
 		}
 		
 		$("#levels #max_hands .counter").text(max_hands);
@@ -268,6 +270,10 @@
 			$("#hand_" + hand + " .points").text(points[hand] + inc_points[hand] * (level[hand] - 1));
 			$("#hand_" + hand + " .multi").text(multi[hand] + inc_multi[hand] * (level[hand] - 1));
 			$("#increased_levels").text(increased_levels);
+			
+			$("#s_hand_" + hand + " .points").text(points[hand] + inc_points[hand] * (level[hand] - 1));
+			$("#s_hand_" + hand + " .multi").text(multi[hand] + inc_multi[hand] * (level[hand] - 1));
+			$("#s_hand_" + hand + " .level").text(level[hand]);
 			
 			timeout = setTimeout(function(){
 			$("#hand_" + hand).removeClass("active");
@@ -693,11 +699,11 @@
 				if(dice > 1) $("#game #die_" + dice).addClass("button");
 				$("#game #die_add").show();
 				$("#game #dice_switch").removeClass("disabled");
-			}, 2500);
+			}, 3000);
 			
-			if($("#game #die_0").length) roll_die(0, 10 + Math.floor(Math.random() * 20));
+			if($("#game #die_0").length) roll_die(0, 15 + Math.floor(Math.random() * 16));
 			else for(var i = 1; i <= dice; i++){
-				roll_die(i, 10 + Math.floor(Math.random() * 20));
+				roll_die(i, 15 + Math.floor(Math.random() * 16));
 			}
 		}
 	}
