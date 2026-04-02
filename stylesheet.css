@@ -25,7 +25,7 @@
 	div#menu{
 		position: relative;
 		display: flex;
-		height: 4%;
+		height: 5%;
 		width: 98%;
 		margin: 1%;
 	}
@@ -44,6 +44,7 @@
 		background-image: linear-gradient(#eeeeee, #dddddd 50%);
 		font-size: 12px;
 		font-weight: bold;
+		border: 1px solid transparent;
 	}
 	input[type=checkbox] + label{
 		width: 100%;
@@ -57,6 +58,7 @@
 	input[type=radio]#header_levels + label{ border-radius: 5px 0 0 5px; }
 	input[type=radio]#header_game + label{ width: 33.34%; }
 	input[type=radio]#header_config + label{ border-radius: 0 5px 5px 0; }
+	
 	
 	input[type=radio]:checked + label, input[type=checkbox]:checked + label{
 		background-image: linear-gradient(#ff0000, #660000 50%);
@@ -88,7 +90,7 @@
 		position: absolute;
 		display: flex;
 		width: 300%;
-		height: 95%;
+		height: 93%;
 		margin-top: 0;
 		margin-left: -200%;
 	}
@@ -101,7 +103,8 @@
 	
 	div#levels .hand{
 		display: flex;
-		place-items: center;
+		align-items: center;
+		justify-content: center;
 		gap: 0.5%;
 		padding: 0.5%;
 		width: 98%;
@@ -170,7 +173,7 @@
 	div#levels .hand .points{ background-color: #2222ff; }
 	div#levels .hand .multi{ background-color: #ff5500; }
 	
-	div#levels #levels_header{ height: 3%; }
+	div#levels #levels_header{ height: 4%; padding-top: 0; padding-bottom: 0; margin-bottom: 1%; }
 	div#levels #levels_header span{
 		background-color: #cccccc;
 		font-size: 8px;
