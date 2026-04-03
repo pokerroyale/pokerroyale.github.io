@@ -430,7 +430,7 @@
 				$("#game #game_footer #hands_left .button.down").addClass("disabled");
 			}
 			else{
-				$("#game #play #play_confirm").removeClass("disabled");
+				if(parseInt($("#s_hand").val())) $("#game #play #play_confirm").removeClass("disabled");
 				$("#game #game_footer #hands_left .button.down").removeClass("disabled");
 			}
 			
@@ -597,15 +597,22 @@
 		$("#hands_form").addClass("hidden");
 	}
 	
+	function calculate_score(){
+		var p = eval($("#points_string").text());
+		var m = eval($("#multi_string").text().replaceAll("x", "*"));
+		
+		return(p * m);
+	}
+	
 	function points_add(inc){
 		clearTimeout(timeout);
 		deactivate_all();
 		$("#points_string").append(" +" + inc);
-		$("#points_confirm").text(eval($("#points_string").text()));
+		$("#points_confirm").text(eval($("#points_string").text()).toLocaleString("es-ES"));
 		
 		$("#play_points").text($("#points_confirm").text());
 		
-		$("#play_confirm").text($("#play_points").text() * $("#play_multi").text());
+		$("#play_confirm").text(calculate_score().toLocaleString("es-ES"));
 	}
 	
 	function points_reset(){
@@ -625,6 +632,7 @@
 			$("#points_confirm").text(p.toLocaleString("es-ES"));
 			
 			$("#play_points").text(p.toLocaleString("es-ES"));
+			$("#play_confirm").text(calculate_score().toLocaleString("es-ES"));
 			
 			$("#points_reset").removeClass("active");
 		}
@@ -634,22 +642,22 @@
 		clearTimeout(timeout);
 		deactivate_all();
 		$("#multi_string").append(" +" + inc);
-		$("#multi_confirm").text(eval($("#multi_string").text().replaceAll("x", "*")));
+		$("#multi_confirm").text(eval($("#multi_string").text().replaceAll("x", "*")).toLocaleString("es-ES"));
 		
 		$("#play_multi").text($("#multi_confirm").text());
 		
-		$("#play_confirm").text($("#play_points").text() * $("#play_multi").text());
+		$("#play_confirm").text(calculate_score().toLocaleString("es-ES"));
 	}
 	
 	function multi_plus(inc){
 		clearTimeout(timeout);
 		deactivate_all();
 		$("#multi_string").text("(" + $("#multi_string").text() + ") x" + inc);
-		$("#multi_confirm").text(eval($("#multi_string").text().replaceAll("x", "*")));
+		$("#multi_confirm").text(eval($("#multi_string").text().replaceAll("x", "*")).toLocaleString("es-ES"));
 		
 		$("#play_multi").text($("#multi_confirm").text());
 		
-		$("#play_confirm").text($("#play_points").text() * $("#play_multi").text());
+		$("#play_confirm").text(calculate_score().toLocaleString("es-ES"));
 	}
 	
 	function multi_reset(){
@@ -669,6 +677,7 @@
 			$("#multi_confirm").text(m.toLocaleString("es-ES"));
 			
 			$("#play_multi").text(m.toLocaleString("es-ES"));
+			$("#play_confirm").text(calculate_score().toLocaleString("es-ES"));
 			
 			$("#multi_reset").removeClass("active");
 		}

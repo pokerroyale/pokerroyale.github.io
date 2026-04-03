@@ -408,7 +408,7 @@
 		text-shadow: 1px 1px 2px #000000;
 	}
 	div#game form #play_reset, div#game form #play_discard, div#game form #play_confirm{
-		filter: saturate(0.25);
+		filter: saturate(0.5);
 		box-shadow: 0 0 0 transparent;
 		transition: filter 0.2s, box-shadow 0.2s;
 	}
@@ -522,7 +522,7 @@
 	div#game div#hands_form.hidden{
 		opacity: 0;
 		scale: 25%;
-		transform: translateX(-175%) translateY(-175%);
+		transform: translateX(-125%) translateY(-170%);
 		visibility: hidden;
 	}
 	div#game div#hands_form div{
@@ -605,7 +605,7 @@
 	div#game div#points_form.hidden{
 		opacity: 0;
 		scale: 25%;
-		transform: translateX(-25%) translateY(-175%);
+		transform: translateX(0) translateY(-170%);
 		visibility: hidden;
 	}
 	div#game div#points_form div{
@@ -639,16 +639,11 @@
 	div#game div#points_form span#points_reset.button{
 		grid-row: 5;
 		grid-column: 1 / 3;
-		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#eeeeee, #cccccc 50%);
-		border: 1px solid #cccccc;
-		filter: saturate(0.25);
+		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #660000 50%);
+		filter: saturate(0.5);
 		transition: filter 0.2s;
 	}
-	div#game div#points_form span#points_reset.button.active{
-		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #660000 50%);
-		border: 1px solid #660000;
-		filter: saturate(1);
-	}
+	div#game div#points_form span#points_reset.button.active{ filter: saturate(1); }
 	div#game div#points_form span#points_confirm.button{
 		grid-row: 5;
 		grid-column: 3 / 6;
@@ -681,7 +676,7 @@
 	div#game div#multi_form.hidden{
 		opacity: 0;
 		scale: 25%;
-		transform: translateX(100%) translateY(-175%);
+		transform: translateX(125%) translateY(-175%);
 		visibility: hidden;
 	}
 	div#game div#multi_form div{
@@ -716,17 +711,18 @@
 	}
 	div#game div#multi_form div.button.plus{
 		background-image: linear-gradient(#ffaa00, #ff5500 50%);
+		text-shadow: 0 0 2px #000000;
 	}
 	div#game div#multi_form span#multi_reset.button{
 		grid-row: 5;
 		grid-column: 1 / 3;
-		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#eeeeee, #cccccc 50%);
-		filter: saturate(50%);
+		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #660000 50%);
+		filter: saturate(0.5);
 		transition: filter 0.2s;
 	}
 	div#game div#multi_form span#multi_reset.button.active{
 		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #660000 50%);
-		filter: saturate(100%);
+		filter: saturate(1);
 	}
 	div#game div#multi_form span#multi_confirm.button{
 		grid-row: 5;
