@@ -511,7 +511,7 @@
 	}
 	
 	function select_hand(hand){
-		if(hand != $("#s_hand").val()){
+		if(hand != parseInt($("#s_hand").val())){
 			$("#play #play_hand").removeClass("empty");
 			switch(hand){
 				case 1:	$("#play #play_hand #label").text("Carta más alta"); break;
@@ -535,6 +535,10 @@
 			$("#play #play_points").text(points[hand] + inc_points[hand] * (level[hand] - 1));
 			$("#play #play_multi").text(multi[hand] + inc_multi[hand] * (level[hand] - 1));
 			$("#play #play_confirm").text(((points[hand] + inc_points[hand] * (level[hand] - 1)) * (multi[hand] + inc_multi[hand] * (level[hand] - 1))).toLocaleString());
+			
+			$("#play #play_points").addClass("enabled");
+			$("#play #play_multi").addClass("enabled");
+			$("#play #play_confirm").addClass("enabled");
 			
 			$("#points_form #points_string").text(points[hand] + inc_points[hand] * (level[hand] - 1));
 			$("#points_form #points_confirm").text(points[hand] + inc_points[hand] * (level[hand] - 1));
@@ -596,10 +600,14 @@
 			$("#play #play_hand #level").text("");
 			$("#play #play_hand #plays").text("");
 			$("#play #play_hand").addClass("empty");
-		
+			
 			$("#play #play_points").text(0);
 			$("#play #play_multi").text(0);
 			$("#play #play_confirm").text(0);
+			
+			$("#play #play_points").removeClass("enabled");
+			$("#play #play_multi").removeClass("enabled");
+			$("#play #play_confirm").removeClass("enabled");
 			
 			$("#play #play_reset").removeClass("active");
 		}

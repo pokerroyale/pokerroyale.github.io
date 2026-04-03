@@ -42,7 +42,7 @@
 		align-items: center;
 		justify-content: center;
 		color: #000000;
-		background-image: linear-gradient(#eeeeee, #dddddd 50%);
+		background-image: linear-gradient(#eeeeee, #cccccc 50%);
 		font-size: 12px;
 		font-weight: bold;
 		border: 1px solid transparent;
@@ -53,7 +53,7 @@
 		justify-content: left;
 		padding-left: 5%;
 		border-radius: 6px;
-		background: url("checkbox.png") 95% center / 6% no-repeat, linear-gradient(#eeeeee, #dddddd 50%);		
+		background: url("checkbox.png") 95% center / 6% no-repeat, linear-gradient(#eeeeee, #cccccc 50%);		
 	}
 	
 	input[type=radio]#header_levels + label{ border-radius: 5px 0 0 5px; }
@@ -103,6 +103,7 @@
 	}
 	
 	div#levels .hand{
+		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -112,10 +113,17 @@
 		height: 5.5%;
 		border-radius: 5px;
 		margin: 0 auto;
+		box-shadow: 0 0 0 transparent;
+		transition: box-shadow 0.2s;
 	}
 	div#levels .hand.even{ background-color: #eeeeee; }
 	div#levels .hand.odd{}
-	div#levels .hand.active{ background-image: linear-gradient(#aaffaa, #44ff44 50%); }
+	div#levels .hand.active{
+		background-image: linear-gradient(#aaffaa, #44ff44 50%);
+		z-index: 2;
+		box-shadow: 2px 2px 3px #666666;
+		transition: box-shadow 0.2s 0.2s;
+	}
 	div#levels .hand span{
 		display: flex;
 		place-items: center;
@@ -210,9 +218,15 @@
 		margin: 0 0.33%;
 		height: 5.5%;
 		border-radius: 5px;
-		background-image: linear-gradient(#eeeeee, #dddddd 50%);
+		background-image: linear-gradient(#eeeeee, #cccccc 50%);
+		box-shadow: 0 0 0 transparent;
+		transition: box-shadow 0.2s;
 	}
-	div#levels .levels_footer.active{ color: #eeeeee; }
+	div#levels .levels_footer.active{
+		color: #eeeeee;
+		box-shadow: 2px 2px 3px #666666;
+		transition: box-shadow 0.2s 0.2s;
+	}
 	
 	div#levels .levels_footer span{
 		display: flex;
@@ -251,7 +265,7 @@
 		color: #eeeeee;
 	}
 	div#levels #tokens.active{
-		background-image: linear-gradient(#666666, #222222 50%);
+		background-image: linear-gradient(#666666, #666666 50%);
 		color: #eeeeee;
 	}
 	div#levels .levels_footer.active .button{ opacity: 1; }
@@ -312,7 +326,7 @@
 		color: #eeeeee;
 		text-shadow: 0 0 1px #000000;
 		border-radius: 3px;
-		box-shadow: 2px 2px 3px #000000;
+		box-shadow: 2px 2px 3px #666666;
 	}
 	div#game div#played div.discard img{
 		max-height: 90%;
@@ -339,18 +353,28 @@
 		align-items: center;
 		justify-content: center;
 		height: 100%;
-		border: 1px solid blue;
 		border-radius: 3px;
 		font-size: 18px;
 		font-weight: bold;
 		color: #eeeeee;
+		border-style: solid;
+		border-width: 1px;
+		opacity: 0.5;
+		box-shadow: 0 0 0 transparent;
+		transition: box-shadow 0.2s;
+	}
+	div#game form div.enabled{
+		opacity: 1;
+		box-shadow: 2px 2px 3px #666666;
+		transition: box-shadow 0.2s 0.2s;
 	}
 	
 	div#game form #play_hand{
 		display: grid;
 		grid-template-columns: 50% 50%;
 		grid-template-rows: 65% 35%;
-		background-image: linear-gradient(#aaffaa, #44ff44 50%); }
+		background-image: linear-gradient(#aaffaa, #44ff44 50%);
+		border-color: #44ff44; }
 	div#game form #play_hand.empty{ background: url("hand.png") center center / 60% no-repeat, linear-gradient(#aaffaa, #44ff44 50%); }
 	div#game form #play_hand span{
 		display: flex;
@@ -377,8 +401,8 @@
 	div#game form #play_hand #level{ font-size: 14px; font-weight: bold; }
 	div#game form #play_hand #plays{ font-size: 12px; font-weight: normal; }
 	div#game form #play_points, div#game form #play_multi{ text-shadow: 1px 1px 2px #000000; }
-	div#game form #play_points{ background-color: #2222ff; }
-	div#game form #play_multi{ background-color: #ff5500; }
+	div#game form #play_points{ background-image: linear-gradient(#8888ff, #2222ff 50%); border-color: #2222ff; }
+	div#game form #play_multi{ background-image: linear-gradient(#ffaa00, #ff5500 50%); border-color: #ff5500; }
 	div#game form #play_reset{
 		background: url("undo.png") center center / 20% no-repeat, linear-gradient(#ff0000, #990000 50%);
 		border: 1px solid #990000;
@@ -392,9 +416,15 @@
 		border: 1px solid #006666;
 		text-shadow: 1px 1px 2px #000000;
 	}
-	div#game form #play_reset, div#game form #play_discard, div#game form #play_confirm{ opacity: 0.5; }
+	div#game form #play_reset, div#game form #play_discard, div#game form #play_confirm{
+		opacity: 0.5;
+		box-shadow: 0 0 0 transparent;
+		transition: box-shadow 0.2s;
+	}
 	div#game form #play_reset.active, div#game form #play_discard.active, div#game form #play_confirm.active{
 		opacity: 1;
+		box-shadow: 2px 2px 3px #666666;
+		transition: box-shadow 0.2s 0.2s;
 	}
 	
 	div#game div#next_round{
@@ -431,6 +461,12 @@
 		height: 100%;
 		width: 24%;
 		border-radius: 5px;
+		box-shadow: 0 0 0 transparent;
+		transition: box-shadow 0.2s;
+	}
+	div#game div#game_footer div.active{
+		box-shadow: 2px 2px 3px #666666;
+		transition: box-shadow 0.2s 0.2s;
 	}
 	div#game div#game_footer div span.counter{
 		font-size: 18px;
@@ -499,7 +535,7 @@
 		width: 100%;
 		height: 100%;
 		grid-template-columns: 49% 49%;
-		grid-template-rows: 24% 28% 24% 20%;
+		grid-template-rows: 24% 30% 22% 20%;
 		grid-gap: 1%;
 		align-items: center;
 		justify-content: center;
@@ -523,7 +559,7 @@
 		grid-row: 2;
 		grid-column: 1 / 3;
 		font-size: 38px;
-		padding-bottom: 10px;
+		padding-bottom: 12px;
 	}
 	div#game div#hands_form div span.sample span{ width: auto; }
 	div#game div#hands_form div span.sample span.red{ color: #ff0000; }
@@ -586,32 +622,43 @@
 	div#game div#points_form div#points_string{
 		grid-row: 1;
 		grid-column: 1 / 6;
-		border: 3px solid #2222ff;
-		border-radius: 3px;
-		font-size: 18px;
+		border: 3px solid #eeeeee;
+		border-radius: 10px;
+		font-size: 28px;
 		font-weight: bold;
-		color: #2222ff;
+		color: #eeeeee;
+		background-color: #2222ff;
+		overflow: hidden;
 	}
-	div#game div#points_form div.points_button{
+	div#game div#points_form div.button.add{
 		font-size: 24px;
 		font-weight: bold;
 		color: #2222ff;
 		border: 3px solid #2222ff;
 		border-radius: 3px;
-		box-shadow: 2px 2px 3px #000000;		
+		box-shadow: 2px 2px 3px #000000;
+		background-image: linear-gradient(#eeeeee, #cccccc 50%);
 	}
-	div#game div#points_form div#points_reset.button{
+	div#game div#points_form span#points_reset.button{
 		grid-row: 5;
 		grid-column: 1 / 3;
-		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#eeeeee, #dddddd 50%);
+		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#eeeeee, #cccccc 50%);
+		border: 1px solid #cccccc;
+		box-shadow: 0 0 0 #000000;
+		transition: box-shadow 0.2s;
 	}
-	div#game div#points_form div#points_reset.button.active{
+	div#game div#points_form span#points_reset.button.active{
 		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #660000 50%);
+		border: 1px solid #660000;
+		box-shadow: 2px 2px 3px #000000;
+		transition: box-shadow 0.2s 0.2s;
 	}
-	div#game div#points_form div#points_confirm.button{
+	div#game div#points_form span#points_confirm.button{
 		grid-row: 5;
 		grid-column: 3 / 6;
-		background-image: linear-gradient(#6666ff, #2222ff 50%);
+		background-image: linear-gradient(#8888ff, #2222ff 50%);
+		border: 1px solid #2222ff;
+		font-size: 28px;
 	}
 	
 	div#game div#multi_form{
@@ -638,6 +685,50 @@
 		scale: 25%;
 		transform: translateX(75%) translateY(-175%);
 		visibility: hidden;
+	}
+	div#game div#multi_form div{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+	}
+	div#game div#multi_form div#multi_string{
+		grid-row: 1;
+		grid-column: 1 / 6;
+		border: 3px solid #eeeeee;
+		border-radius: 10px;
+		font-size: 20px;
+		font-weight: bold;
+		color: #eeeeee;
+		background-color: #ff5500;
+		overflow: hidden;
+	}
+	div#game div#points_form div.button{
+		font-size: 24px;
+		font-weight: bold;
+		border: 3px solid #ff5500;
+		border-radius: 3px;
+		box-shadow: 2px 2px 3px #000000;
+	}
+	div#game div#multi_form div.button.add{
+		background-image: linear-gradient(#eeeeee, #cccccc 50%);
+	}
+	div#game div#multi_form div.button.plus{
+		background-image: linear-gradient(#ffaa00, #ff5500 50%);
+	}
+	div#game div#multi_form span#multi_reset.button{
+		grid-row: 5;
+		grid-column: 1 / 3;
+		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#eeeeee, #cccccc 50%);
+	}
+	div#game div#multi_form span#multi_reset.button.active{
+		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #660000 50%);
+	}
+	div#game div#multi_form span#multi_confirm.button{
+		grid-row: 5;
+		grid-column: 3 / 6;
+		background-image: linear-gradient(#ff8800, #ff5500 50%);
 	}
 	
 	div#game div#dice_form{
