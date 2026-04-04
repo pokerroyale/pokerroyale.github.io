@@ -72,14 +72,15 @@
 	
 	input[type=radio]:disabled + label, input[type=checkbox]:disabled + label{ opacity: 0.25; }
 
-	div.button, span.button{
+	div.button{
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		height: 100%;
-		font-size: 18px;
+		font-size: 20px;
 		font-weight: bold;
 		color: #eeeeee;
+		text-shadow: 0 0 3px #000000;
 		background-image: linear-gradient(#ff0000, #990000 50%);
 		border: 1px solid #990000;
 		border-radius: 6px;
@@ -117,7 +118,7 @@
 	}
 	div#levels .hand.even{ background-color: #eeeeee; }
 	div#levels .hand.odd{}
-	div#levels .hand.active{ background-image: linear-gradient(#00dddd, #009999 50%); }
+	div#levels .hand.active{ background-image: linear-gradient(#00dddd, #008888 50%); }
 	div#levels .hand span{
 		display: flex;
 		align-items: center;
@@ -126,17 +127,18 @@
 	}
 	div#levels .hand .sample{
 		width: 38%;
-		font-size: 28px;
-		font-weight: bold;
-		opacity: 0.25;
+		font-size: 32px;
+		white-space: nowrap;
+		overflow: hidden;
+		opacity: 0.3;
 	}
-	div#levels .hand .sample span{ filter: drop-shadow(0 0 10px #eeeeee); }
+	div#levels .hand .sample span{ margin: 0 3%; height: 30px; padding-bottom: 2px; background-color: #eeeeee; }
 	div#levels .hand .sample span.red{ color: #ff0000; }
 	div#levels .hand .sample span.black{ color: #000000; }
 	div#levels .hand .label{
 		width: 38%;
 		margin-left: -38%;
-		font-size: 18px;
+		font-size: 20px;
 		font-weight: bold;
 		text-shadow: -1px 0 1px #eeeeee,
 					-1px 1px 1px #eeeeee,
@@ -145,15 +147,16 @@
 					1px 0 1px #eeeeee,
 					1px -1px 1px #eeeeee,
 					0 -1px 1px #eeeeee,
-					-1px -1px 1px #eeeeee;
+					-1px -1px 1px #eeeeee,
+					0 0 2px #eeeeee;
 		z-index: 1;
 	}
 	
 
-	div#levels .hand .plays{ width: 6%; font-size: 12px; }
+	div#levels .hand .plays{ width: 6%; font-size: 16px; }
 	div#levels .hand .level{
 		width: 26%;
-		font-size: 24px;
+		font-size: 20px;
 		font-weight: bold;
 		opacity: 1;
 		transition: opacity 0.2s 0.2s;
@@ -177,7 +180,7 @@
 	
 	div#levels .hand .points, div#levels .hand .multi{
 		width: 15%;
-		font-size: 18px;
+		font-size: 20px;
 		font-weight: bold;
 		color: #eeeeee;
 		text-shadow: 1px 1px 2px #000000;
@@ -233,7 +236,7 @@
 		align-items: center;
 		justify-content: center;
 		height: 100%;
-		font-size: 18px;
+		font-size: 20px;
 		font-weight: bold;
 	}
 	div#levels .levels_footer .label{ width: 40%; }
@@ -327,13 +330,17 @@
 		grid-template-rows: 48% 48%;
 		grid-gap: 4% 1%;
 		width: 98%;
-		height: 24%;
+		height: 25%;
+		overflow: hidden;
+		opacity: 1;
 		margin: 1% auto;
 		border-radius: 3px;
 		background-color: #ccccff;
 		box-sizing: border-box;
 		padding: 1%;
+		transition: opacity 0.2s, height 0.3s 0.2s, width 0.3s 0.5s;
 	}
+	div#game form.hidden{ width: 0; height: 0; opacity: 0; transition: width 0.3s, height 0.3s 0.3s, opacity 0.3s 0.6s; }
 	
 	div#game form div{
 		display: flex;
@@ -346,37 +353,26 @@
 		color: #eeeeee;
 		border-style: solid;
 		border-width: 1px;
+		opacity: 1;
+		transition: opacity 0.2s;
 	}
-	div#game form div.button.disabled{}
+	div#game form div.disabled{ opacity: 0.25; }
 	
 	div#game form #play_hand{
 		display: grid;
 		grid-template-columns: 50% 50%;
 		grid-template-rows: 65% 35%;
-		background-image: linear-gradient(#00dddd, #009999 50%);
-		border-color: #44ff44; }
-	div#game form #play_hand.empty{ background: url("hand.png") center center / 60% no-repeat, linear-gradient(#00dddd, #009999 50%); }
+		background-image: linear-gradient(#00dddd, #008888 50%);
+		border-color: #008888;
+	}
+	div#game form #play_hand.empty{ background: url("hand.png") center center / 60% no-repeat, linear-gradient(#00dddd, #008888 50%); }
 	div#game form #play_hand span{
 		display: flex;
-		width: 100%;
 		height: 100%;
 		align-items: center;
 		justify-content: center;
 		color: #000000;
-	}
-	div#game form #play_hand #label{
-		grid-row: 1;
-		grid-column: 1 / 3;
-		font-size: 18px;
-		font-weight: bold;
-		text-shadow: -1px 0 1px #eeeeee,
-					-1px 1px 1px #eeeeee,
-					0 1px 1px #eeeeee,
-					1px 1px 1px #eeeeee,
-					1px 0 1px #eeeeee,
-					1px -1px 1px #eeeeee,
-					0 -1px 1px #eeeeee,
-					-1px -1px 1px #eeeeee;
+		border: 0;
 	}
 	div#game form #play_hand #sample{
 		grid-area: 1 / 1 / 1 / 3;
@@ -384,13 +380,30 @@
 		align-items: center;
 		justify-content: center;
 		font-size: 36px;
+		font-weight: normal;
+		white-space: nowrap;
+		overflow: hidden;
 		opacity: 0.3;
 	}
-	div#game form #play_hand #sample span{ width: auto; text-shadow: 0 0 2px #eeeeee; }
+	div#game form #play_hand #sample span{ margin: 0 1%; height: 33px; padding-bottom: 2px; background-color: #eeeeee; }
 	div#game form #play_hand #sample span.black{ color: #000000; }
 	div#game form #play_hand #sample span.red{ color: #ff0000; }
-	div#game form #play_hand #level{ font-size: 14px; font-weight: bold; }
-	div#game form #play_hand #plays{ font-size: 12px; font-weight: normal; }
+	div#game form #play_hand #label{
+		grid-row: 1;
+		grid-column: 1 / 3;
+		text-shadow: -1px 0 1px #eeeeee,
+					-1px 1px 1px #eeeeee,
+					0 1px 1px #eeeeee,
+					1px 1px 1px #eeeeee,
+					1px 0 1px #eeeeee,
+					1px -1px 1px #eeeeee,
+					0 -1px 1px #eeeeee,
+					-1px -1px 1px #eeeeee,
+					0 0 2px #eeeeee;
+	}
+	div#game form #play_hand #level, div#game form #play_hand #plays{ text-shadow: 0 0 2px #eeeeee; }
+	div#game form #play_hand #level{ font-size: 16px; font-weight: bold; }
+	div#game form #play_hand #plays{ font-size: 14px; font-weight: normal; }
 	div#game form #play_points, div#game form #play_multi{ font-size: 24px; text-shadow: 1px 1px 2px #000000; }
 	div#game form #play_points{ background-image: linear-gradient(#8888ff, #2222ff 50%); border-color: #2222ff; }
 	div#game form #play_multi{ background-image: linear-gradient(#ffaa00, #ff5500 50%); border-color: #ff5500; }
@@ -403,13 +416,14 @@
 		border: 1px solid #999900;
 	}
 	div#game form #play_confirm{
-		background: url("confirm.png") 90% center / 20% no-repeat, linear-gradient(#00dd00, #009900 50%);
+		background-image: linear-gradient(#00dd00, #009900 50%);
 		border: 1px solid #009900;
 		font-size: 24px;
 		text-shadow: 1px 1px 2px #000000;
 	}
+	div#game form #play_confirm.empty{ background: url("confirm.png") center center / 20% no-repeat, linear-gradient(#00dd00, #009900 50%); }
 	div#game form #play_reset, div#game form #play_discard, div#game form #play_confirm{
-		filter: saturate(0.5);
+		filter: saturate(0.25);
 		box-shadow: 0 0 0 transparent;
 		transition: filter 0.2s, box-shadow 0.2s;
 	}
@@ -448,7 +462,7 @@
 	div#game div#game_footer div{
 		display: flex;
 		align-items: center;
-		justify-content: right;
+		justify-content: center;
 		padding: 0.5% 0;
 		height: 100%;
 		width: 24%;
@@ -482,8 +496,8 @@
 		width: 48%;
 		margin: 0 1%;
 	}
-	div#game div#game_gooter div span.buttons .button.up{}
-	div#game div#game_gooter div span.buttons .button.down{}
+	div#game div#game_footer div span.buttons .button.up{}
+	div#game div#game_footer div span.buttons .button.down{}
 	div#game div#game_footer div span.buttons .button.disabled{ opacity: 0.25; }
 	
 	div#game div#game_footer div#dice{ background: url("die_button.png") center center / 25% no-repeat, linear-gradient(#eeeeee, #cccccc 50%); border: 1px solid #cccccc; }
@@ -530,17 +544,17 @@
 		display: grid;
 		width: 100%;
 		height: 100%;
-		grid-template-columns: 49% 49%;
-		grid-template-rows: 24% 30% 22% 20%;
+		grid-template-columns: 48% 48%;
+		grid-template-rows: 28% 26% 22% 20%;
 		grid-gap: 1%;
 		align-items: center;
 		justify-content: center;
-		border: 3px solid #44ff44;
+		background-image: linear-gradient(#00dddd, #008888 50%);
+		border: 3px solid #008888;
 		border-radius: 6px;
 	}
 	div#game div#hands_form div span{
 		display: flex;
-		width: 100%;
 		height: 100%;
 		align-items: center;
 		justify-content: center;
@@ -548,16 +562,18 @@
 	div#game div#hands_form div span.label{
 		grid-row: 1;
 		grid-column: 1 / 3;
-		font-size: 14px;
+		font-size: 18px;
 		font-weight: bold;
+		text-shadow: 0 0 2px #eeeeee;
 	}
 	div#game div#hands_form div span.sample{
 		grid-row: 2;
 		grid-column: 1 / 3;
 		font-size: 36px;
-		padding-bottom: 12px;
+		padding-bottom: 18px;
+		white-space: nowrap;
 	}
-	div#game div#hands_form div span.sample span{ width: auto; }
+	div#game div#hands_form div span.sample span{ margin: 0 1%; height: 33px; padding-bottom: 2px; background-color: #eeeeee; }
 	div#game div#hands_form div span.sample span.red{ color: #ff0000; }
 	div#game div#hands_form div span.sample span.black{ color: #000000; }
 	div#game div#hands_form div span.points, div#game div#hands_form div span.multi{
@@ -569,17 +585,18 @@
 		text-shadow: 1px 1px 2px #000000;
 		border-radius: 3px;
 	}
+	div#game div#hands_form div span.points, div#game div#hands_form div span.multi { text-shadow: 0 0 2px #eeeeee; }
 	div#game div#hands_form div span.points{ background-color: #2222ff; }
 	div#game div#hands_form div span.multi{ background-color: #ff5500; }
 	div#game div#hands_form div span.level{
 		grid-row: 4;
-		font-size: 12px;
+		font-size: 16px;
 		font-weight: bold;
 	}
 	div#game div#hands_form div span.level::before{ content: "Niv.:\00a0"; }
 	div#game div#hands_form div span.plays{
 		grid-row: 4;
-		font-size: 12px;
+		font-size: 14px;
 	}
 	div#game div#hands_form div span.plays::before{ content: "Jug.:\00a0"; }
 	
@@ -590,7 +607,7 @@
 		height: 100%;
 		width: 33.34%;
 		display: grid;
-		grid-template-columns: repeat(5, 1fr);;
+		grid-template-columns: repeat(5, 1fr);
 		grid-template-rows: 20% 20% 20% 20% 16%;
 		grid-gap: 1%;
 		align-items: center;
@@ -609,14 +626,14 @@
 		transform: translateX(0) translateY(-170%);
 		visibility: hidden;
 	}
-	div#game div#points_form div{
+	div#game div#points_form span{
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		width: 100%;
 		height: 100%;
 	}
-	div#game div#points_form div#points_string{
+	div#game div#points_form span#points_string{
 		grid-row: 1;
 		grid-column: 1 / 6;
 		background-color: #2222ff;
@@ -628,7 +645,7 @@
 		text-shadow: 2px 2px 3px #000000;
 		overflow: hidden;
 	}
-	div#game div#points_form div.button.add{
+	div#game div#points_form span.button.add{
 		font-size: 24px;
 		font-weight: bold;
 		color: #2222ff;
@@ -637,15 +654,15 @@
 		box-shadow: 2px 2px 3px #666666;
 		background-image: linear-gradient(#eeeeee, #cccccc 50%);
 	}
-	div#game div#points_form span#points_reset.button{
+	div#game div#points_form div#points_reset.button{
 		grid-row: 5;
 		grid-column: 1 / 3;
 		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #990000 50%);
-		filter: saturate(0.5);
+		filter: saturate(0.25);
 		transition: filter 0.2s;
 	}
-	div#game div#points_form span#points_reset.button.active{ filter: saturate(1); }
-	div#game div#points_form span#points_confirm.button{
+	div#game div#points_form div#points_reset.button.active{ filter: saturate(1); }
+	div#game div#points_form div#points_confirm.button{
 		grid-row: 5;
 		grid-column: 3 / 6;
 		background-image: linear-gradient(#8888ff, #2222ff 50%);
@@ -661,7 +678,7 @@
 		height: 100%;
 		width: 33.34%;
 		display: grid;
-		grid-template-columns: repeat(5, 1fr);;
+		grid-template-columns: repeat(5, 1fr);
 		grid-template-rows: 20% 20% 20% 20% 16%;
 		grid-gap: 1%;
 		align-items: center;
@@ -680,14 +697,14 @@
 		transform: translateX(125%) translateY(-175%);
 		visibility: hidden;
 	}
-	div#game div#multi_form div{
+	div#game div#multi_form span{
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		width: 100%;
 		height: 100%;
 	}
-	div#game div#multi_form div#multi_string{
+	div#game div#multi_form span#multi_string{
 		grid-row: 1;
 		grid-column: 1 / 6;
 		background-color: #ff5500;
@@ -699,33 +716,34 @@
 		text-shadow: 2px 2px 3px #000000;
 		overflow: hidden;
 	}
-	div#game div#multi_form div.button{
+	div#game div#multi_form span.button{
 		font-size: 24px;
 		font-weight: bold;
 		border: 3px solid #ff5500;
 		border-radius: 3px;
 		box-shadow: 2px 2px 3px #666666;
 	}
-	div#game div#multi_form div.button.add{
+	div#game div#multi_form span.button.add{
 		background-image: linear-gradient(#eeeeee, #cccccc 50%);
 		color: #ff5500;
 	}
-	div#game div#multi_form div.button.plus{
+	div#game div#multi_form span.button.plus{
 		background-image: linear-gradient(#ffaa00, #ff5500 50%);
+		color: #eeeeee;
 		text-shadow: 0 0 2px #000000;
 	}
-	div#game div#multi_form span#multi_reset.button{
+	div#game div#multi_form div#multi_reset.button{
 		grid-row: 5;
 		grid-column: 1 / 3;
 		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #990000 50%);
-		filter: saturate(0.5);
+		filter: saturate(0.25);
 		transition: filter 0.2s;
 	}
-	div#game div#multi_form span#multi_reset.button.active{
+	div#game div#multi_form div#multi_reset.button.active{
 		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #990000 50%);
 		filter: saturate(1);
 	}
-	div#game div#multi_form span#multi_confirm.button{
+	div#game div#multi_form div#multi_confirm.button{
 		grid-row: 5;
 		grid-column: 3 / 6;
 		background-image: linear-gradient(#ff8800, #ff5500 50%);
@@ -761,13 +779,13 @@
 		visibility: hidden;
 	}
 	
-	div#game div#dice_form div.die{
+	div#game div#dice_form span.die{
 		height: 100%;
 		border: 1px solid #cccccc;
 		border-radius: 6px;
 	}
-	div#game div#dice_form div.die.button{}
-	div#game div#dice_form div#die_0.die{
+	div#game div#dice_form span.die.button{}
+	div#game div#dice_form span#die_0.die{
 		grid-column: 1 / 4;
 		grid-row: 1 / 4;
 		display: flex;
@@ -778,44 +796,44 @@
 		text-shadow: 0 0 10px #800080;
 		border: 3px solid #800080;
 	}
-	div#game div#dice_form div.die.die_1{ background: url("die_1.png") center / 60% no-repeat; }
-	div#game div#dice_form div.die.die_1.button{ background: url("die_1.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form div.die.die_2{ background: url("die_2.png") center / 60% no-repeat; }
-	div#game div#dice_form div.die.die_2.button{ background: url("die_2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form div.die.die_3{ background: url("die_3.png") center / 60% no-repeat; }
-	div#game div#dice_form div.die.die_3.button{ background: url("die_3.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form div.die.die_4{ background: url("die_4.png") center / 60% no-repeat; }
-	div#game div#dice_form div.die.die_4.button{ background: url("die_4.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form div.die.die_5{ background: url("die_5.png") center / 60% no-repeat; }
-	div#game div#dice_form div.die.die_5.button{ background: url("die_5.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form div.die.die_6{ background: url("die_6.png") center / 60% no-repeat; }
-	div#game div#dice_form div.die.die_6.button{ background: url("die_6.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form div.die.die_7{ background: url("die_1.png") center / 60% no-repeat; }
-	div#game div#dice_form div.die.die_7.button{ background: url("die_1.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form div.die.die_8{ background: url("die_2v2.png") center / 60% no-repeat; }
-	div#game div#dice_form div.die.die_8.button{ background: url("die_2v2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form div.die.die_9{ background: url("die_3v2.png") center / 60% no-repeat; }
-	div#game div#dice_form div.die.die_9.button{ background: url("die_3v2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form div.die.die_10{ background: url("die_4.png") center / 60% no-repeat; }
-	div#game div#dice_form div.die.die_10.button{ background: url("die_4.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form div.die.die_11{ background: url("die_5.png") center / 60% no-repeat; }
-	div#game div#dice_form div.die.die_11.button{ background: url("die_5.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form div.die.die_12{ background: url("die_6v2.png") center / 60% no-repeat; }
-	div#game div#dice_form div.die.die_12.button{ background: url("die_6v2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die.die_1{ background: url("die_1.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die.die_1.button{ background: url("die_1.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die.die_2{ background: url("die_2.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die.die_2.button{ background: url("die_2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die.die_3{ background: url("die_3.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die.die_3.button{ background: url("die_3.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die.die_4{ background: url("die_4.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die.die_4.button{ background: url("die_4.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die.die_5{ background: url("die_5.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die.die_5.button{ background: url("die_5.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die.die_6{ background: url("die_6.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die.die_6.button{ background: url("die_6.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die.die_7{ background: url("die_1.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die.die_7.button{ background: url("die_1.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die.die_8{ background: url("die_2v2.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die.die_8.button{ background: url("die_2v2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die.die_9{ background: url("die_3v2.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die.die_9.button{ background: url("die_3v2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die.die_10{ background: url("die_4.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die.die_10.button{ background: url("die_4.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die.die_11{ background: url("die_5.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die.die_11.button{ background: url("die_5.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die.die_12{ background: url("die_6v2.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die.die_12.button{ background: url("die_6v2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
 	
-	div#game div#dice_form div.die.add{
+	div#game div#dice_form span.die.add{
 		background: url("die_add.png") center / 60% no-repeat, linear-gradient(#aaffaa, #44ff44 50%);
 		border: 1px solid #44ff44;
 	}
-	div#game div#dice_form div.die.active{
+	div#game div#dice_form span.die.active{
 		background: url("die_remove.png") center / 60% no-repeat, linear-gradient(#ff0000, #990000 50%) !important;
 		border: 1px solid #990000;
 	}
-	div#game div#dice_form div.die.rolling{ background-color: #aaaaaa !important; }
+	div#game div#dice_form span.die.rolling{ background-color: #aaaaaa !important; }
 	
-	div#game div#dice_form span.button{ font-size: 28px; }
+	div#game div#dice_form div.button{ font-size: 28px; }
 	
-	div#game div#dice_form span#roll{
+	div#game div#dice_form div#roll{
 		grid-column: 1 / 4;
 		grid-row: 4;
 		background-image: linear-gradient(#009900, #004400 50%);
@@ -823,19 +841,19 @@
 		color: #eeeeee;
 		border: 1px solid #004400;
 	}
-	div#game div#dice_form span#roll.disabled{}
-	div#game div#dice_form span#dice_switch{
+	div#game div#dice_form div#roll.disabled{}
+	div#game div#dice_form div#dice_switch{
 		grid-row: 5;
 		grid-column: 1;
 		background: url("die_teseract.png") center / 40% no-repeat, radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080);
 		border: 3px solid #800080;
 	}
-	div#game div#dice_form span#dice_switch.regular{
+	div#game div#dice_form div#dice_switch.regular{
 		background: url("die_regular.png") center / 40% no-repeat, radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080);
 		border-color: #808080;
 	}
-	div#game div#dice_form span#dice_switch.disabled{}
-	div#game div#dice_form span#close{
+	div#game div#dice_form div#dice_switch.disabled{}
+	div#game div#dice_form div#close{
 		grid-row: 5;
 		grid-column: 2 / 4;
 	}
@@ -875,7 +893,7 @@
 		height: 6%;
 		margin: 2% auto;
 	}
-	div#config div.options span{
+	div#config div.options span, div#config div.options div{
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -887,8 +905,8 @@
 		padding-right: 8px;
 		font-size: 14px;
 	}
-	div#config div.options span.button{}
-	div#config div.options span.button.disabled{}
+	div#config div.options div.button{}
+	div#config div.options div.button.disabled{}
 	div#config div.options span#suddeath{
 		font-size: 18px;
 		font-weight: bold;
@@ -901,10 +919,10 @@
 		display: table;
 		height: 10%;
 		width: 80%;
-		margin: 20% auto;
+		margin: 20% auto auto;
 		border-radius: 60px;
 		background-image: linear-gradient(#ff0000, #990000 50%);
-		font-size: 18px;
+		font-size: 20px;
 		font-weight: bold;
 		padding: auto;
 		color: #eeeeee;
