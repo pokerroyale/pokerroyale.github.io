@@ -705,17 +705,7 @@
 			$("#game #played").append("<div class='discard'><span class='label'>Descarte</span><span class='score'></span></div>");
 			$("#game #played .discard").animate({ height: "32px" }, 250);
 			
-			deactivate($("#play #play_discard"));
-			$("#game_footer #discards_left .counter").text(discards_left);
-			if(!discards_left){
-				disable($("#game #play #play_discard"));
-				disable($("#game_footer #discards_left .button.down"));
-			}
-			$("#stats #played_discards").text(played_discards);
-			
-			disable($("#config .button"));
-			$("#config #nofigures").prop("disabled", true);
-			$("#config #balanced").prop("disabled", true);
+			if(!discards_left) disable($("#play_discard"));
 		}
 		else{
 			var label;
@@ -741,7 +731,12 @@
 			
 			
 			
+			
+			
 		}
+		disable($("#config .button"));
+		$("#config #nofigures").prop("disabled", true);
+		$("#config #balanced").prop("disabled", true);
 	}
 	
 	function play_reset(){
@@ -793,6 +788,8 @@
 				discards_left--;
 				
 				refresh_score();
+				$("#game_footer #discards_left .counter").text(discards_left);
+				deactivate($("#play #play_discard"));
 				save_game();
 			}
 		}
@@ -858,10 +855,10 @@
 					change_level(parseInt($("#s_hand").val()), -1);
 				}
 				
+				refresh_score();
+				$("#game_footer #plays_left .counter").text(plays_left);
 				activate($("#play_reset"));
 				play_reset();
-			
-				refresh_score();
 				
 				save_game();
 			}
