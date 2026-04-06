@@ -280,7 +280,7 @@
 		gap: 0 1%;
 		padding: 0 1%;
 		margin: 0 auto;
-		font-size: 12px;
+		font-size: 14px;
 		font-weight: bold;
 		color: #eeeeee;
 	}
@@ -299,10 +299,10 @@
 	}
 	div#game div#game_header #round{}
 	div#game div#game_header #blind{ width: 33.34%; }
-	div#game div#game_header.small_blind #blind{ background: url("blind_small.png") left center / 10% no-repeat, url("blind_small.png") right center / 10% no-repeat; }
-	div#game div#game_header.big_blind #blind{ background: url("blind_big.png") left center / 10% no-repeat, url("blind_big.png") right center / 10% no-repeat; }
-	div#game div#game_header.boss_blind #blind{ background: url("blind_boss.png") left center / 10% no-repeat, url("blind_boss.png") right center / 10% no-repeat; }
-	div#game div#game_header #goal{ background: url("token.png") 5% center / 8% no-repeat, url("token.png") 95% center / 8% no-repeat; }
+	div#game div#game_header.small_blind #blind{ background: url("blind_small.png") left center / 15% no-repeat, url("blind_small.png") right center / 15% no-repeat; }
+	div#game div#game_header.big_blind #blind{ background: url("blind_big.png") left center / 15% no-repeat, url("blind_big.png") right center / 15% no-repeat; }
+	div#game div#game_header.boss_blind #blind{ background: url("blind_boss.png") left center / 15% no-repeat, url("blind_boss.png") right center / 15% no-repeat; }
+	div#game div#game_header #goal{ background: url("token.png") 5% center / 10% no-repeat, url("token.png") 95% center / 10% no-repeat; }
 	
 	div#game div#played{}
 	div#game div#played div{
@@ -331,7 +331,7 @@
 	}
 	div#game div#played div.discard span.score{
 		width: 20%;
-		background: url("reject.png") 95% center / 25% no-repeat;
+		background: url("reject.png") 90% center / 30% no-repeat;
 	}
 	
 	div#game div#played div.play{ background-color: #009900; }
@@ -461,20 +461,37 @@
 		transition: filter 0.2s, box-shadow 0.2s 0.2s;
 	}
 	
-	div#game div#next_round{
+	div#game div#next_blind{
 		position: relative;
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		height: 4%;
-		width: 80%;
+		height: 5%;
+		width: 98%;
 		margin: 1% auto;
-		border-radius: 20px;
-		font-size: 12px;
+		background-color: #990000;
+		border: 1px solid #990000;
+		border-radius: 3px;
+		font-size: 24px;
 		font-weight: bold;
-		background-image: linear-gradient(#ff0000, #990000 50%);
 		color: #eeeeee;
+		padding: 0 2%;
+		text-shadow: 0 0 3px #000000;
 	}
+	div#game div#next_blind::before{ content: "PUNTUACIÓN:"; }
+	div#game div#next_blind.active{
+		background-image: linear-gradient(#ff0000, #990000 50%);
+		justify-content: center;
+	}
+	div#game div#next_blind.active::before{ content: "CONTINUAR"; }
+	div#game div#next_blind span#score{
+		display: flex;
+		height: 100%;
+		width: 100%;
+		align-items: center;
+		justify-content: right;
+	}
+	div#game div#next_blind.active span#score{ display: none; }
+	div#game div#next_blind.active.finish::before { content: "Fin de la partida"; }
 	
 	div#game div#game_footer{
 		position: absolute;

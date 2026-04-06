@@ -1,7 +1,7 @@
-	function enable(item){ item.removeClass("disabled"); }
-	function disable(item){ item.addClass("disabled"); }
-	function activate(item){ item.addClass("active"); }
-	function deactivate(item){ item.removeClass("active"); }
+	function enable(e){ e.removeClass("disabled"); }
+	function disable(e){ e.addClass("disabled"); }
+	function activate(e){ e.addClass("active"); }
+	function deactivate(e){ e.removeClass("active"); }
 	
 	const points = new Array();
 	const multi = new Array();
@@ -34,12 +34,25 @@
 	var cards;
 	var dice;
 	var tokens;
-	var score;
 	var suddeath;
 	var nofigures, balanced;
 	var boss = "none";						// "none" / "big_boss" / "half_base" / "level_down" / unique_hand / varied_hands
 	var timeout = 0;
 	var delay = 1500;
+	
+	function initialize(){
+		change_dice();
+		change_dice();
+		
+		add_die();
+		for(var i = 1; i <= 6; i++){
+			$("#die_" + dice).attr("class", "die die_" + i + " button");
+			$("#die_" + (dice - 1)).attr("class", "die die_" + (i + 6));
+		}
+		activate($("#die_" + dice));
+		remove_die();
+		$("#die_" + dice).attr("class", "die die_" + (1 + Math.floor(Math.random() * 12)));
+	}
 	
 	function load_game(){
 //			var cookie = document.cookie;
@@ -62,7 +75,6 @@
 			discards_left = max_discards;// BORRAR
 			round = 1;			// BORRAR
 			blind = 1;				// BORRAR
-			goal = 300;				// BORRAR
 			total_points = 0;		// BORRAR
 			played_plays = 0;		// BORRAR
 			not_played_plays = 0;	// BORRAR
@@ -74,10 +86,10 @@
 			cards = 0				// BORRAR
 			dice = 1;				// BORRAR
 			tokens = 4;				// BORRAR
-			score = 0;				// BORRAR
 			suddeath = 6;			// BORRAR
 			nofigures = false;		// BORRAR
 			balanced = false;		// BORRAR
+			goal = 300;				// BORRAR
 			
 			$("#header_levels").prop("disabled", false);
 			$("#header_game").prop("disabled", false);
@@ -95,7 +107,6 @@
 			discards_left = max_discards;
 			round = 1;
 			blind = 1;
-			goal = 300;
 			played_plays = 0;
 			not_played_plays = 0;
 			played_discards = 0;
@@ -106,10 +117,10 @@
 			cards = 0;
 			dice = 1;
 			tokens = 4;
-			score = 0;
 			suddeath = 6;
 			nofigures = $("#nofigures").is(":checked");
 			balanced = $("#balanced").is(":checked");
+			goal = balanced ? 600 : 300;
 			
 			for(var i = 1; i <= 12; i++){
 				level[i] = 1;
@@ -170,6 +181,8 @@
 		$("#config #suddeath").text(suddeath);
 		$("#config #nofigures").prop("checked", nofigures);
 		$("#config #balanced").prop("checked", balanced);
+		
+		defeated_blind();
 	}
 	
 	function save_game(){
@@ -201,6 +214,9 @@
 				if(suddeath < 12) enable($("#config .button.up"));
 				$("#config #nofigures").prop("disabled", false);
 				$("#config #balanced").prop("disabled", false);
+				
+				$("#header_levels").prop("disabled", true);
+				$("#header_game").prop("disabled", true);
 			}
 		}
 		else{
@@ -213,6 +229,7 @@
 			$("#header_game").prop("disabled", false);
 			show_game();
 		}
+		$("#game form").removeClass("hidden");
 		
 		load_game();
 		save_game();
@@ -248,14 +265,14 @@
 			$("#s_hand_" + i + " .multi").text((boss == "half_base") ? (multi[i] + inc_multi[i] * (level[i] - 1)) / 2 : multi[i] + inc_multi[i] * (level[i] - 1).toLocaleString());
 		}
 		
-		if(parseInt($("#s_hand").val())){
+/*		if(parseInt($("#s_hand").val())){
 			
 			if(balanced){
 				$("#play_points").text(get_points().toLocaleString());
 				$("#play_multi").text(get_multi().toLocaleString());
 				$("#play_confirm").text((get_points() * get_multi()).toLocaleString());
 			}
-		}
+		}*/
 	}
 	
 	function refresh_game_header(){
@@ -457,7 +474,7 @@
 				disable($("#game #game_footer #plays_left .button.down"));
 				$("#game form").addClass("hidden");
 			}
-			else{
+			else if(!defeated_blind()){
 				if(parseInt($("#s_hand").val())) enable($("#game #play #play_confirm"));
 				enable($("#game #game_footer #plays_left .button.down"));
 				$("#game form").removeClass("hidden");
@@ -514,30 +531,6 @@
 			$("#config #suddeath").text(suddeath);
 		}
 	}
-
-	function next_blind(){
-		blind++;
-		round = Math.trunc((blind + 2) / 3);
-		$("#game #game_header #round").html("Ronda " + round);
-		
-		var base_points = (suddeath >= round) ? 300 * (2 ** (round - 1)) : 300 * (2 ** (round - 1)) + 100 * (2 ** (round - 1) * round - 1) - 100 * (round - 1);
-		goal = base_points * (0.5 * (blind - (3 * (round - 1)) + 1));
-		
-		refresh_game_header();
-		
-		if(suddeath >= round) $("#game #game_header #goal").text(goal.toLocaleString());
-		else{
-			$("#game #game_header").addClass("suddeath");
-			$("#game #game_header #goal").html(goal.toLocaleString());
-			
-			disable($("#config #rounds_down"));
-			disable($("#config #rounds_up"));
-		}
-		
-		$("#game #played div").animate({ height: "0" }, 250);
-		setTimeout(function(){ $("#game #played").html(""); }, 250);
-		save_game();
-	}
 	
 	function select_hand(hand){
 		clearTimeout(timeout);
@@ -554,7 +547,7 @@
 					$("#play #play_hand #sample").html('<span class="red">&#127173;</span><span class="black">&#127189;</span>');
 					break;
 				case 3:
-					$("#play #play_hand #label").text("Doble pareja");
+					$("#play #play_hand #label").text("Doble Pareja");
 					$("#play #play_hand #sample").html('<span class="black">&#127145;</span><span class="red">&#127161;</span><span class="black">&#127188;</span><span class="red">&#127172;</span>');
 					break;
 				case 4:
@@ -578,7 +571,7 @@
 					$("#play #play_hand #sample").html('<span class="black">&#127137;</span><span class="red">&#127153;</span><span class="black">&#127185;</span><span class="red">&#127169;</span>');
 					break;
 				case 9:
-					$("#play #play_hand #label").text("Esc. Col. / Real");
+					$("#play #play_hand #label").text("Esc. Color/Real");
 					$("#play #play_hand #sample").html('<span class="red">&#127153;</span><span class="red">&#127166;</span><span class="red">&#127165;</span><span class="red">&#127163;</span><span class="red">&#127162;</span>');
 					break;
 				case 10:
@@ -700,43 +693,55 @@
 		}
 	}
 	
-	function refresh_score(){
-		if(!current_play[current_play.length - 1]){
-			$("#game #played").append("<div class='discard'><span class='label'>Descarte</span><span class='score'></span></div>");
-			$("#game #played .discard").animate({ height: "32px" }, 250);
-			
-			if(!discards_left) disable($("#play_discard"));
-		}
-		else{
-			var label;
-			switch(current_play[current_play.length - 1]){
-				case 1: label = "Carta más alta"; break;
-				case 2: label = "Pareja"; break;
-				case 3: label = "Doble Pareja"; break;
-				case 4: label = "Trío"; break;
-				case 5: label = "Escalera"; break;
-				case 6: label = "Color"; break;
-				case 7: label = "Full"; break;
-				case 8: label = "Póker"; break;
-				case 9: label = "Escalera de Color / Real"; break;
-				case 10: label = "Repóker"; break;
-				case 11: label = "Full de Color"; break;
-				case 12: label = "5 de Color"; break;
+	function refresh_score(original = false){
+		var hand = parseInt($("#s_hand").val());
+		
+		if(!original){
+			switch(boss){
+				case "level_down":
+					if(level[hand] > 1){
+						$("#play_hand #level").append(" -1");
+						
+						var search;
+						
+						search = points[hand] + inc_points[hand] * (level[hand] - 1);
+						$("#points_string").text($("#points_string").text().replace(search, points[hand] + inc_points[hand] * (level[hand] - 2)));
+						
+						search = multi[hand] + inc_multi[hand] * (level[hand] - 1);
+						$("#multi_string").text($("#multi_string").text().replace(search, multi[hand] + inc_multi[hand] * (level[hand] - 2)));
+						
+						points_add(0);
+						multi_add(0);
+					}
+					break;
 				default: break;
 			}
-			$("#game #played").append("<div class='play'><span class='label'>" + label + "</span><span class='score'>" + current_score[current_score.length - 1].toLocaleString() + "</span></div>");
-			$("#game #played .play").animate({ height: "32px" }, 250);
 			
-			
-			
-			
-			
-			
-			
+			if(balanced){
+				$("#play_points").text(Math.floor((get_points() + get_multi()) / 2).toLocaleString());
+				$("#play_multi").text(Math.floor((get_points() + get_multi()) / 2).toLocaleString());
+				
+				$("#play_confirm").text((Math.floor(((get_points() + get_multi())) / 2) ** 2).toLocaleString());
+			}
 		}
-		disable($("#config .button"));
-		$("#config #nofigures").prop("disabled", true);
-		$("#config #balanced").prop("disabled", true);
+		else{
+			switch(boss){
+				case "level_down":
+					$("#play_hand #level").text(level[hand]);
+
+					var search = points[hand] + inc_points[hand] * (level[hand] - 2);
+					$("#points_string").text($("#points_string").text().replace(search, points[hand] + inc_points[hand] * (level[hand] - 1)));
+					
+					search = multi[hand] + inc_multi[hand] * (level[hand] - 2);
+					$("#multi_string").text($("#multi_string").text().replace(search, multi[hand] + inc_multi[hand] * (level[hand] - 1)));
+					
+					break;
+				default: break;
+			}
+			
+			points_add(0);
+			multi_add(0);
+		}
 	}
 	
 	function play_reset(){
@@ -745,7 +750,6 @@
 			if(!$("#play #play_reset").hasClass("active")){
 				refresh();
 				activate($("#play #play_reset"));
-				
 				timeout = setTimeout(function(){ deactivate($("#play #play_reset")); }, delay);
 			}
 			else{
@@ -772,97 +776,143 @@
 		}
 	}
 	
-	function play_discard(){
-		if(discards_left > 0){
-			clearTimeout(timeout);
-			if(!$("#play #play_discard").hasClass("active")){
-				refresh();
-				activate($("#play #play_discard"));
-				
-				timeout = setTimeout(function(){ deactivate($("#play #play_discard")); }, delay);
-			}
-			else{
-				current_play[current_play.length] = 0;
-				current_score[current_score.length] = 0;
-				played_discards++;
-				discards_left--;
-				
-				refresh_score();
-				$("#game_footer #discards_left .counter").text(discards_left);
-				deactivate($("#play #play_discard"));
-				save_game();
+	function play(hand){
+		var played = false;
+		
+		if(!hand){
+			if(discards_left){
+				clearTimeout(timeout);
+				if(!$("#play_discard").hasClass("active")){
+					refresh();
+					activate($("#play_discard"));
+					timeout = setTimeout(function(){ deactivate($("#play_discard")); }, delay);
+				}
+				else{
+					current_play[current_play.length] = 0;
+					current_score[current_score.length] = 0;
+					played_discards++;
+					
+					$("#game #played").append("<div class='discard'><span class='label'>Descarte</span><span class='score'></span></div>");
+					$("#game #played .discard").animate({ height: "32px" }, 250);
+					
+					activate($("#discards_left"));
+					change_discards(-1);
+					
+					played = true;
+				}
 			}
 		}
-	}
-	
-	function play_confirm(){
-		if((plays_left) && (parseInt($("#s_hand").val()))){
+		else if(plays_left){
 			clearTimeout(timeout);
-			if(!$("#play #play_confirm").hasClass("active")){
+			if(!$("#play_confirm").hasClass("active")){
 				refresh();
-				activate($("#play #play_confirm"));
-				
-				if(boss == "level_down"){
-					var hand = parseInt($("#s_hand").val());
-					if(level[hand] > 1){
-						$("#play_hand #level").append(" -1");
-						
-						var search;
-
-						search = points[hand] + inc_points[hand] * (level[hand] - 1);
-						$("#points_string").text($("#points_string").text().replace(search, points[hand] + inc_points[hand] * (level[hand] - 2)));
-						
-						search = multi[hand] + inc_multi[hand] * (level[hand] - 1);
-						$("#multi_string").text($("#multi_string").text().replace(search, multi[hand] + inc_multi[hand] * (level[hand] - 2)));
-						
-						points_add(0);
-						multi_add(0);
-					}
-				}
-				
-				if(balanced){
-					$("#play_points").text(((get_points() + get_multi()) / 2).toLocaleString());
-					$("#play_multi").text(((get_points() + get_multi()) / 2).toLocaleString());
-					
-					$("#play_confirm").text((((get_points() + get_multi()) / 2) * ((get_points() + get_multi()) / 2)).toLocaleString());
-				}
+				refresh_score();
+				activate($("#play_confirm"));
 				
 				timeout = setTimeout(function(){
-					$("#play_hand #level").text(level[parseInt($("#s_hand").val())]);
-					
-					if(boss == "level_down"){
-						search = points[hand] + inc_points[hand] * (level[hand] - 2);
-						$("#points_string").text($("#points_string").text().replace(search, points[hand] + inc_points[hand] * (level[hand] - 1)));
-						
-						search = multi[hand] + inc_multi[hand] * (level[hand] - 2);
-						$("#multi_string").text($("#multi_string").text().replace(search, multi[hand] + inc_multi[hand] * (level[hand] - 1)));
-						
-						points_add(0);
-						multi_add(0);
-					}
-					
-					refresh();
+					deactivate($("#play_confirm"));
+					refresh_score(true);
 				}, delay);
 			}
 			else{
-				current_play[current_play.length] = parseInt($("#s_hand").val());
-				current_score[current_score.length] = get_score();
+				current_play[current_play.length] = hand;
+				current_score[current_score.length] = balanced ? Math.floor((get_points() + get_multi()) / 2) ** 2 : get_score();
 				played_plays++;
-				plays_left--;
 				
-				if((boss == "level_down") && (level[parseInt($("#s_hand").val())] > 1)){
-					activate($("#levels #hand_" + parseInt($("#s_hand").val())));
-					change_level(parseInt($("#s_hand").val()), -1);
+				var label;
+				switch(current_play[current_play.length - 1]){
+					case 1: label = "Carta más alta"; break;
+					case 2: label = "Pareja"; break;
+					case 3: label = "Doble Pareja"; break;
+					case 4: label = "Trío"; break;
+					case 5: label = "Escalera"; break;
+					case 6: label = "Color"; break;
+					case 7: label = "Full"; break;
+					case 8: label = "Póker"; break;
+					case 9: label = "Escalera de Color / Real"; break;
+					case 10: label = "Repóker"; break;
+					case 11: label = "Full de Color"; break;
+					case 12: label = "5 de Color"; break;
+					default: break;
 				}
+				$("#game #played").append("<div class='play'><span class='label'>" + label + "</span><span class='score'>" + current_score[current_score.length - 1].toLocaleString() + "</span></div>");
+				$("#game #played .play").animate({ height: "32px" }, 250);
 				
-				refresh_score();
-				$("#game_footer #plays_left .counter").text(plays_left);
 				activate($("#play_reset"));
 				play_reset();
 				
-				save_game();
+				activate($("#plays_left"));
+				change_plays(-1);
+				
+				played = true;
+				
+				if(defeated_blind()) $("#game form").addClass("hidden");
 			}
 		}
+		
+		if(played){
+			disable($("#config .button"));
+			$("#config #nofigures").prop("disabled", true);
+			$("#config #balanced").prop("disabled", true);
+			save_game();
+		}
+	}
+	
+	function defeated_blind(){
+		var score = 0;
+		for(var i = 0; i < current_score.length; i++) score += current_score[i];
+		$("#next_blind #score").text(score.toLocaleString());
+		return(score >= goal);
+	}
+	
+	function next_blind(){
+		if((!defeated_blind()) && (round > suddeath)){
+			clearTimeout(timeout);
+			if(!$("#next_blind").hasClass("active")){
+				refresh();
+				activate($("#next_blind"));
+				timeout = setTimeout(function(){ deactivate($("#next_blind")); }, delay);
+			}
+			else{
+				blind++;
+				round = Math.trunc((blind + 2) / 3);
+				$("#game #game_header #round").html("Ronda " + round);
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			}
+			
+			
+		}
+		if((defeated_blind()) || (round <= suddeath))
+		blind++;
+		round = Math.trunc((blind + 2) / 3);
+		$("#game #game_header #round").html("Ronda " + round);
+		
+		var base_points = (suddeath >= round) ? 300 * (2 ** (round - 1)) : 300 * (2 ** (round - 1)) + 100 * (2 ** (round - 1) * round - 1) - 100 * (round - 1);
+		goal = base_points * (0.5 * (blind - (3 * (round - 1)) + 1));
+		
+		refresh_game_header();
+		
+		if(suddeath >= round) $("#game #game_header #goal").text(goal.toLocaleString());
+		else{
+			$("#game #game_header").addClass("suddeath");
+			$("#game #game_header #goal").html(goal.toLocaleString());
+			
+	//		disable($("#config #rounds_down"));
+	//		disable($("#config #rounds_up"));
+		}
+		
+		$("#game #played div").animate({ height: "0" }, 250);
+		setTimeout(function(){ $("#game #played").html(""); }, 250);
+		save_game();
 	}
 	
 	function change_dice(){

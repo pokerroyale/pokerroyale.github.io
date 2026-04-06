@@ -18,7 +18,7 @@
 	
 	<script type="text/javascript" src="functions.js"></script>
 </head/>
-<body onLoad="load_game();" onBeforeUnload="// return confirm();">
+<body onLoad="load_game(); initialize();" onBeforeUnload="// return confirm();">
 	<div id="menu">
 		<input type="radio" id="header_levels" name="menu" onclick="show_levels();" disabled /><label for="header_levels">NIVELES</label>
 		<input type="radio" id="header_game" name="menu" onclick="show_game();" disabled /><label for="header_game">JUEGO</label>
@@ -206,11 +206,11 @@
 				<div id="play_points" onClick="if(parseInt($('#s_hand').val())) $('#points_form').removeClass('hidden');"></div>
 				<div id="play_multi" onClick="if(parseInt($('#s_hand').val())) $('#multi_form').removeClass('hidden');">0</div>
 				<div id="play_reset" onClick="play_reset();"></div>
-				<div id="play_discard" onClick="play_discard();"></div>
-				<div id="play_confirm" class="empty" onClick="play_confirm();"></div>
+				<div id="play_discard" onClick="play(0);"></div>
+				<div id="play_confirm" class="empty" onClick="play(parseInt($('#s_hand').val()));"></div>
 			</form>
 			
-			<div id="next_round" onClick="next_blind()";>Siguiente</div>
+			<div id="next_blind" onClick="next_blind();"><span id="score"></span></div>
 			
 			<div id="game_footer">
 				<div id="dice" onClick="$('#dice_form').removeClass('hidden');"></div>
@@ -252,7 +252,7 @@
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_9" onClick="select_hand(9);">
-					<span class="label">Esc. Col. / Real</span>
+					<span class="label">Esc. Color/Real</span>
 					<span class="sample"><span class="red">&#127153;</span><span class="red">&#127166;</span><span class="red">&#127165;</span><span class="red">&#127163;</span><span class="red">&#127162;</span></span>
 				<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
