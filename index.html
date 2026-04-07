@@ -145,9 +145,9 @@
 			
 			<div id="stats">
 				<span class="label">Manos jugadas:</span>
-				<span class="counter" id="played_hands"></span>
+				<span class="counter" id="played_plays"></span>
 				<span class="label">Manos no jugadas:</span>
-				<span class="counter" id="not_played_hands"></span>
+				<span class="counter" id="not_played_plays"></span>
 			
 				<span class="label">Descartes usados:</span>
 				<span class="counter" id="played_discards"></span>
@@ -204,7 +204,7 @@
 					<span id="plays"></span>
 				</div>
 				<div id="play_points" onClick="if(parseInt($('#s_hand').val())) $('#points_form').removeClass('hidden');"></div>
-				<div id="play_multi" onClick="if(parseInt($('#s_hand').val())) $('#multi_form').removeClass('hidden');">0</div>
+				<div id="play_multi" onClick="if(parseInt($('#s_hand').val())) $('#multi_form').removeClass('hidden');"></div>
 				<div id="play_reset" onClick="play_reset();"></div>
 				<div id="play_discard" onClick="play(0);"></div>
 				<div id="play_confirm" class="empty" onClick="play(parseInt($('#s_hand').val()));"></div>

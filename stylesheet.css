@@ -470,17 +470,26 @@
 		margin: 1% auto;
 		background-color: #990000;
 		border: 1px solid #990000;
-		border-radius: 3px;
+		border-radius: 6px;
 		font-size: 24px;
 		font-weight: bold;
 		color: #eeeeee;
 		padding: 0 2%;
 		text-shadow: 0 0 3px #000000;
+		transition: all 0.2s;
+	}
+	div#game div#next_blind.button{
+		background-image: linear-gradient(#ff0000, #990000 50%);
+		height: 10%;
+		filter: saturate(0.5);
+		box-shadow: 0 0 0 transparent;
 	}
 	div#game div#next_blind::before{ content: "PUNTUACIÓN:"; }
 	div#game div#next_blind.active{
-		background-image: linear-gradient(#ff0000, #990000 50%);
 		justify-content: center;
+		filter: saturate(1);
+		box-shadow: 2px 2px 3px #666666;
+		transition: filter 0.2s, box-shadow 0.2s 0.2s;
 	}
 	div#game div#next_blind.active::before{ content: "CONTINUAR"; }
 	div#game div#next_blind span#score{
@@ -491,7 +500,7 @@
 		justify-content: right;
 	}
 	div#game div#next_blind.active span#score{ display: none; }
-	div#game div#next_blind.active.finish::before { content: "Fin de la partida"; }
+	div#game div#next_blind.active.endgame::before { content: "Fin de la partida"; }
 	
 	div#game div#game_footer{
 		position: absolute;
