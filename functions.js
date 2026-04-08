@@ -36,7 +36,7 @@
 	var tokens;
 	var suddeath = 6;
 	var nofigures, balanced;
-	var boss = "none";						// "none" / "big_boss" / "half_base" / "level_down" / "unique_hand" / "varied_hands"
+	var boss = "none";						// "none" / "big_boss" / "half_base" / "level_down" / "unique_hand" / "varied_hands" / 
 	var timeout = 0;
 	var delay = 1500;
 	
@@ -263,12 +263,20 @@
 	function refresh(){
 		deactivate($(".active"));
 		
-		for(var i = 1; i <= 12; i++){
-			$("#hand_" + i + " .points").text(points[i] + inc_points[i] * (level[i] - 1));
-			$("#hand_" + i + " .multi").text(multi[i] + inc_multi[i] * (level[i] - 1));
+		for(var h = 1; h <= 12; h++){
+			$("#hand_" + h + " .points").text(points[h] + inc_points[h] * (level[h] - 1));
+			$("#hand_" + h + " .multi").text(multi[h] + inc_multi[h] * (level[h] - 1));
 			
-			$("#s_hand_" + i + " .points").text((boss == "half_base") ? (points[i] + inc_points[i] * (level[i] - 1)) / 2 : points[i] + inc_points[i] * (level[i] - 1).toLocaleString());
-			$("#s_hand_" + i + " .multi").text((boss == "half_base") ? (multi[i] + inc_multi[i] * (level[i] - 1)) / 2 : multi[i] + inc_multi[i] * (level[i] - 1).toLocaleString());
+			switch(boss){
+				case "half-base":
+					$("#s_hand_" + h + " .points").text(Math.floor((points[h] + inc_points[h] * (level[h] - 1)) / 2));
+					$("#s_hand_" + h + " .multi").text(Math.floor((multi[h] + inc_multi[h] * (level[h] - 1)) / 2));
+					break;
+				default:
+					$("#s_hand_" + h + " .points").text(points[h] + inc_points[h] * (level[h] - 1));
+					$("#s_hand_" + h + " .multi").text(multi[h] + inc_multi[h] * (level[h] - 1));
+					break;
+			}
 		}
 	}
 	
@@ -287,17 +295,18 @@
 			case 1:
 				$("#game_header").attr("class", "small_blind");
 				$("#game_header #blind").html("Ciega PEQUEÑA");
+				boss = "none";
 				break;
 			case 2:
 				$("#game_header").attr("class", "big_blind");
 				$("#game_header #blind").html("Ciega GRANDE");
-				goal = goal * 1.5;
+				goal *= 1.5;
 				break;
 			case 3:
 				$("#game_header").attr("class", "boss_blind");
 				$("#game_header #blind").html("Ciega JEFE");
-				goal = goal * 2;
-				/*if(!current_play.length) */$("#game_header").addClass("button");
+				goal *= 2;
+				$("#game_header").addClass("button");
 				break;
 			default: break;
 		}
