@@ -668,7 +668,7 @@
 		width: 33.34%;
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
-		grid-template-rows: 20% 20% 20% 20% 16%;
+		grid-template-rows: auto 18% 18% 18% 12%;
 		grid-gap: 1%;
 		align-items: center;
 		background-color: #eeeeee;
@@ -699,7 +699,7 @@
 		background-color: #2222ff;
 		border: 3px solid #2222ff;
 		border-radius: 10px;
-		font-size: 28px;
+		font-size: 32px;
 		font-weight: bold;
 		color: #eeeeee;
 		text-shadow: 2px 2px 3px #000000;
@@ -739,7 +739,7 @@
 		width: 33.34%;
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
-		grid-template-rows: 20% 20% 20% 20% 16%;
+		grid-template-rows: auto 18% 18% 18% 12%;
 		grid-gap: 1%;
 		align-items: center;
 		background-color: #eeeeee;
@@ -770,7 +770,7 @@
 		background-color: #ff5500;
 		border: 3px solid #ff5500;
 		border-radius: 10px;
-		font-size: 28px;
+		font-size: 32px;
 		font-weight: bold;
 		color: #eeeeee;
 		text-shadow: 2px 2px 3px #000000;
@@ -839,13 +839,13 @@
 		visibility: hidden;
 	}
 	
-	div#game div#dice_form span.die{
+	div#game div#dice_form span{
 		height: 100%;
 		border: 1px solid #cccccc;
 		border-radius: 6px;
 	}
-	div#game div#dice_form span.die.button{}
-	div#game div#dice_form span#die_0.die{
+	div#game div#dice_form span.button{}
+	div#game div#dice_form span#die_0{
 		grid-column: 1 / 4;
 		grid-row: 1 / 4;
 		display: flex;
@@ -856,40 +856,40 @@
 		text-shadow: 0 0 10px #800080;
 		border: 3px solid #800080;
 	}
-	div#game div#dice_form span.die.die_1{ background: url("die_1.png") center / 60% no-repeat; }
-	div#game div#dice_form span.die.die_1.button{ background: url("die_1.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form span.die.die_2{ background: url("die_2.png") center / 60% no-repeat; }
-	div#game div#dice_form span.die.die_2.button{ background: url("die_2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form span.die.die_3{ background: url("die_3.png") center / 60% no-repeat; }
-	div#game div#dice_form span.die.die_3.button{ background: url("die_3.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form span.die.die_4{ background: url("die_4.png") center / 60% no-repeat; }
-	div#game div#dice_form span.die.die_4.button{ background: url("die_4.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form span.die.die_5{ background: url("die_5.png") center / 60% no-repeat; }
-	div#game div#dice_form span.die.die_5.button{ background: url("die_5.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form span.die.die_6{ background: url("die_6.png") center / 60% no-repeat; }
-	div#game div#dice_form span.die.die_6.button{ background: url("die_6.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form span.die.die_7{ background: url("die_1.png") center / 60% no-repeat; }
-	div#game div#dice_form span.die.die_7.button{ background: url("die_1.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form span.die.die_8{ background: url("die_2v2.png") center / 60% no-repeat; }
-	div#game div#dice_form span.die.die_8.button{ background: url("die_2v2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form span.die.die_9{ background: url("die_3v2.png") center / 60% no-repeat; }
-	div#game div#dice_form span.die.die_9.button{ background: url("die_3v2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form span.die.die_10{ background: url("die_4.png") center / 60% no-repeat; }
-	div#game div#dice_form span.die.die_10.button{ background: url("die_4.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form span.die.die_11{ background: url("die_5.png") center / 60% no-repeat; }
-	div#game div#dice_form span.die.die_11.button{ background: url("die_5.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
-	div#game div#dice_form span.die.die_12{ background: url("die_6v2.png") center / 60% no-repeat; }
-	div#game div#dice_form span.die.die_12.button{ background: url("die_6v2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die_1{ background: url("die_1.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die_1.button{ background: url("die_1.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die_2{ background: url("die_2.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die_2.button{ background: url("die_2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die_3{ background: url("die_3.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die_3.button{ background: url("die_3.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die_4{ background: url("die_4.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die_4.button{ background: url("die_4.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die_5{ background: url("die_5.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die_5.button{ background: url("die_5.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die_6{ background: url("die_6.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die_6.button{ background: url("die_6.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die_7{ background: url("die_1.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die_7.button{ background: url("die_1.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die_8{ background: url("die_2v2.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die_8.button{ background: url("die_2v2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die_9{ background: url("die_3v2.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die_9.button{ background: url("die_3v2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die_10{ background: url("die_4.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die_10.button{ background: url("die_4.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die_11{ background: url("die_5.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die_11.button{ background: url("die_5.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
+	div#game div#dice_form span.die_12{ background: url("die_6v2.png") center / 60% no-repeat; }
+	div#game div#dice_form span.die_12.button{ background: url("die_6v2.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
 	
-	div#game div#dice_form span.die.add{
+	div#game div#dice_form span#die_add{
 		background: url("die_add.png") center / 60% no-repeat, linear-gradient(#aaffaa, #44ff44 50%);
 		border: 1px solid #44ff44;
 	}
-	div#game div#dice_form span.die.active{
+	div#game div#dice_form span.active{
 		background: url("die_remove.png") center / 60% no-repeat, linear-gradient(#ff0000, #990000 50%) !important;
 		border: 1px solid #990000;
 	}
-	div#game div#dice_form span.die.rolling{ background-color: #aaaaaa !important; }
+	div#game div#dice_form span.rolling{ background-color: #aaaaaa !important; }
 	
 	div#game div#dice_form div.button{ font-size: 28px; }
 	
@@ -913,7 +913,7 @@
 		border-color: #808080;
 	}
 	div#game div#dice_form div#dice_switch.disabled{}
-	div#game div#dice_form div#close{
+	div#game div#dice_form div#dice_close{
 		grid-row: 5;
 		grid-column: 2 / 4;
 	}
