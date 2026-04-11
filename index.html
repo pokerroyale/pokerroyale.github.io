@@ -188,7 +188,7 @@
 		</div>
 		
 		<div id="game">
-			<div id="game_header" onClick="change_boss();">
+			<div id="game_header">
 				<span id="round"></span>
 				<span id="blind"></span>
 				<span id="goal"></span>
@@ -210,7 +210,8 @@
 				<div id="play_confirm" class="empty"></div>
 			</form>
 			
-			<div id="next_blind" onClick="next_blind();"><span id="score"></span></div>
+			<div id="next_blind" onClick="next_blind();"><span></span></div>
+			<div id="total_score" class="hidden"><span></span></div>
 			
 			<div id="game_footer">
 				<div id="dice" onClick="$('#dice_form').removeClass('hidden');"></div>
@@ -229,6 +230,16 @@
 					<span class="counter"></span>
 					<span class="buttons"><div class="button down" onClick="change_plays(-1);">-</div><div class="button up" onClick="change_plays(1);">+</div></span>
 				</div>
+			</div>
+			
+			<div id="boss_form" class="hidden">
+				<span class="boss" id="big_boss" onClick="change_boss('big_boss');">Big Boss</span>
+				<span class="boss" id="medium" onClick="change_boss('medium');">Medium</span>
+				<span class="boss" id="depressing" onClick="change_boss('depressing');">Deprimente</span>
+				<span class="boss" id="repetitive" onClick="change_boss('repetitive');">Repetitivo</span>
+				<span class="boss" id="alternative" onClick="change_boss('alternative');">Alternativo</span>
+				<span class="boss" id="forbidden" onClick="change_boss('forbidden');">Mano prohibida</span>
+				<span class="boss" id="none" onClick="change_boss('none');"></span>
 			</div>
 			
 			<div id="hands_form" class="hidden">
@@ -309,44 +320,44 @@
 			
 			<div id="points_form" class="hidden">
 				<span id="points_string"></span>
-				<span class="button add" onClick="points_add(80);">+80</span>
-				<span class="button add" onClick="points_add(50);">+50</span>
-				<span class="button add" onClick="points_add(30);">+30</span>
-				<span class="button add" onClick="points_add(20);">+20</span>
-				<span class="button add" onClick="points_add(11);">+11</span>
-				<span class="button add" onClick="points_add(10);">+10</span>
-				<span class="button add" onClick="points_add(9);">+9</span>
-				<span class="button add" onClick="points_add(8);">+8</span>
-				<span class="button add" onClick="points_add(7);">+7</span>
-				<span class="button add" onClick="points_add(6);">+6</span>
-				<span class="button add" onClick="points_add(5);">+5</span>
-				<span class="button add" onClick="points_add(4);">+4</span>
-				<span class="button add" onClick="points_add(3);">+3</span>
-				<span class="button add" onClick="points_add(2);">+2</span>
-				<span class="button add" onClick="points_add(1);">+1</span>
+				<span class="add" onClick="points_add(80);">+80</span>
+				<span class="add" onClick="points_add(50);">+50</span>
+				<span class="add" onClick="points_add(30);">+30</span>
+				<span class="add" onClick="points_add(20);">+20</span>
+				<span class="add" onClick="points_add(11);">+11</span>
+				<span class="add" onClick="points_add(10);">+10</span>
+				<span class="add" onClick="points_add(9);">+9</span>
+				<span class="add" onClick="points_add(8);">+8</span>
+				<span class="add" onClick="points_add(7);">+7</span>
+				<span class="add" onClick="points_add(6);">+6</span>
+				<span class="add" onClick="points_add(5);">+5</span>
+				<span class="add" onClick="points_add(4);">+4</span>
+				<span class="add" onClick="points_add(3);">+3</span>
+				<span class="add" onClick="points_add(2);">+2</span>
+				<span class="add" onClick="points_add(1);">+1</span>
 				<div class="button" id="points_reset" onClick="points_reset();"></div>
-				<div class="button" id="points_confirm" onClick="$('#points_form').addClass('hidden');"></div>
+				<div class="button" id="points_close" onClick="$('#points_form').addClass('hidden');"></div>
 			</div>
 			
 			<div id="multi_form" class="hidden">
 				<span id="multi_string"></span>
-				<span class="button plus" onClick="multi_plus(5);">x5</span>
-				<span class="button plus" onClick="multi_plus(4);">x4</span>
-				<span class="button plus" onClick="multi_plus(3);">x3</span>
-				<span class="button plus" onClick="multi_plus(2);">x2</span>
-				<span class="button plus" onClick="multi_plus(1.5);">x1.5</span>
-				<span class="button add" onClick="multi_add(10);">+10</span>
-				<span class="button add" onClick="multi_add(9);">+9</span>
-				<span class="button add" onClick="multi_add(8);">+8</span>
-				<span class="button add" onClick="multi_add(7);">+7</span>
-				<span class="button add" onClick="multi_add(6);">+6</span>
-				<span class="button add" onClick="multi_add(5);">+5</span>
-				<span class="button add" onClick="multi_add(4);">+4</span>
-				<span class="button add" onClick="multi_add(3);">+3</span>
-				<span class="button add" onClick="multi_add(2);">+2</span>
-				<span class="button add" onClick="multi_add(1);">+1</span>
+				<span class="plus" onClick="multi_plus(5);">x5</span>
+				<span class="plus" onClick="multi_plus(4);">x4</span>
+				<span class="plus" onClick="multi_plus(3);">x3</span>
+				<span class="plus" onClick="multi_plus(2);">x2</span>
+				<span class="plus" onClick="multi_plus(1.5);">x1.5</span>
+				<span class="add" onClick="multi_add(10);">+10</span>
+				<span class="add" onClick="multi_add(9);">+9</span>
+				<span class="add" onClick="multi_add(8);">+8</span>
+				<span class="add" onClick="multi_add(7);">+7</span>
+				<span class="add" onClick="multi_add(6);">+6</span>
+				<span class="add" onClick="multi_add(5);">+5</span>
+				<span class="add" onClick="multi_add(4);">+4</span>
+				<span class="add" onClick="multi_add(3);">+3</span>
+				<span class="add" onClick="multi_add(2);">+2</span>
+				<span class="add" onClick="multi_add(1);">+1</span>
 				<div class="button" id="multi_reset" onClick="multi_reset();"></div>
-				<div class="button" id="multi_confirm" onClick="$('#multi_form').addClass('hidden');"></div>
+				<div class="button" id="multi_close" onClick="$('#multi_form').addClass('hidden');"></div>
 			</div>
 			
 			<div id="dice_form" class="hidden">
