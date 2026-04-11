@@ -197,14 +197,14 @@
 			}
 		}
 		else{
-			$("#game #hands_form").addClass("hidden");
-			$("#game #points_form").addClass("hidden");
-			$("#game #multi_form").addClass("hidden");
-			$("#game #dice_form").addClass("hidden");
+			hide($("#game #hands_form"));
+			hide($("#game #points_form"));
+			hide($("#game #multi_form"));
+			hide($("#game #dice_form"));
 			
 			$("#header_levels").prop("disabled", false);
 			$("#header_game").prop("disabled", false);
-			$("#game form").removeClass("hidden");
+			show($("#game form"));
 			$("#next_blind").removeClass("button");
 			
 			load_game();
@@ -407,7 +407,7 @@
 				warning = "Juega un solo tipo de mano.";
 				break;
 			case "alternative":
-				warning = "Las manos no se repiten.";
+				warning = "Las manos repetidas no puntúan.";
 				break;
 			case "forbidden":
 				var max = 0;
@@ -427,7 +427,7 @@
 					case 12: warning = "un <span>5 de Color</span>"; break;
 					default: break;
 				}
-				warning = "Jugar " + (warning) + " reduce las fichas a 0.";
+				warning = "Jugar " + warning + " reduce las fichas a 0.";
 				break;
 			default:
 				$("#played .warning").remove();
@@ -637,12 +637,14 @@
 				disable($("#game_footer #plays_left .button.down"));
 				hide($("#play"));
 				$("#next_blind").addClass("button");
+				if((!defeated_blind()) && (round > suddeath)) $("#next_blind").addClass("endgame");
 			}
 			else if(!defeated_blind()){
-				if(parseInt($("#s_hand").val())) enable($("#game #play #play_confirm"));
+				if(parseInt($("#s_hand").val())) enable($("#play #play_confirm"));
 				enable($("#game_footer #plays_left .button.down"));
 				show($("#play"));
-				$("#next_blind").removeClass("button");
+				$("#next_blind").removeClass("button endgame");
+				hide($("#total_score"));
 			}
 			
 			$("#game_footer #plays_left").removeAttr("onClick");
@@ -768,7 +770,7 @@
 			$("#play #play_confirm").attr("onClick", "play(" + hand + ");");
 			save_game();
 		}
-		$("#hands_form").addClass("hidden");
+		hide($("#hands_form"));
 	}
 	
 	function get_points(){ return(eval($("#points_string").text())); }
@@ -796,14 +798,13 @@
 			timeout = setTimeout(function(){ deactivate($("#points_reset")); }, delay);
 		}
 		else{
-			var p = points[parseInt($("#s_hand").val())] + inc_points[parseInt($("#s_hand").val())] * (level[parseInt($("#s_hand").val())] - 1);
-			if(boss == "medium") p = p / 2;
+			var hand = parseInt($("#s_hand").val());
+			var string = $("#multi_form #multi_string").text();
 			
-			$("#points_string").text(p.toLocaleString());
-			$("#points_close").text(p.toLocaleString());
-			
-			$("#play_points").text(p.toLocaleString());
-			$("#play_confirm").text(get_score().toLocaleString());
+			$("#s_hand").val(0);
+			select_hand(hand);
+			$("#multi_form #multi_string").text(string);
+			$("#play #play_multi").text(get_multi().toLocaleString());
 			
 			deactivate($("#points_reset"));
 		}
@@ -840,14 +841,13 @@
 			timeout = setTimeout(function(){ deactivate($("#multi_reset")); }, delay);
 		}
 		else{
-			var m = multi[parseInt($("#s_hand").val())] + inc_multi[parseInt($("#s_hand").val())] * (level[parseInt($("#s_hand").val())] - 1);
-			if(boss == "medium") m = m / 2;
+			var hand = parseInt($("#s_hand").val());
+			var string = $("#points_form #points_string").text();
 			
-			$("#multi_string").text(m.toLocaleString());
-			$("#multi_close").text(m.toLocaleString());
-			
-			$("#play_multi").text(m.toLocaleString());
-			$("#play_confirm").text(get_score().toLocaleString());
+			$("#s_hand").val(0);
+			select_hand(hand);
+			$("#points_form #points_string").text(string);
+			$("#play #play_points").text(get_multi().toLocaleString());
 			
 			deactivate($("#multi_reset"));
 		}
@@ -984,7 +984,7 @@
 				played = true;
 				
 				if(defeated_blind()){
-					$("#game form").addClass("hidden");
+					hide($("#game form"));
 					$("#next_blind").addClass("button");
 				}
 				else if(!plays_left){

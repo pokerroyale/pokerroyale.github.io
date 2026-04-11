@@ -326,12 +326,14 @@
 	div#game div#played div.hidden{ height: 0px; }
 	
 	div#game div#played div.warning{
-		background-color: #990000;
+		justify-content:center;
+		background-color: #eeeeee;
 		font-size: 16px;
-		color: #eeeeee;
-		text-shadow: 0 0 2px #000000;
+		color: #990000;
+		border: 1px solid #990000;
+		text-shadow: 0 0 1px #eeeeee, 0 0 12px #990000;
 	}
-	div#game div#played div.warning span{ font-weight: bold; margin: 0 1%; }
+	div#game div#played div.warning span{ display: inline; font-weight: bold; margin: 0 1%; }
 	div#game div#played div.discard{ background-color: #aaaa00; }
 	div#game div#played div.discard span{
 		display: flex;
