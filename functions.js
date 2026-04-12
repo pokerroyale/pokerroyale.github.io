@@ -44,7 +44,16 @@
 	var timeout = 0;
 	var delay = 1500;
 	
+	
+	function delete_game(){
+		
+	}
+	
 	function load_game(){
+	//	if($.cookie("PokerRoyale_prueba")){
+	//		var prueba = $.cookie("PokerRoyale_prueba");
+		//	alert(prueba);
+	//	}
 //			var cookie = document.cookie;
 		
 		//var cookie = document.cookie.replace(/(?:(?:^|.*;\s*)${"POKER_ROYALE"}\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -159,9 +168,12 @@
 	
 	function save_game(){
 		if($("#savegame").prop("checked")){
+			Cookies.set("prueba", "123", { expires: 7, path: "/" });
+			alert(Cookies.get("prueba"));
 		//	alert("Partida guardada.");
 		}
 		else{
+			delete_game();
 		//	alert("Partida borrada.");
 		}
 //				var partida = new Array();
