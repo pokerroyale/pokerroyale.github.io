@@ -46,45 +46,56 @@
 	
 	
 	function delete_game(){
-		
+		Cookies.remove("PokerRoyale_current_play");
+		Cookies.remove("PokerRoyale_current_score");
+		Cookies.remove("PokerRoyale_total_score");
+		Cookies.remove("PokerRoyale_max_plays");
+		Cookies.remove("PokerRoyale_plays_left");
+		Cookies.remove("PokerRoyale_max_discards");
+		Cookies.remove("PokerRoyale_discards_left");
+		Cookies.remove("PokerRoyale_tokens");
+		Cookies.remove("PokerRoyale_cards");
+		Cookies.remove("PokerRoyale_blind");
+		Cookies.remove("PokerRoyale_round");
+		Cookies.remove("PokerRoyale_played_plays");
+		Cookies.remove("PokerRoyale_not_played_plays");
+		Cookies.remove("PokerRoyale_played_discards");
+		Cookies.remove("PokerRoyale_not_played_discards");
+		Cookies.remove("PokerRoyale_defeated_blinds");
+		Cookies.remove("PokerRoyale_not_defeated_blinds");
+		Cookies.remove("PokerRoyale_nofigures");
+		Cookies.remove("PokerRoyale_balanced");
+		Cookies.remove("PokerRoyale_suddeath");
+		Cookies.remove("PokerRoyale_dice");
+		Cookies.remove("PokerRoyale_boss");
+		Cookies.remove("PokerRoyale_boss_action");
 	}
 	
 	function load_game(){
-	//	if($.cookie("PokerRoyale_prueba")){
-	//		var prueba = $.cookie("PokerRoyale_prueba");
-		//	alert(prueba);
-	//	}
-//			var cookie = document.cookie;
-		
-		//var cookie = document.cookie.replace(/(?:(?:^|.*;\s*)${"POKER_ROYALE"}\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-		
-//			if(cookie.length == 0) show_config();
-//			SI HAY PARTIDA GUARDADA
-//				VOLCAR DATOS DE PARTIDA DESDE LA COOKIE
-//				Y MOSTRAR PANTALLA DE JUEGO
-		//	alert(cookie.length);
-		if(1 == 0){
-		//
-		//		CARGAR DATOS DESDE COOKIES
-			current_play = new Array(); // BORRAR
-			current_score = new Array(); // BORRAR
-			max_plays = 4;			// BORRAR
-			plays_left = max_plays;	// BORRAR
-			max_discards = 3;		// BORRAR
-			discards_left = max_discards;// BORRAR
-			tokens = 4;				// BORRAR
-			cards = 0;				// BORRAR
-			round = 1;				// BORRAR
-			blind = 1;				// BORRAR
-			played_plays = 0;		// BORRAR
-			not_played_plays = 0;	// BORRAR
-			played_discards = 0;	// BORRAR
-			not_played_discards = 0;// BORRAR
-			defeated_blinds = 0;	// BORRAR
-			not_defeated_blinds = 0;// BORRAR
-			total_score = 0;		// BORRAR
-			nofigures = false;		// BORRAR
-			balanced = false;		// BORRAR
+		if(Cookies.get("PokerRoyale_total_score")){
+			current_play = Cookies.get("PokerRoyale_current_play");
+			current_score = Cookies.get("PokerRoyale_current_score");
+			total_score = Cookies.get("PokerRoyale_total_score");
+			max_plays = Cookies.get("PokerRoyale_max_plays");
+			plays_left = Cookies.get("PokerRoyale_plays_left");
+			max_discards = Cookies.get("PokerRoyale_max_discards");
+			discards_left = Cookies.get("PokerRoyale_discards_left");
+			tokens = Cookies.get("PokerRoyale_tokens");
+			cards = Cookies.get("PokerRoyale_cards");
+			blind = Cookies.get("PokerRoyale_blind");
+			round = Cookies.getº("PokerRoyale_round");
+			played_plays = Cookies.get("PokerRoyale_played_plays");
+			not_played_plays = Cookies.get("PokerRoyale_not_played_plays");
+			played_discards = Cookies.get("PokerRoyale_played_discards");
+			not_played_discards = Cookies.get("PokerRoyale_not_played_discards");
+			defeated_blinds = Cookies.get("PokerRoyale_defeated_blinds");
+			not_defeated_blinds = Cookies.get("PokerRoyale_not_defeated_blinds");
+			nofigures = Cookies.get("PokerRoyale_nofigures");
+			balanced = Cookies.get("PokerRoyale_balanced");
+			suddeath = Cookies.get("PokerRoyale_suddeath");
+			dice = Cookies.get("PokerRoyale_dice");
+			boss = Cookies.get("PokerRoyale_boss");
+			boss_action = Cookies.get("PokerRoyale_boss_action");
 			
 			$("#header_levels").prop("disabled", false);
 			$("#header_game").prop("disabled", false);
@@ -143,10 +154,17 @@
 		enable($("#play #play_discard"));
 		disable($("#play #play_confirm"));
 		
-		$("#game_footer #cards .counter").text((nofigures ? 40 : 52) + cards);
-		$("#game_footer #discards_left .counter").text(discards_left);
-		$("#game_footer #plays_left .counter").text(plays_left);
 		enable($("#game_footer .button"));
+		$("#game_footer #cards .counter").text((nofigures ? 40 : 52) + cards);
+		if(cards == (nofigures) ? -39 : -51) disable($("#game_footer #cards .button.down"));
+		$("#game_footer #discards_left .counter").text(discards_left);
+		if(!discards_left) disable($("#game_footer #discards_left .button_down"));
+		$("#game_footer #plays_left .counter").text(plays_left);
+		if(!plays_left){
+			disable($("#game_footer #plays_left .button_down"));
+			hide("#play");
+			$("#next_blind").addClass("button");
+		}
 		
 		$("#hands_form #s_hand").val(0);
 		
@@ -163,26 +181,36 @@
 		$("#config #nofigures").prop("checked", nofigures);
 		$("#config #balanced").prop("checked", balanced);
 		
-		defeated_blind();
+		if((!defeated_blind()) && (round > suddeath)) $("#next_blind").addClass("endgame");
 	}
 	
 	function save_game(){
 		if($("#savegame").prop("checked")){
-			Cookies.set("prueba", "123", { expires: 7, path: "/" });
-			alert(Cookies.get("prueba"));
-		//	alert("Partida guardada.");
+			Cookies.set("PokerRoyale_current_play", current_play, { expires: 7 });
+			Cookies.set("PokerRoyale_current_score", current_score, { expires: 7 });
+			Cookies.set("PokerRoyale_total_score", total_score, { expires: 7 });
+			Cookies.set("PokerRoyale_max_plays", max_plays, { expires: 7 });
+			Cookies.set("PokerRoyale_plays_left", plays_left, { expires: 7 });
+			Cookies.set("PokerRoyale_max_discards", max_discards, { expires: 7 });
+			Cookies.set("PokerRoyale_discards_left", discards_left, { expires: 7 });
+			Cookies.set("PokerRoyale_tokens", tokens, { expires: 7 });
+			Cookies.set("PokerRoyale_cards", cards, { expires: 7 });
+			Cookies.set("PokerRoyale_blind", blind, { expires: 7 });
+			Cookies.set("PokerRoyale_round", round, { expires: 7 });
+			Cookies.set("PokerRoyale_played_plays", played_plays, { expires: 7 });
+			Cookies.set("PokerRoyale_not_played_plays", not_played_plays, { expires: 7 });
+			Cookies.set("PokerRoyale_played_discards", played_discards, { expires: 7 });
+			Cookies.set("PokerRoyale_not_played_discards", not_played_discards, { expires: 7 });
+			Cookies.set("PokerRoyale_defeated_blinds", defeated_blinds, { expires: 7 });
+			Cookies.set("PokerRoyale_not_defeated_blinds", not_defeated_blinds, { expires: 7 });
+			Cookies.set("PokerRoyale_nofigures", nofigures, { expires: 7 });
+			Cookies.set("PokerRoyale_balanced", balanced, { expires: 7 });
+			Cookies.set("PokerRoyale_suddeath", suddeath, { expires: 7 });
+			Cookies.set("PokerRoyale_dice", dice, { expires: 7 });
+			Cookies.set("PokerRoyale_boss", boss, { expires: 7 });
+			Cookies.set("PokerRoyale_boss_action", boss_action, { expires: 7 });
 		}
-		else{
-			delete_game();
-		//	alert("Partida borrada.");
-		}
-//				var partida = new Array();
-//				
-//				const d = new Date();
-//				d.setTime(d.getTime() + (exdays*24*60*60*1000));
-//				let expires = "expires="+ d.toUTCString();
-//				document.cookie = "poker_royale=" + cvalue + ";" + expires + ";path=/";
-//			}
+		else delete_game();
 	}
 	
 	function new_game(endgame = false){
