@@ -134,9 +134,14 @@
 		refresh();
 		refresh_game_header();
 		
-		$("#levels #max_plays .counter").text(max_plays);
-		$("#levels #max_discards .counter").text(max_discards);
-		$("#levels #tokens .counter").text(tokens);
+		$("#levels_footer #max_plays .counter").text(max_plays);
+		$("#levels_footer #max_discards .counter").text(max_discards);
+		$("#levels_footer #tokens .counter").text(tokens);
+		
+		for(var i = 0; i < current_play.length; i++){
+			if(!current_play[i]) $("#game #played").append("<div class='discard'><span class='label'>Descarte</span><span class='score'></span></div>");
+			else $("#game #played").append("<div class='play'><span class='label'>" + get_label() + "</span><span class='score'>" + current_score[i].toLocaleString() + "</span></div>");
+		}
 		
 		$("#play #play_hand #sample").text("");
 		$("#play #play_hand #label").text("");
@@ -813,6 +818,25 @@
 		hide($("#hands_form"));
 	}
 	
+	function get_label(hand, warning = false){
+		var label;
+		switch(hand){
+			case 1: label = "Carta más alta"; if(warning) label = "una <span>" + label + "</span> "; break;
+			case 2: label = "Pareja"; if(warning) label = "una <span>" + label + "</span> "; break;
+			case 3: label = "Doble Pareja"; if(warning) label = "una <span>" + label + "</span> "; break;
+			case 4: label = "Trío";if(warning) label = "un <span>" + label + "</span> "; break;
+			case 5: label = "Escalera"; if(warning) label = "una <span>" + label + "</span> "; break;
+			case 6: label = "Color"; if(warning) label = "un <span>" + label + "</span> "; break;
+			case 7: label = "Full"; if(warning) label = "un <span>" + label + "</span> "; break;
+			case 8: label = "Póker"; if(warning) label = "un <span>" + label + "</span> "; break;
+			case 9: label = "Escalera de Color / Real"; if(warning) label = "una <span>" + label + "</span> "; break;
+			case 10: label = "Repóker"; if(warning) label = "un <span>" + label + "</span> "; break;
+			case 11: label = "Full de Color"; if(warning) label = "un <span>" + label + "</span> "; break;
+			case 12: label = "5 de Color"; if(warning) label = "un <span>" + label + "</span> "; break;
+			default: break;
+		}
+		return(label);
+	}
 	function get_points(){ return(eval($("#points_string").text())); }
 	function get_multi(){ return(eval($("#multi_string").text().replaceAll("x", "*"))); }
 	function get_score(){ return(get_points() * get_multi()); }
@@ -995,23 +1019,7 @@
 				
 				current_play[current_play.length] = hand;
 				
-				var label;
-				switch(current_play[current_play.length - 1]){
-					case 1: label = "Carta más alta"; break;
-					case 2: label = "Pareja"; break;
-					case 3: label = "Doble Pareja"; break;
-					case 4: label = "Trío"; break;
-					case 5: label = "Escalera"; break;
-					case 6: label = "Color"; break;
-					case 7: label = "Full"; break;
-					case 8: label = "Póker"; break;
-					case 9: label = "Escalera de Color / Real"; break;
-					case 10: label = "Repóker"; break;
-					case 11: label = "Full de Color"; break;
-					case 12: label = "5 de Color"; break;
-					default: break;
-				}
-				$("#game #played").append("<div class='play hidden'><span class='label'>" + label + "</span><span class='score'>" + current_score[current_score.length - 1].toLocaleString() + "</span></div>");
+				$("#game #played").append("<div class='play hidden'><span class='label'>" + get_label() + "</span><span class='score'>" + current_score[current_score.length - 1].toLocaleString() + "</span></div>");
 				setTimeout(function(){ show($("#game #played div.play")); }, 0);
 				
 				played_plays++;
