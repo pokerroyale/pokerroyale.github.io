@@ -163,7 +163,7 @@
 		
 		for(var i = 0; i < current_play.length; i++){
 			if(!current_play[i]) $("#game #played").append("<div class='discard'><span class='label'>Descarte</span><span class='score'></span></div>");
-			else $("#game #played").append("<div class='play'><span class='label'>" + get_label() + "</span><span class='score'>" + current_score[i].toLocaleString() + "</span></div>");
+			else $("#game #played").append("<div class='play'><span class='label'>" + get_label(current_play[i]) + "</span><span class='score'>" + current_score[i].toLocaleString() + "</span></div>");
 		}
 		
 		$("#play #play_hand #sample").text("");
@@ -1043,7 +1043,7 @@
 				
 				current_play[current_play.length] = hand;
 				
-				$("#game #played").append("<div class='play hidden'><span class='label'>" + get_label() + "</span><span class='score'>" + current_score[current_score.length - 1].toLocaleString() + "</span></div>");
+				$("#game #played").append("<div class='play hidden'><span class='label'>" + get_label(hand) + "</span><span class='score'>" + current_score[current_score.length - 1].toLocaleString() + "</span></div>");
 				setTimeout(function(){ show($("#game #played div.play")); }, 0);
 				
 				played_plays++;
