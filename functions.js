@@ -185,7 +185,7 @@
 		
 		enable($("#game_footer .button"));
 		$("#game_footer #cards .counter").text((nofigures ? 40 : 52) + cards);
-		if(cards == (nofigures) ? -39 : -51) disable($("#game_footer #cards .button.down"));
+		if(((nofigures) && (cards == -39)) || ((!nofigures) && (cards == -51))) disable($("#game_footer #cards .button.down"));
 		$("#game_footer #discards_left .counter").text(discards_left);
 		if(!discards_left) disable($("#game_footer #discards_left .button_down"));
 		$("#game_footer #plays_left .counter").text(plays_left);
