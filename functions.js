@@ -678,51 +678,51 @@
 			switch(hand){
 				case 1:
 					$("#play #play_hand #label").text("Carta más alta");
-					$("#play #play_hand #sample").html('<span class="black">&#127146;</span>');
+					$("#play #play_hand #sample").css("background-image", "url('sample_1.png')");
 					break;
 				case 2:
 					$("#play #play_hand #label").text("Pareja");
-					$("#play #play_hand #sample").html('<span class="red">&#127173;</span><span class="black">&#127189;</span>');
+					$("#play #play_hand #sample").css("background-image", "url('sample_2.png')");
 					break;
 				case 3:
 					$("#play #play_hand #label").text("Doble Pareja");
-					$("#play #play_hand #sample").html('<span class="black">&#127145;</span><span class="red">&#127161;</span><span class="black">&#127188;</span><span class="red">&#127172;</span>');
+					$("#play #play_hand #sample").css("background-image", "url('sample_3.png')");
 					break;
 				case 4:
 					$("#play #play_hand #label").text("Trío");
-					$("#play #play_hand #sample").html('<span class="red">&#127171;</span><span class="black">&#127139;</span><span class="red">&#127155;</span>');
+					$("#play #play_hand #sample").css("background-image", "url('sample_4.png')");
 					break;
 				case 5:
 					$("#play #play_hand #label").text("Escalera");
-					$("#play #play_hand #sample").html('<span class="black">&#127190;</span><span class="red">&#127173;</span><span class="black">&#127140;</span><span class="red">&#127155;</span><span class="black">&#127186;</span>');
+					$("#play #play_hand #sample").css("background-image", "url('sample_5.png')");
 					break;
 				case 6:
 					$("#play #play_hand #label").text("Color");
-					$("#play #play_hand #sample").html('<span class="red">&#127178;</span><span class="red">&#127175;</span><span class="red">&#127173;</span><span class="red">&#127171;</span><span class="red">&#127170;</span>');
+					$("#play #play_hand #sample").css("background-image", "url('sample_6.png')");
 					break;
 				case 7:
 					$("#play #play_hand #label").text("Full");
-					$("#play #play_hand #sample").html('<span class="red">&#127175;</span><span class="black">&#127191;</span><span class="red">&#127159;</span><span class="black">&#127140;</span><span class="red">&#127156;</span>');
+					$("#play #play_hand #sample").css("background-image", "url('sample_7.png')");
 					break;
 				case 8:
 					$("#play #play_hand #label").text("Póker");
-					$("#play #play_hand #sample").html('<span class="black">&#127137;</span><span class="red">&#127153;</span><span class="black">&#127185;</span><span class="red">&#127169;</span>');
+					$("#play #play_hand #sample").css("background-image", "url('sample_8.png')");
 					break;
 				case 9:
 					$("#play #play_hand #label").text("Esc. Color/Real");
-					$("#play #play_hand #sample").html('<span class="red">&#127153;</span><span class="red">&#127166;</span><span class="red">&#127165;</span><span class="red">&#127163;</span><span class="red">&#127162;</span>');
+					$("#play #play_hand #sample").css("background-image", "url('sample_9.png')");
 					break;
 				case 10:
 					$("#play #play_hand #label").text("Repóker");
-					$("#play #play_hand #sample").html('<span class="black">&#127137;</span><span class="red">&#127153;</span><span class="black">&#127185;</span><span class="red">&#127169;</span><span class="black">&#127137;</span>');
+					$("#play #play_hand #sample").css("background-image", "url('sample_10.png')");
 					break;
 				case 11:
 					$("#play #play_hand #label").text("Full de Color");
-					$("#play #play_hand #sample").html('<span class="red">&#127162;</span><span class="red">&#127162;</span><span class="red">&#127162;</span><span class="red">&#127156;</span><span class="red">&#127156;</span>');
+					$("#play #play_hand #sample").css("background-image", "url('sample_11.png')");
 					break;
 				case 12:
 					$("#play #play_hand #label").text("5 de Color");
-					$("#play #play_hand #sample").html('<span class="black">&#127137;</span><span class="black">&#127137;</span><span class="black">&#127137;</span><span class="black">&#127137;</span><span class="black">&#127137;</span>');
+					$("#play #play_hand #sample").css("background-image", "url('sample_12.png')");
 					break;
 				default: break;
 			}
@@ -804,6 +804,7 @@
 			$("#s_hand").val(0);
 			select_hand(hand);
 			$("#multi_form #multi_string").text(string);
+			$("#multi_form #multi_close").text(get_multi().toLocaleString());
 			$("#play #play_multi").text(get_multi().toLocaleString());
 			
 			deactivate($("#points_reset"));
@@ -847,7 +848,8 @@
 			$("#s_hand").val(0);
 			select_hand(hand);
 			$("#points_form #points_string").text(string);
-			$("#play #play_points").text(get_multi().toLocaleString());
+			$("#points_form #points_close").text(get_points().toLocaleString());
+			$("#play #play_points").text(get_points().toLocaleString());
 			
 			deactivate($("#multi_reset"));
 		}
@@ -864,7 +866,7 @@
 			else{
 				$("#hands_form #s_hand").val(0);
 				
-				$("#play #play_hand #sample").text("");
+				$("#play #play_hand #sample").css("background-image", "none");
 				$("#play #play_hand #label").text("");
 				$("#play #play_hand #level").text("");
 				$("#play #play_hand #plays").text("");

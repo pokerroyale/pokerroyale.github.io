@@ -127,15 +127,21 @@
 	}
 	div#levels .hand .sample{
 		width: 38%;
-		font-size: 34px;
-		white-space: nowrap;
-		overflow: hidden;
-		padding-bottom: 2px;
-		opacity: 0.3;
+		background: center center / auto 90% no-repeat;
+		opacity: 0.5;
 	}
-	div#levels .hand .sample span{ margin: 0 2%; height: 32px; width: 20px; background-color: #eeeeee; text-shadow: 0 0 2px #eeeeee; }
-	div#levels .hand .sample span.red{ color: #ff0000; }
-	div#levels .hand .sample span.black{ color: #000000; }
+	div#levels #hand_1 .sample{ background-image: url("sample_1.png"); }
+	div#levels #hand_2 .sample{ background-image: url("sample_2.png"); }
+	div#levels #hand_3 .sample{ background-image: url("sample_3.png"); }
+	div#levels #hand_4 .sample{ background-image: url("sample_4.png"); }
+	div#levels #hand_5 .sample{ background-image: url("sample_5.png"); }
+	div#levels #hand_6 .sample{ background-image: url("sample_6.png"); }
+	div#levels #hand_7 .sample{ background-image: url("sample_7.png"); }
+	div#levels #hand_8 .sample{ background-image: url("sample_8.png"); }
+	div#levels #hand_9 .sample{ background-image: url("sample_9.png"); }
+	div#levels #hand_10 .sample{ background-image: url("sample_10.png"); }
+	div#levels #hand_11 .sample{ background-image: url("sample_11.png"); }
+	div#levels #hand_12 .sample{ background-image: url("sample_12.png"); }
 	div#levels .hand .label{
 		width: 38%;
 		margin-left: -38%;
@@ -411,15 +417,9 @@
 		height: 100%;
 		align-items: center;
 		justify-content: center;
-		font-size: 34px;
-		font-weight: normal;
-		white-space: nowrap;
-		padding-bottom: 5px;
-		opacity: 0.3;
+		opacity: 0.5;
 	}
-	div#game form #play_hand #sample span{ margin: 0 2%; height: 32px; width: 20px; background-color: #eeeeee; text-shadow: 0 0 2px #eeeeee; }
-	div#game form #play_hand #sample span.black{ color: #000000; }
-	div#game form #play_hand #sample span.red{ color: #ff0000; }
+	div#game form #play_hand #sample { background: center center / auto 55% no-repeat; }
 	div#game form #play_hand #label{
 		grid-row: 1;
 		grid-column: 1 / 3;
@@ -432,10 +432,11 @@
 					0 -1px 1px #eeeeee,
 					-1px -1px 1px #eeeeee,
 					0 0 2px #eeeeee;
+		z-index: 1;
 	}
 	div#game form #play_hand #level, div#game form #play_hand #plays{ text-shadow: 0 0 2px #eeeeee; }
-	div#game form #play_hand #level{ font-size: 16px; font-weight: bold; }
-	div#game form #play_hand #plays{ font-size: 14px; font-weight: normal; }
+	div#game form #play_hand #level{ font-size: 18px; font-weight: bold; }
+	div#game form #play_hand #plays{ font-size: 16px; font-weight: normal; }
 	div#game form #play_points, div#game form #play_multi{ font-size: 24px; text-shadow: 1px 1px 2px #000000; }
 	div#game form #play_points{ background-image: linear-gradient(#8888ff, #2222ff 50%); border-color: #2222ff; }
 	div#game form #play_multi{ background-image: linear-gradient(#ffaa00, #ff5500 50%); border-color: #ff5500; }
@@ -666,7 +667,7 @@
 		width: 100%;
 		height: 100%;
 		grid-template-columns: 48% 48%;
-		grid-template-rows: 28% 26% 22% 20%;
+		grid-template-rows: 20% 34% 22% 20%;
 		grid-gap: 1%;
 		align-items: center;
 		justify-content: center;
@@ -685,40 +686,48 @@
 		grid-column: 1 / 3;
 		font-size: 18px;
 		font-weight: bold;
-		text-shadow: 0 0 2px #eeeeee;
+		padding-top: 20%;
+		text-shadow: 0 0 0 #eeeeee, 0 0 3px #eeeeee;
 	}
 	div#game div#hands_form div span.sample{
 		grid-row: 2;
 		grid-column: 1 / 3;
-		font-size: 34px;
-		padding-bottom: 28px;
-		white-space: nowrap;
+		background: center center / auto 50% no-repeat;
+		filter: drop-shadow(0 0 3px #666666);
 	}
-	div#game div#hands_form div span.sample span{ margin: 0 2%; height: 32px; width: 20px; background-color: #eeeeee; text-shadow: 0 0 2px #eeeeee; }
-	div#game div#hands_form div span.sample span.red{ color: #ff0000; }
-	div#game div#hands_form div span.sample span.black{ color: #000000; }
+	div#game div#hands_form #s_hand_1 .sample{ background-image: url("sample_1.png"); }
+	div#game div#hands_form #s_hand_2 .sample{ background-image: url("sample_2.png"); }
+	div#game div#hands_form #s_hand_3 .sample{ background-image: url("sample_3.png"); }
+	div#game div#hands_form #s_hand_4 .sample{ background-image: url("sample_4.png"); }
+	div#game div#hands_form #s_hand_5 .sample{ background-image: url("sample_5.png"); }
+	div#game div#hands_form #s_hand_6 .sample{ background-image: url("sample_6.png"); }
+	div#game div#hands_form #s_hand_7 .sample{ background-image: url("sample_7.png"); }
+	div#game div#hands_form #s_hand_8 .sample{ background-image: url("sample_8.png"); }
+	div#game div#hands_form #s_hand_9 .sample{ background-image: url("sample_9.png"); }
+	div#game div#hands_form #s_hand_10 .sample{ background-image: url("sample_10.png"); }
+	div#game div#hands_form #s_hand_11 .sample{ background-image: url("sample_11.png"); }
+	div#game div#hands_form #s_hand_12 .sample{ background-image: url("sample_12.png"); }
 	div#game div#hands_form div span.points, div#game div#hands_form div span.multi{
 		grid-row: 3;
 		width: 100%;
-		font-size: 18px;
+		font-size: 20px;
 		font-weight: bold;
 		color: #eeeeee;
-		text-shadow: 1px 1px 2px #000000;
+		text-shadow: 2px 2px 3px #666666;
 		border-radius: 3px;
 	}
-	div#game div#hands_form div span.points, div#game div#hands_form div span.multi { text-shadow: 0 0 2px #eeeeee; }
 	div#game div#hands_form div span.points{ background-color: #2222ff; }
 	div#game div#hands_form div span.multi{ background-color: #ff5500; }
 	div#game div#hands_form div span.level{
 		grid-row: 4;
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: bold;
 		text-shadow: 0 0 2px #eeeeee;
 	}
 	div#game div#hands_form div span.level::before{ content: "Niv.:\00a0"; }
 	div#game div#hands_form div span.plays{
 		grid-row: 4;
-		font-size: 14px;
+		font-size: 16px;
 		text-shadow: 0 0 2px #eeeeee;
 	}
 	div#game div#hands_form div span.plays::before{ content: "Jug.:\00a0"; }
