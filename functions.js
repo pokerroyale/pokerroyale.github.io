@@ -74,28 +74,51 @@
 	function load_game(){
 		if(Cookies.get("PokerRoyale_total_score")){
 			current_play = Cookies.get("PokerRoyale_current_play");
+			console_log(current_play);
 			current_score = Cookies.get("PokerRoyale_current_score");
+			console_log(current_score);
 			total_score = Cookies.get("PokerRoyale_total_score");
+			console_log(total_score);
 			max_plays = Cookies.get("PokerRoyale_max_plays");
+			console_log(max_plays);
 			plays_left = Cookies.get("PokerRoyale_plays_left");
+			console_log(plays_left);
 			max_discards = Cookies.get("PokerRoyale_max_discards");
+			console_log(max_discards);
 			discards_left = Cookies.get("PokerRoyale_discards_left");
+			console_log(discards_left);
 			tokens = Cookies.get("PokerRoyale_tokens");
+			console_log(tokens);
 			cards = Cookies.get("PokerRoyale_cards");
+			console_log(cards);
 			blind = Cookies.get("PokerRoyale_blind");
-			round = Cookies.getº("PokerRoyale_round");
+			console_log(blind);
+			round = Cookies.get("PokerRoyale_round");
+			console_log(round);
 			played_plays = Cookies.get("PokerRoyale_played_plays");
+			console_log(played_plays);
 			not_played_plays = Cookies.get("PokerRoyale_not_played_plays");
+			console_log(not_played_plays);
 			played_discards = Cookies.get("PokerRoyale_played_discards");
+			console_log(played_discards);
 			not_played_discards = Cookies.get("PokerRoyale_not_played_discards");
+			console_log(not_played_discards);
 			defeated_blinds = Cookies.get("PokerRoyale_defeated_blinds");
+			console_log(defeated_blinds);
 			not_defeated_blinds = Cookies.get("PokerRoyale_not_defeated_blinds");
+			console_log(not_defeated_blinds);
 			nofigures = Cookies.get("PokerRoyale_nofigures");
+			console_log(nofigures);
 			balanced = Cookies.get("PokerRoyale_balanced");
+			console_log(balanced);
 			suddeath = Cookies.get("PokerRoyale_suddeath");
+			console_log(suddeath);
 			dice = Cookies.get("PokerRoyale_dice");
+			console_log(dice);
 			boss = Cookies.get("PokerRoyale_boss");
+			console_log(boss);
 			boss_action = Cookies.get("PokerRoyale_boss_action");
+			console_log(boss_action);
 			
 			$("#header_levels").prop("disabled", false);
 			$("#header_game").prop("disabled", false);
@@ -156,7 +179,8 @@
 		disable($("#play #play_points"));
 		disable($("#play #play_multi"));
 		disable($("#play #play_reset"));
-		enable($("#play #play_discard"));
+		if(discards_left) enable($("#play #play_discard"));
+		else disable($("#play #play_discard"));
 		disable($("#play #play_confirm"));
 		
 		enable($("#game_footer .button"));
