@@ -74,6 +74,7 @@
 		if($("#savegame").prop("checked")){
 			var string = "";
 			for(var i = 0; i <= 12; i++) string += (i < 12) ? level[i] + "_" : level[i];
+			alert(string);
 			Cookies.set("PokerRoyale_level", string, { expires: 7 });
 			for(i = 0; i <= 12; i++) string += (i < 12) ? plays[i] + "_" : plays[i];
 			Cookies.set("PokerRoyale_plays", string, { expires: 7 });
@@ -108,7 +109,7 @@
 	
 	function load_game(){
 		if(Cookies.get("PokerRoyale_level")){
-			level = Cookies.get("PokerRoyale_level").split("_");
+		/*	level = Cookies.get("PokerRoyale_level").split("_");
 			plays = Cookies.get("PokerRoyale_plays").split("_");
 			current_play = Cookies.get("PokerRoyale_current_play").split("_");
 			current_score = Cookies.get("PokerRoyale_current_score").split("_");
@@ -159,7 +160,7 @@
 			console.log("Dados: " + dice);
 			console.log("Ciega jefe: " + boss);
 			console.log("Acción del jefe: " + boss_action);
-			
+			*/
 			$("#header_levels").prop("disabled", false);
 			$("#header_game").prop("disabled", false);
 			
