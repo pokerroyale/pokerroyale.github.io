@@ -194,7 +194,7 @@
 			
 			<div id="played"></div>
 			
-			<form id="play">
+			<form id="play" class="hidden">
 				<div id="play_hand" class="empty" onClick="$('#hands_form').removeClass('hidden');">
 					<span id="sample"></span>
 					<span id="label"></span>
@@ -232,12 +232,14 @@
 			
 			<div id="boss_form" class="hidden">
 				<span class="boss" id="big_boss" onClick="change_boss('big_boss');">Big Boss</span>
-				<span class="boss" id="medium" onClick="change_boss('medium');">Medium</span>
-				<span class="boss" id="depressing" onClick="change_boss('depressing');">Deprimente</span>
-				<span class="boss" id="repetitive" onClick="change_boss('repetitive');">Repetitivo</span>
-				<span class="boss" id="alternative" onClick="change_boss('alternative');">Alternativo</span>
-				<span class="boss" id="forbidden" onClick="change_boss('forbidden');">Mano prohibida</span>
-				<span class="boss" id="none" onClick="change_boss('none');"></span>
+				<span class="boss" id="medium" onClick="change_boss('medium');">El Medium</span>
+				<span class="boss" id="depressing" onClick="change_boss('depressing');">El Deprimente</span>
+				<span class="boss" id="tiresome" onClick="change_boss('tiresome');">La Cansina</span>
+				<span class="boss" id="alternative" onClick="change_boss('alternative');">El Alternativo</span>
+				<span class="boss" id="forbidden" onClick="change_boss('forbidden');">La Mano Prohibida</span>
+				<span class="boss" id="onehanded" onClick="change_boss('onehanded');">El manco</span>
+				<span class="boss" id="lucky" onClick="change_boss('lucky');">El afortunado</span>
+				<span class="boss" id="none" onClick="change_boss('none');">Ninguno</span>
 			</div>
 			
 			<div id="hands_form" class="hidden">
@@ -263,7 +265,7 @@
 				<div id="s_hand_9" onClick="select_hand(9);">
 					<span class="label">Esc. Color/Real</span>
 					<span class="sample"></span>
-				<span class="points"></span><span class="multi"></span>
+					<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_8" onClick="select_hand(8);">
@@ -379,7 +381,7 @@
 				<input type="checkbox" name="nofigures" id="nofigures" onChange="$('#cards .counter').text((this.checked) ? 40 : 52);" /><label for="nofigures">Variante sin figuras</label>
 			</div>
 			<div class="options">
-				<input type="checkbox" name="balanced" id="balanced" /><label for="balanced">Variante equilibrada</label>
+				<input type="checkbox" name="balanced" id="balanced" onChange="balanced = this.checked; refresh_game_header();" /><label for="balanced">Variante equilibrada</label>
 			</div>
 			<div class="options">
 				<input type="checkbox" name="savegame" id="savegame" onChange="save_game();" /><label for="savegame">Guardar partida (usa cookies)</label>

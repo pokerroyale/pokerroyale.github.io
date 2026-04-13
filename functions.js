@@ -38,13 +38,14 @@
 	var defeated_blinds, not_defeated_blinds;
 	var total_score;
 	var suddeath = 6;
-	var nofigures, balanced;
-	var boss = "none";						// "none" / "big_boss" / "medium" / "depressing" / "repetitive" / "alternative" / "forbidden"
-	var boss_action;
+	var nofigures = false, balanced = false;
+	var boss = "none";						// "none" / "big_boss" / "medium" / "depressing" / "tiresome" / "alternative" / "forbidden"
 	var timeout = 0;
 	const delay = 1500;
 	
 	function delete_game(){
+		Cookies.remove("PokerRoyale_level");
+		Cookies.remove("PokerRoyale_plays");
 		Cookies.remove("PokerRoyale_current_play");
 		Cookies.remove("PokerRoyale_current_score");
 		Cookies.remove("PokerRoyale_total_score");
@@ -67,19 +68,20 @@
 		Cookies.remove("PokerRoyale_suddeath");
 		Cookies.remove("PokerRoyale_dice");
 		Cookies.remove("PokerRoyale_boss");
-		Cookies.remove("PokerRoyale_boss_action");
 	}
 	
 	function save_game(){
 		if($("#savegame").prop("checked")){
 			var string = "";
-			for(var i = 0; i <= 12; i++) string += (i < 12) ? level[i] + "_" : level[i];
-			alert(string);
-			Cookies.set("PokerRoyale_level", string, { expires: 7 });
-			for(i = 0; i <= 12; i++) string += (i < 12) ? plays[i] + "_" : plays[i];
-			Cookies.set("PokerRoyale_plays", string, { expires: 7 });
+			for(var i = 1; i <= 12; i++) string += (i < 12) ? level[i] + "_" : level[i];
+			Cookies.set("PokerRoyale_level", "0_" + string, { expires: 7 });
+			string = "";
+			for(i = 1; i <= 12; i++) string += (i < 12) ? plays[i] + "_" : plays[i];
+			Cookies.set("PokerRoyale_plays", "0_" + string, { expires: 7 });
+			string = "";
 			for(i = 0; i < current_play.length; i++) string += (i < current_play.length - 1) ? current_play[i] + "_" : current_play[i];
 			Cookies.set("PokerRoyale_current_play", string, { expires: 7 });
+			string = "";
 			for(i = 0; i < current_score.length; i++) string += (i < current_score.length - 1) ? current_score[i] + "_" : current_score[i];
 			Cookies.set("PokerRoyale_current_score", string, { expires: 7 });
 			Cookies.set("PokerRoyale_total_score", total_score, { expires: 7 });
@@ -102,65 +104,40 @@
 			Cookies.set("PokerRoyale_suddeath", suddeath, { expires: 7 });
 			Cookies.set("PokerRoyale_dice", dice, { expires: 7 });
 			Cookies.set("PokerRoyale_boss", boss, { expires: 7 });
-			Cookies.set("PokerRoyale_boss_action", boss_action, { expires: 7 });
 		}
 		else delete_game();
 	}	
 	
 	function load_game(){
 		if(Cookies.get("PokerRoyale_level")){
-		/*	level = Cookies.get("PokerRoyale_level").split("_");
-			plays = Cookies.get("PokerRoyale_plays").split("_");
-			current_play = Cookies.get("PokerRoyale_current_play").split("_");
-			current_score = Cookies.get("PokerRoyale_current_score").split("_");
-			total_score = Cookies.get("PokerRoyale_total_score");
-			max_plays = Cookies.get("PokerRoyale_max_plays");
-			plays_left = Cookies.get("PokerRoyale_plays_left");
-			max_discards = Cookies.get("PokerRoyale_max_discards");
-			discards_left = Cookies.get("PokerRoyale_discards_left");
-			tokens = Cookies.get("PokerRoyale_tokens");
-			cards = Cookies.get("PokerRoyale_cards");
-			blind = Cookies.get("PokerRoyale_blind");
-			round = Cookies.get("PokerRoyale_round");
-			played_plays = Cookies.get("PokerRoyale_played_plays");
-			not_played_plays = Cookies.get("PokerRoyale_not_played_plays");
-			played_discards = Cookies.get("PokerRoyale_played_discards");
-			not_played_discards = Cookies.get("PokerRoyale_not_played_discards");
-			defeated_blinds = Cookies.get("PokerRoyale_defeated_blinds");
-			not_defeated_blinds = Cookies.get("PokerRoyale_not_defeated_blinds");
-			nofigures = Cookies.get("PokerRoyale_nofigures");
-			balanced = Cookies.get("PokerRoyale_balanced");
-			suddeath = Cookies.get("PokerRoyale_suddeath");
-			dice = Cookies.get("PokerRoyale_dice");
+			level = Cookies.get("PokerRoyale_level").split("_").map(Number);
+			plays = Cookies.get("PokerRoyale_plays").split("_").map(Number);
+			if(Cookies.get("PokerRoyale_current_play")) current_play = Cookies.get("PokerRoyale_current_play").split("_").map(Number);
+			else current_play = new Array();
+			if(Cookies.get("PokerRoyale_current_score")) current_score = Cookies.get("PokerRoyale_current_score").split("_").map(Number);
+			else current_score = new Array();
+			total_score = parseInt(Cookies.get("PokerRoyale_total_score"));
+			max_plays = parseInt(Cookies.get("PokerRoyale_max_plays"));
+			plays_left = parseInt(Cookies.get("PokerRoyale_plays_left"));
+			max_discards = parseInt(Cookies.get("PokerRoyale_max_discards"));
+			discards_left = parseInt(Cookies.get("PokerRoyale_discards_left"));
+			tokens = parseInt(Cookies.get("PokerRoyale_tokens"));
+			cards = parseInt(Cookies.get("PokerRoyale_cards"));
+			blind = parseInt(Cookies.get("PokerRoyale_blind"));
+			round = parseInt(Cookies.get("PokerRoyale_round"));
+			played_plays = parseInt(Cookies.get("PokerRoyale_played_plays"));
+			not_played_plays = parseInt(Cookies.get("PokerRoyale_not_played_plays"));
+			played_discards = parseInt(Cookies.get("PokerRoyale_played_discards"));
+			not_played_discards = parseInt(Cookies.get("PokerRoyale_not_played_discards"));
+			defeated_blinds = parseInt(Cookies.get("PokerRoyale_defeated_blinds"));
+			not_defeated_blinds = parseInt(Cookies.get("PokerRoyale_not_defeated_blinds"));
+			nofigures = (Cookies.get("PokerRoyale_nofigures") === "true");
+			balanced = (Cookies.get("PokerRoyale_balanced") === "true");
+			suddeath = parseInt(Cookies.get("PokerRoyale_suddeath"));
+			dice = parseInt(Cookies.get("PokerRoyale_dice"));
 			boss = Cookies.get("PokerRoyale_boss");
-			boss_action = Cookies.get("PokerRoyale_boss_action");
+			if(!isNaN(parseInt(boss))) boss = parseInt(boss);
 			
-			console.log("Niveles: " + level);
-			console.log("Jugadas: " + plays);
-			console.log("Jugada actual: " + current_play);
-			console.log("Puntuación actual: " + current_score);
-			console.log("Puntuación total: " + total_score);
-			console.log("Jugadas máximas: " + max_plays);
-			console.log("Jugadas restantes: " + plays_left);
-			console.log("Descartes máximos: " + max_discards);
-			console.log("Descartes restantes: " + discards_left);
-			console.log("Fichas: " + tokens);
-			console.log("Cartas: " + cards);
-			console.log("Ciega actual: " + blind);
-			console.log("Ronda actual: " + round);
-			console.log("Jugadas realizadas: " + played_plays);
-			console.log("Jugadas no realizadas: " + not_played_plays);
-			console.log("Descartes realizados: " + played_discards);
-			console.log("Descartes no realizados: " + not_played_discards);
-			console.log("Ciegas superadas: " + defeated_blinds);
-			console.log("Ciegas no superadas: " + not_defeated_blinds);
-			console.log("Variante sin figuras: " + nofigures);
-			console.log("Variante balanceada: " + balanced);
-			console.log("Muerte súbita: " + suddeath);
-			console.log("Dados: " + dice);
-			console.log("Ciega jefe: " + boss);
-			console.log("Acción del jefe: " + boss_action);
-			*/
 			$("#header_levels").prop("disabled", false);
 			$("#header_game").prop("disabled", false);
 			
@@ -186,8 +163,6 @@
 			defeated_blinds = 0;
 			not_defeated_blinds = 0;
 			total_score = 0;
-			nofigures = $("#nofigures").is(":checked");
-			balanced = $("#balanced").is(":checked");
 			
 			for(var i = 1; i <= 12; i++){
 				level[i] = 1;
@@ -202,12 +177,13 @@
 		$("#levels #max_discards .counter").text(max_discards);
 		$("#levels #tokens .counter").text(tokens);
 		
+		if(boss != "none") change_boss(boss);
+		
 		for(var i = 0; i < current_play.length; i++){
 			if(!current_play[i]) $("#game #played").append("<div class='discard'><span class='label'>Descarte</span><span class='score'></span></div>");
 			else $("#game #played").append("<div class='play'><span class='label'>" + get_label(current_play[i]) + "</span><span class='score'>" + current_score[i].toLocaleString() + "</span></div>");
 		}
 		
-		$("#play #play_hand #sample").text("");
 		$("#play #play_hand #label").text("");
 		$("#play #play_hand #level").text("");
 		$("#play #play_hand #plays").text("");
@@ -216,6 +192,7 @@
 		$("#play #play_points").text("0");
 		$("#play #play_multi").text("0");
 		$("#play #play_confirm").text("");
+		$("#game #total_score span").text(total_score.toLocaleString());
 		
 		disable($("#play #play_points"));
 		disable($("#play #play_multi"));
@@ -232,9 +209,15 @@
 		$("#game_footer #plays_left .counter").text(plays_left);
 		if(!plays_left){
 			disable($("#game_footer #plays_left .button_down"));
-			hide("#play");
+			hide($("#play"));
+			$("#next_blind").addClass("button");
+			if((!defeated_blind()) && (round > suddeath)) $("#next_blind").addClass("endgame");
+		}
+		else if(defeated_blind()){
+			hide($("#play"));
 			$("#next_blind").addClass("button");
 		}
+		else show($("#play"));
 		
 		$("#hands_form #s_hand").val(0);
 		
@@ -248,37 +231,48 @@
 		$("#dice_form #dice_switch").removeClass("regular");
 		
 		$("#config #suddeath").text(suddeath);
+		if(suddeath > 1) enable($("#config .button.down"));
+		else disable($("#config .button.down"));
+		if(suddeath < 12) enable($("#config .button.up"));
+		else disable($("#config .button.up"));
 		$("#config #nofigures").prop("checked", nofigures);
 		$("#config #balanced").prop("checked", balanced);
 		
+		if((played_plays) || (played_discards)){
+			disable($("#config .button"));
+			$("#config #nofigures").prop("disabled", true);
+			$("#config #balanced").prop("disabled", true);
+		}
+		
 		if((!defeated_blind()) && (round > suddeath)) $("#next_blind").addClass("endgame");
 	}
-	
 	
 	function new_game(endgame = false){
 		if((played_plays) || (played_discards)){
 			if(!endgame) endgame = confirm("Esto borrará la partida en curso. ¿Continuar?");
 			if(endgame){
-				//
-				//	PRIMERO: BORRAR COOKIES
-				//
+				delete_game();
+				
 				$("#game #game_header").removeClass("suddeath");
+				$("#game #play").removeClass("suddeath");
 				$("#game #played").text("");
 				
-				if(suddeath > 1) enable($("#config .button.down"));
-				if(suddeath < 12) enable($("#config .button.up"));
 				$("#config #nofigures").prop("disabled", false);
 				$("#config #balanced").prop("disabled", false);
 				
 				$("#header_levels").prop("disabled", true);
 				$("#header_game").prop("disabled", true);
 				
-				$("#next_blind").removeClass("button");
+				$("#next_blind").removeClass("button endgame");
+				hide($("#total_score"));
 				
 				load_game();
 			}
 		}
 		else{
+			nofigures = $("#nofigures").is(":checked");
+			balanced = $("#balanced").is(":checked");
+			
 			hide($("#game #hands_form"));
 			hide($("#game #points_form"));
 			hide($("#game #multi_form"));
@@ -289,7 +283,6 @@
 			show($("#game form"));
 			$("#next_blind").removeClass("button");
 			
-			load_game();
 			show_game();
 		}
 		save_game();
@@ -315,7 +308,6 @@
 	}
 	
 	function refresh(){
-	//	boss = "repetitive";
 		deactivate_all();
 		
 		var increased_levels = 0;
@@ -342,7 +334,7 @@
 					$("#s_hand_" + h + " .multi").text(multi[h] + inc_multi[h] * (level[h] - 2));
 				}
 			}
-			else if(boss == "repetitive"){
+			else if(boss == "tiresome"){
 				if(current_play.length){
 					for(var i = 0; i <= current_play.length; i++) if(current_play[i] == h) break;
 					if(i > current_play.length){
@@ -421,7 +413,10 @@
 				break;
 			default: break;
 		}
-		if(round > suddeath) $("#game_header").addClass("suddeath");
+		if(round > suddeath){
+			$("#game_header").addClass("suddeath");
+			$("#game #play").addClass("suddeath");
+		}
 		
 		if(boss == "big_boss") goal *= 2;
 		if(balanced) goal *= 2;
@@ -433,7 +428,7 @@
 		var hand = parseInt($("#s_hand").val());
 		
 		if(!original){
-			if((boss == "repetitive") && (current_play.length)){
+			if((boss == "tiresome") && (current_play.length)){
 				for(var i = 0; i <= current_play.length; i++) if(current_play[i] == hand) break;
 				if(i > current_play.length){
 					$("#play #play_points").text("0");
@@ -465,15 +460,30 @@
 	}
 	
 	function change_boss(b){
-		boss = b;
+		//boss = b;
 		// big_boss --> duplica la puntuación objetivo.
 		// medium --> reduce a la mitad la puntuación base
 		// depressing --> reduce un nivel la mano jugada
-		// repetitive --> sólo se puede jugar un tipo de mano
+		// tiresome --> sólo se puede jugar un tipo de mano
 		// alternative -- > las manos repetidas no puntúan
 		// forbidden --> la/s mano/s más jugadas reducen las fichas a 0
+		// onehanded --> se juega una sola mano
+		// lucky --> se juega sin descartes
 		
+		switch(boss){
+			case "onehanded":
+				activate($("#game_footer #plays_left"));
+				change_plays(max_plays - 1);
+			break;
+			case "lucky":
+				activate($("#game_footer #discards_left"));
+				change_discards(max_discards);
+				break;
+			default: break;
+		}
 		$("#played .warning").remove();
+		
+		boss = b;
 		var warning;
 		switch(boss){
 			case "big_boss":
@@ -485,7 +495,7 @@
 			case "depressing":
 				warning = "Reduce el nivel de la mano jugada.";
 				break;
-			case "repetitive":
+			case "tiresome":
 				warning = "Juega un solo tipo de mano.";
 				break;
 			case "alternative":
@@ -493,23 +503,19 @@
 				break;
 			case "forbidden":
 				var max = 0;
-				for(var i = 1; i <= 12; i++) if(plays[i] > max){ max = plays[i]; boss_action = i; }
-				switch(boss_action){
-					case 1: warning = "una <span>Carta más alta</span>"; break;
-					case 2: warning = "una <span>Pareja</span>"; break;
-					case 3: warning = "una <span>Doble Pareja</span>"; break;
-					case 4: warning = "un <span>Trío</span>"; break;
-					case 5: warning = "una <span>Escalera</span>"; break;
-					case 6: warning = "un <span>Color</span>"; break;
-					case 7: warning = "un <span>Full</span>"; break;
-					case 8: warning = "un <span>Póker</span>"; break;
-					case 9: warning = "una <span>Esc. Color / Real</span>"; break;
-					case 10: warning = "un <span>Repóker</span>"; break;
-					case 11: warning = "un <span>Full de Color</span>"; break;
-					case 12: warning = "un <span>5 de Color</span>"; break;
-					default: break;
-				}
-				warning = "Jugar " + warning + " reduce las fichas a 0.";
+				for(var i = 1; i <= 12; i++) if(plays[i] >= max){ max = plays[i]; boss = i; }
+			case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10: case 11: case 12:
+				warning = "Jugar " + get_label(boss, false, true) + " reduce las fichas a 0.";
+				break;
+			case "onehanded":
+				warning = "Comienza con una sola mano.";
+				activate($("#game_footer #plays_left"));
+				change_plays(-(plays_left - 1) - current_play.filter(x => x !== 0).length);
+				break;
+			case "lucky":
+				warning = "Comienza sin descartes.";
+				activate($("#game_footer #discards_left"));
+				change_discards(-discards_left - current_play.filter(x => x === 0).length);
 				break;
 			default:
 				$("#played .warning").remove();
@@ -560,7 +566,7 @@
 				else if(boss == "medium"){
 					search = (inc > 0) ? Math.floor((points[hand] + inc_points[hand] * (level[hand] - 2)) / 2) : Math.floor((points[hand] + inc_points[hand] * level[hand]) / 2);
 					$("#points_form #points_string").text($("#points_string").text().replace(search, Math.floor((points[hand] + inc_points[hand] * (level[hand] - 1)) / 2)));
-					alert(search + " - " + (Math.floor((points[hand] + inc_points[hand] * (level[hand] - 1)) / 2)));
+//					alert(search + " - " + (Math.floor((points[hand] + inc_points[hand] * (level[hand] - 1)) / 2)));
 					search = (inc > 0) ? Math.floor((points[hand] + inc_points[hand] * (level[hand] - 2)) / 2) : Math.floor((points[hand] + inc_points[hand] * level[hand]) / 2);
 					$("#multi_form #multi_string").text($("#multi_string").text().replace(search, Math.floor((multi[hand] + inc_multi[hand] * (level[hand] - 1)) / 2)));
 				}
@@ -754,57 +760,8 @@
 		refresh();
 		if(hand != parseInt($("#s_hand").val())){
 			$("#play #play_hand").removeClass("empty");
-			switch(hand){
-				case 1:
-					$("#play #play_hand #label").text("Carta más alta");
-					$("#play #play_hand #sample").css("background-image", "url('sample_1.png')");
-					break;
-				case 2:
-					$("#play #play_hand #label").text("Pareja");
-					$("#play #play_hand #sample").css("background-image", "url('sample_2.png')");
-					break;
-				case 3:
-					$("#play #play_hand #label").text("Doble Pareja");
-					$("#play #play_hand #sample").css("background-image", "url('sample_3.png')");
-					break;
-				case 4:
-					$("#play #play_hand #label").text("Trío");
-					$("#play #play_hand #sample").css("background-image", "url('sample_4.png')");
-					break;
-				case 5:
-					$("#play #play_hand #label").text("Escalera");
-					$("#play #play_hand #sample").css("background-image", "url('sample_5.png')");
-					break;
-				case 6:
-					$("#play #play_hand #label").text("Color");
-					$("#play #play_hand #sample").css("background-image", "url('sample_6.png')");
-					break;
-				case 7:
-					$("#play #play_hand #label").text("Full");
-					$("#play #play_hand #sample").css("background-image", "url('sample_7.png')");
-					break;
-				case 8:
-					$("#play #play_hand #label").text("Póker");
-					$("#play #play_hand #sample").css("background-image", "url('sample_8.png')");
-					break;
-				case 9:
-					$("#play #play_hand #label").text("Esc. Color/Real");
-					$("#play #play_hand #sample").css("background-image", "url('sample_9.png')");
-					break;
-				case 10:
-					$("#play #play_hand #label").text("Repóker");
-					$("#play #play_hand #sample").css("background-image", "url('sample_10.png')");
-					break;
-				case 11:
-					$("#play #play_hand #label").text("Full de Color");
-					$("#play #play_hand #sample").css("background-image", "url('sample_11.png')");
-					break;
-				case 12:
-					$("#play #play_hand #label").text("5 de Color");
-					$("#play #play_hand #sample").css("background-image", "url('sample_12.png')");
-					break;
-				default: break;
-			}
+			$("#play #play_hand #label").text(get_label(hand, true));
+			$("#play #play_hand #sample").css("background-image", "url('sample_" + hand + ".png')");
 			
 			$("#play #play_hand #level").text(level[hand]);
 			$("#play #play_hand #plays").text(plays[hand] + " +1");
@@ -821,7 +778,7 @@
 				$("#points_form #points_string").text(Math.floor((points[hand] + inc_points[hand] * (level[hand] - 1)) / 2));
 				$("#multi_form #multi_string").text(((multi[hand] + inc_multi[hand] * (level[hand] - 1)) / 2 > 1) ? Math.floor((multi[hand] + inc_multi[hand] * (level[hand] - 1)) / 2) : 1);
 			}
-			else if((boss == "repetitive") && (current_play.length)){
+			else if((boss == "tiresome") && (current_play.length)){
 				for(var i = 0; i <= current_play.length; i++) if(current_play[i] == hand) break;
 				if(i > current_play.length){
 					$("#points_form #points_string").text("0");
@@ -852,7 +809,7 @@
 		hide($("#hands_form"));
 	}
 	
-	function get_label(hand, warning = false){
+	function get_label(hand, abbr = false, warning = false){
 		var label;
 		switch(hand){
 			case 1: label = "Carta más alta"; if(warning) label = "una <span>" + label + "</span> "; break;
@@ -863,7 +820,7 @@
 			case 6: label = "Color"; if(warning) label = "un <span>" + label + "</span> "; break;
 			case 7: label = "Full"; if(warning) label = "un <span>" + label + "</span> "; break;
 			case 8: label = "Póker"; if(warning) label = "un <span>" + label + "</span> "; break;
-			case 9: label = "Escalera de Color / Real"; if(warning) label = "una <span>" + label + "</span> "; break;
+			case 9: label = (abbr) ? "Esc. Color/Real" : "Escalera de Color / Real"; if(warning) label = "una <span>" + label + "</span> "; break;
 			case 10: label = "Repóker"; if(warning) label = "un <span>" + label + "</span> "; break;
 			case 11: label = "Full de Color"; if(warning) label = "un <span>" + label + "</span> "; break;
 			case 12: label = "5 de Color"; if(warning) label = "un <span>" + label + "</span> "; break;
@@ -1032,7 +989,11 @@
 				
 				current_score[current_score.length] = balanced ? Math.floor((get_points() + get_multi()) / 2) ** 2 : get_score();
 				
-				if(boss == "depressing"){
+				if((!isNaN(parseInt(boss))) && (boss == hand) && (tokens > 0)){
+					tokens = 0;
+					$("#levels #tokens .counter").text(tokens);
+				}
+				else if(boss == "depressing"){
 					activate($("#levels #hand_" + hand));
 					change_level(hand, -1);
 				}
@@ -1040,13 +1001,9 @@
 					for(var i = 0; i <= current_play.length; i++) if(current_play[i] == hand) break;
 					if(i <= current_play.length) current_score[current_score.length - 1] = 0;
 				}
-				else if((boss == "repetitive") && (current_play.length)){
+				else if((boss == "tiresome") && (current_play.length)){
 					for(var i = 0; i <= current_play.length; i++) if(current_play[i] == hand) break;
 					if(i > current_play.length) current_score[current_score.length - 1] = 0;
-				}
-				else if((boss == "forbidden") && (tokens > 0)){
-					tokens = 0;
-					$("#levels #tokens .counter").text(0);
 				}
 				
 				total_score += current_score[current_score.length - 1];
@@ -1067,14 +1024,11 @@
 				
 				played = true;
 				
-				if(defeated_blind()){
+				if((defeated_blind()) || (!plays_left)){
 					hide($("#game form"));
 					$("#next_blind").addClass("button");
 				}
-				else if(!plays_left){
-					$("#next_blind").addClass("button");
-					if((!defeated_blind()) && (round > suddeath)) $("#next_blind").addClass("endgame");
-				}
+				if((!defeated_blind()) && (round > suddeath) && (!plays_left)) $("#next_blind").addClass("endgame");
 			}
 		}
 		
@@ -1101,6 +1055,7 @@
 			clearTimeout(timeout);
 			if(!$("#next_blind").hasClass("active")){
 				deactivate_all()
+				
 				activate($("#next_blind"));
 				show($("#total_score"));
 				
@@ -1165,6 +1120,7 @@
 		dice++;
 		
 		$("#dice_form #die_add").before("<span id='die_" + dice + "' class='die_" + (1 + Math.floor(Math.random() * 12)) + " button' onClick='remove_die();'></span>");
+		save_game();
 	}
 	
 	function remove_die(){
