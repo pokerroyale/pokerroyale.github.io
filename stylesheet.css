@@ -159,7 +159,6 @@
 		z-index: 1;
 	}
 	
-
 	div#levels .hand .plays{ width: 6%; font-size: 16px; }
 	div#levels .hand .level{
 		width: 26%;
@@ -330,33 +329,30 @@
 		transition: height 0.2s;
 	}
 	div#game div#played div.hidden{ height: 0px; }
+	div#game div#played div span{
+		display: flex;
+		height: 100%;
+		align-items: center;
+		font-weight: bold;
+		color: #eeeeee;
+		text-shadow: 0 0 2px #000000;
+	}
 	
 	div#game div#played div.warning{
-		justify-content:center;
+		justify-content: center;
 		background-color: #eeeeee;
 		font-size: 16px;
 		color: #990000;
 		border: 1px solid #990000;
 		text-shadow: 0 0 1px #eeeeee, 0 0 12px #990000;
 	}
-	div#game div#played div.warning span{ display: inline; font-weight: bold; margin: 0 1%; }
+	div#game div#played div.warning span{ display: inline; height: auto; margin: 0 1%; }
+	
 	div#game div#played div.discard{ background-color: #aaaa00; }
-	div#game div#played div.discard span{
-		display: flex;
-		font-weight: bold;
-		color: #eeeeee;
-		text-shadow: 0 0 2px #000000;
-	}
 	div#game div#played div.discard span.label{ width: 80%; }
 	div#game div#played div.discard span.score{ width: 20%; background: url("reject.png") 90% center / 30% no-repeat; }
 	
 	div#game div#played div.play{ background-color: #009900; }
-	div#game div#played div.play span{
-		display: flex;
-		font-weight: bold;
-		color: #eeeeee;
-		text-shadow: 0 0 2px #000000;
-	}
 	div#game div#played div.play span.label{ width: 80%; }
 	div#game div#played div.play span.score{ width: 20%; justify-content: right; }
 	

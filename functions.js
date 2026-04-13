@@ -42,8 +42,7 @@
 	var boss = "none";						// "none" / "big_boss" / "medium" / "depressing" / "repetitive" / "alternative" / "forbidden"
 	var boss_action;
 	var timeout = 0;
-	var delay = 1500;
-	
+	const delay = 1500;
 	
 	function delete_game(){
 		Cookies.remove("PokerRoyale_current_play");
@@ -71,54 +70,95 @@
 		Cookies.remove("PokerRoyale_boss_action");
 	}
 	
+	function save_game(){
+		if($("#savegame").prop("checked")){
+			var string = "";
+			for(var i = 0; i <= 12; i++) string += (i < 12) ? level[i] + "_" : level[i];
+			Cookies.set("PokerRoyale_level", string, { expires: 7 });
+			for(i = 0; i <= 12; i++) string += (i < 12) ? plays[i] + "_" : plays[i];
+			Cookies.set("PokerRoyale_plays", string, { expires: 7 });
+			for(i = 0; i < current_play.length; i++) string += (i < current_play.length - 1) ? current_play[i] + "_" : current_play[i];
+			Cookies.set("PokerRoyale_current_play", string, { expires: 7 });
+			for(i = 0; i < current_score.length; i++) string += (i < current_score.length - 1) ? current_score[i] + "_" : current_score[i];
+			Cookies.set("PokerRoyale_current_score", string, { expires: 7 });
+			Cookies.set("PokerRoyale_total_score", total_score, { expires: 7 });
+			Cookies.set("PokerRoyale_max_plays", max_plays, { expires: 7 });
+			Cookies.set("PokerRoyale_plays_left", plays_left, { expires: 7 });
+			Cookies.set("PokerRoyale_max_discards", max_discards, { expires: 7 });
+			Cookies.set("PokerRoyale_discards_left", discards_left, { expires: 7 });
+			Cookies.set("PokerRoyale_tokens", tokens, { expires: 7 });
+			Cookies.set("PokerRoyale_cards", cards, { expires: 7 });
+			Cookies.set("PokerRoyale_blind", blind, { expires: 7 });
+			Cookies.set("PokerRoyale_round", round, { expires: 7 });
+			Cookies.set("PokerRoyale_played_plays", played_plays, { expires: 7 });
+			Cookies.set("PokerRoyale_not_played_plays", not_played_plays, { expires: 7 });
+			Cookies.set("PokerRoyale_played_discards", played_discards, { expires: 7 });
+			Cookies.set("PokerRoyale_not_played_discards", not_played_discards, { expires: 7 });
+			Cookies.set("PokerRoyale_defeated_blinds", defeated_blinds, { expires: 7 });
+			Cookies.set("PokerRoyale_not_defeated_blinds", not_defeated_blinds, { expires: 7 });
+			Cookies.set("PokerRoyale_nofigures", nofigures, { expires: 7 });
+			Cookies.set("PokerRoyale_balanced", balanced, { expires: 7 });
+			Cookies.set("PokerRoyale_suddeath", suddeath, { expires: 7 });
+			Cookies.set("PokerRoyale_dice", dice, { expires: 7 });
+			Cookies.set("PokerRoyale_boss", boss, { expires: 7 });
+			Cookies.set("PokerRoyale_boss_action", boss_action, { expires: 7 });
+		}
+		else delete_game();
+	}	
+	
 	function load_game(){
-		if(Cookies.get("PokerRoyale_total_score")){
-			current_play = Cookies.get("PokerRoyale_current_play");
-			console.log(current_play);
-			current_score = Cookies.get("PokerRoyale_current_score");
-			console.log(current_score);
+		if(Cookies.get("PokerRoyale_level")){
+			level = Cookies.get("PokerRoyale_level").split("_");
+			plays = Cookies.get("PokerRoyale_plays").split("_");
+			current_play = Cookies.get("PokerRoyale_current_play").split("_");
+			current_score = Cookies.get("PokerRoyale_current_score").split("_");
 			total_score = Cookies.get("PokerRoyale_total_score");
-			console.log(total_score);
 			max_plays = Cookies.get("PokerRoyale_max_plays");
-			console.log(max_plays);
 			plays_left = Cookies.get("PokerRoyale_plays_left");
-			console.log(plays_left);
 			max_discards = Cookies.get("PokerRoyale_max_discards");
-			console.log(max_discards);
 			discards_left = Cookies.get("PokerRoyale_discards_left");
-			console.log(discards_left);
 			tokens = Cookies.get("PokerRoyale_tokens");
-			console.log(tokens);
 			cards = Cookies.get("PokerRoyale_cards");
-			console.log(cards);
 			blind = Cookies.get("PokerRoyale_blind");
-			console.log(blind);
 			round = Cookies.get("PokerRoyale_round");
-			console.log(round);
 			played_plays = Cookies.get("PokerRoyale_played_plays");
-			console.log(played_plays);
 			not_played_plays = Cookies.get("PokerRoyale_not_played_plays");
-			console.log(not_played_plays);
 			played_discards = Cookies.get("PokerRoyale_played_discards");
-			console.log(played_discards);
 			not_played_discards = Cookies.get("PokerRoyale_not_played_discards");
-			console.log(not_played_discards);
 			defeated_blinds = Cookies.get("PokerRoyale_defeated_blinds");
-			console.log(defeated_blinds);
 			not_defeated_blinds = Cookies.get("PokerRoyale_not_defeated_blinds");
-			console.log(not_defeated_blinds);
 			nofigures = Cookies.get("PokerRoyale_nofigures");
-			console.log(nofigures);
 			balanced = Cookies.get("PokerRoyale_balanced");
-			console.log(balanced);
 			suddeath = Cookies.get("PokerRoyale_suddeath");
-			console.log(suddeath);
 			dice = Cookies.get("PokerRoyale_dice");
-			console.log(dice);
 			boss = Cookies.get("PokerRoyale_boss");
-			console.log(boss);
 			boss_action = Cookies.get("PokerRoyale_boss_action");
-			console.log(boss_action);
+			
+			console.log("Niveles: " + level);
+			console.log("Jugadas: " + plays);
+			console.log("Jugada actual: " + current_play);
+			console.log("Puntuación actual: " + current_score);
+			console.log("Puntuación total: " + total_score);
+			console.log("Jugadas máximas: " + max_plays);
+			console.log("Jugadas restantes: " + plays_left);
+			console.log("Descartes máximos: " + max_discards);
+			console.log("Descartes restantes: " + discards_left);
+			console.log("Fichas: " + tokens);
+			console.log("Cartas: " + cards);
+			console.log("Ciega actual: " + blind);
+			console.log("Ronda actual: " + round);
+			console.log("Jugadas realizadas: " + played_plays);
+			console.log("Jugadas no realizadas: " + not_played_plays);
+			console.log("Descartes realizados: " + played_discards);
+			console.log("Descartes no realizados: " + not_played_discards);
+			console.log("Ciegas superadas: " + defeated_blinds);
+			console.log("Ciegas no superadas: " + not_defeated_blinds);
+			console.log("Variante sin figuras: " + nofigures);
+			console.log("Variante balanceada: " + balanced);
+			console.log("Muerte súbita: " + suddeath);
+			console.log("Dados: " + dice);
+			console.log("Ciega jefe: " + boss);
+			console.log("Acción del jefe: " + boss_action);
 			
 			$("#header_levels").prop("disabled", false);
 			$("#header_game").prop("disabled", false);
@@ -157,9 +197,9 @@
 		refresh();
 		refresh_game_header();
 		
-		$("#levels_footer #max_plays .counter").text(max_plays);
-		$("#levels_footer #max_discards .counter").text(max_discards);
-		$("#levels_footer #tokens .counter").text(tokens);
+		$("#levels #max_plays .counter").text(max_plays);
+		$("#levels #max_discards .counter").text(max_discards);
+		$("#levels #tokens .counter").text(tokens);
 		
 		for(var i = 0; i < current_play.length; i++){
 			if(!current_play[i]) $("#game #played").append("<div class='discard'><span class='label'>Descarte</span><span class='score'></span></div>");
@@ -213,34 +253,6 @@
 		if((!defeated_blind()) && (round > suddeath)) $("#next_blind").addClass("endgame");
 	}
 	
-	function save_game(){
-		if($("#savegame").prop("checked")){
-			Cookies.set("PokerRoyale_current_play", current_play, { expires: 7 });
-			Cookies.set("PokerRoyale_current_score", current_score, { expires: 7 });
-			Cookies.set("PokerRoyale_total_score", total_score, { expires: 7 });
-			Cookies.set("PokerRoyale_max_plays", max_plays, { expires: 7 });
-			Cookies.set("PokerRoyale_plays_left", plays_left, { expires: 7 });
-			Cookies.set("PokerRoyale_max_discards", max_discards, { expires: 7 });
-			Cookies.set("PokerRoyale_discards_left", discards_left, { expires: 7 });
-			Cookies.set("PokerRoyale_tokens", tokens, { expires: 7 });
-			Cookies.set("PokerRoyale_cards", cards, { expires: 7 });
-			Cookies.set("PokerRoyale_blind", blind, { expires: 7 });
-			Cookies.set("PokerRoyale_round", round, { expires: 7 });
-			Cookies.set("PokerRoyale_played_plays", played_plays, { expires: 7 });
-			Cookies.set("PokerRoyale_not_played_plays", not_played_plays, { expires: 7 });
-			Cookies.set("PokerRoyale_played_discards", played_discards, { expires: 7 });
-			Cookies.set("PokerRoyale_not_played_discards", not_played_discards, { expires: 7 });
-			Cookies.set("PokerRoyale_defeated_blinds", defeated_blinds, { expires: 7 });
-			Cookies.set("PokerRoyale_not_defeated_blinds", not_defeated_blinds, { expires: 7 });
-			Cookies.set("PokerRoyale_nofigures", nofigures, { expires: 7 });
-			Cookies.set("PokerRoyale_balanced", balanced, { expires: 7 });
-			Cookies.set("PokerRoyale_suddeath", suddeath, { expires: 7 });
-			Cookies.set("PokerRoyale_dice", dice, { expires: 7 });
-			Cookies.set("PokerRoyale_boss", boss, { expires: 7 });
-			Cookies.set("PokerRoyale_boss_action", boss_action, { expires: 7 });
-		}
-		else delete_game();
-	}
 	
 	function new_game(endgame = false){
 		if((played_plays) || (played_discards)){
@@ -606,14 +618,14 @@
 			if(discards_left){
 				discards_left += inc;
 				if(!discards_left){
-					disable($("#game #play #play_discard"));
-					disable($("#game #game_footer #discards_left .button.down"));
+					disable($("#play #play_discard"));
+					disable($("#game_footer #discards_left .button.down"));
 				}
 				else{
-					enable($("#game #play #play_discard"));
-					enable($("#game #game_footer #discards_left .button.down"));
+					enable($("#play #play_discard"));
+					enable($("#game_footer #discards_left .button.down"));
 				}
-				$("#game #game_footer #discards_left .counter").text(discards_left);
+				$("#game_footer #discards_left .counter").text(discards_left);
 			}
 			save_game();
 		}
@@ -641,7 +653,6 @@
 		if((!$("#game_footer #cards").hasClass("active")) || (!inc)){
 			refresh();
 			activate($("#game_footer #cards"));
-			
 			timeout = setTimeout(function(){ deactivate($("#game #game_footer #cards")); }, delay);
 		}
 		else if((inc > 0) || ((nofigures ? 40 : 52) + cards)){
@@ -666,7 +677,6 @@
 		if((!$("#game_footer #discards_left").hasClass("active")) || (!inc)){
 			refresh();
 			activate($("#game_footer #discards_left"));
-			
 			timeout = setTimeout(function(){ deactivate($("#game_footer #discards_left")); }, delay);
 		}
 		else if((inc > 0) || (discards_left)){
@@ -695,7 +705,6 @@
 		if((!$("#game_footer #plays_left").hasClass("active")) || (!inc)){
 			refresh();
 			activate($("#game_footer #plays_left"));
-			
 			timeout = setTimeout(function(){ deactivate($("#game_footer #plays_left")); }, delay);
 		}
 		else if((inc > 0) || (plays_left)){
