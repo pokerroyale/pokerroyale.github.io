@@ -294,7 +294,7 @@
 	div#game div#game_header.big_blind{ background-color: #660066; }
 	div#game div#game_header.boss_blind{ background-color: #990000; }
 	div#game div#game_header.boss_blind.button{
-		background: url("token.png") 1% center / 5% no-repeat, url("token.png") 99% center / 5% no-repeat, linear-gradient(#dd0000, #990000 50%);
+		background: url("token.png") 2% center / 5% no-repeat, url("token.png") 98% center / 5% no-repeat, linear-gradient(#dd0000, #990000 50%);
 		border-radius: 0;
 	}
 	div#game div#game_header.suddeath{ box-shadow: 0 0 5px #ff0000; }
@@ -625,7 +625,7 @@
 	div#game div#boss_form span{
 		display: flex;
 		width: 100%;
-		height: 100%;
+		height: 100%;º
 		align-items: center;
 		justify-content: center;
 		font-size: 28px;
