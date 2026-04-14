@@ -16,7 +16,7 @@
 	
 	<link rel="stylesheet" href="stylesheet.css">
 </head/>
-<body onLoad="load_game();" onBeforeUnload="// return confirm();">
+<body onLoad="set_levels(); load_game();" onBeforeUnload="// return confirm();">
 	<div id="menu">
 		<input type="radio" id="header_levels" name="menu" onclick="show_levels();" disabled /><label for="header_levels">NIVELES</label>
 		<input type="radio" id="header_game" name="menu" onclick="show_game();" disabled /><label for="header_game">JUEGO</label>
@@ -31,114 +31,6 @@
 				<span class="level">Nivel</span>
 				<span class="points">Puntos</span>
 				<span class="multi">Multiplicador</span>
-			</div>
-			<div class="hand even" id="hand_12" onClick="change_level(12, 0);">
-				<span class="sample"></span>
-				<span class="label" >5 de Color</span>
-				<span class="plays"></span>
-				<span class="level"></span>
-				<span class="buttons"><div class="button down" onClick="change_level(12, -1);">-</div><div class="button up" onClick="change_level(12, 1);">+</div></span>
-				<span class="points"></span>
-				<span class="multi"></span>
-			</div>
-			<div class="hand odd" id="hand_11" onClick="change_level(11, 0);">
-				<span class="sample"></span>
-				<span class="label">Full de Color</span>
-				<span class="plays"></span>
-				<span class="level"></span>
-				<span class="buttons"><div class="button down" onClick="change_level(11, -1);">-</div><div class="button up" onClick="change_level(11, 1);">+</div></span>
-				<span class="points"></span>
-				<span class="multi"></span>
-			</div>
-			<div class="hand even" id="hand_10" onClick="change_level(10, 0);">
-				<span class="sample"></span>
-				<span class="label">Repóker</span>
-				<span class="plays"></span>
-				<span class="level"></span>
-				<span class="buttons"><div class="button down" onClick="change_level(10, -1);">-</div><div class="button up" onClick="change_level(10, 1);">+</div></span>
-				<span class="points"></span>
-				<span class="multi"></span>
-			</div>
-			<div class="hand odd" id="hand_9" onClick="change_level(9, 0);">
-				<span class="sample"></span>
-				<span class="label">Esc. Color / Real</span>
-				<span class="plays"></span>
-				<span class="level"></span>
-				<span class="buttons"><div class="button down" onClick="change_level(9, -1);">-</div><div class="button up" onClick="change_level(9, 1);">+</div></span>
-				<span class="points"></span>
-				<span class="multi"></span>
-			</div>
-			<div class="hand even" id="hand_8" onClick="change_level(8, 0);">
-				<span class="sample"></span>
-				<span class="label">Póker</span>
-				<span class="plays"></span>
-				<span class="level"></span>
-				<span class="buttons"><div class="button down" onClick="change_level(8, -1);">-</div><div class="button up" onClick="change_level(8, 1);">+</div></span>
-				<span class="points"></span>
-				<span class="multi"></span>
-			</div>
-			<div class="hand odd" id="hand_7" onClick="change_level(7, 0);">
-				<span class="sample"></span>
-				<span class="label">Full</span>
-				<span class="plays"></span>
-				<span class="level"></span>
-				<span class="buttons"><div class="button down" onClick="change_level(7, -1);">-</div><div class="button up" onClick="change_level(7, 1);">+</div></span>
-				<span class="points"></span>
-				<span class="multi"></span>
-			</div>
-			<div class="hand even" id="hand_6" onClick="change_level(6, 0);">
-				<span class="sample"></span>
-				<span class="label">Color</span>
-				<span class="plays"></span>
-				<span class="level"></span>
-				<span class="buttons"><div class="button down" onClick="change_level(6, -1);">-</div><div class="button up" onClick="change_level(6, 1);">+</div></span>
-				<span class="points"></span>
-				<span class="multi"></span>
-			</div>
-			<div class="hand odd" id="hand_5" onClick="change_level(5, 0);">
-				<span class="sample"></span>
-				<span class="label">Escalera</span>
-				<span class="plays"></span>
-				<span class="level"></span>
-				<span class="buttons"><div class="button down" onClick="change_level(5, -1);">-</div><div class="button up" onClick="change_level(5, 1);">+</div></span>
-				<span class="points"></span>
-				<span class="multi"></span>
-			</div>
-			<div class="hand even" id="hand_4" onClick="change_level(4, 0);">
-				<span class="sample"></span>
-				<span class="label">Trío</span>
-				<span class="plays"></span>
-				<span class="level"></span>
-				<span class="buttons"><div class="button down" onClick="change_level(4, -1);">-</div><div class="button up" onClick="change_level(4, 1);">+</div></span>
-				<span class="points"></span>
-				<span class="multi"></span>
-			</div>
-			<div class="hand odd" id="hand_3" onClick="change_level(3, 0);">
-				<span class="sample"></span>
-				<span class="label">Doble pareja</span>
-				<span class="plays"></span>
-				<span class="level"></span>
-				<span class="buttons"><div class="button down" onClick="change_level(3, -1);">-</div><div class="button up" onClick="change_level(3, 1);">+</div></span>
-				<span class="points"></span>
-				<span class="multi"></span>
-			</div>
-			<div class="hand even" id="hand_2" onClick="change_level(2, 0);">
-				<span class="sample"></span>
-				<span class="label">Pareja</span>
-				<span class="plays"></span>
-				<span class="level"></span>
-				<span class="buttons"><div class="button down" onClick="change_level(2, -1);">-</div><div class="button up" onClick="change_level(2, 1);">+</div></span>
-				<span class="points"></span>
-				<span class="multi"></span>
-			</div>
-			<div class="hand odd" id="hand_1" onClick="change_level(1, 0);">
-				<span class="sample"></span>
-				<span class="label">Carta más alta</span>
-				<span class="plays"></span>
-				<span class="level"></span>
-				<span class="buttons"><div class="button down" onClick="change_level(1, -1);">-</div><div class="button up" onClick="change_level(1, 1);">+</div></span>
-				<span class="points"></span>
-				<span class="multi"></span>
 			</div>
 			
 			<div id="stats">
@@ -194,7 +86,7 @@
 			
 			<div id="played"></div>
 			
-			<form id="play" class="hidden">
+			<form id="play">
 				<div id="play_hand" class="empty" onClick="$('#hands_form').removeClass('hidden');">
 					<span id="sample"></span>
 					<span id="label"></span>
@@ -231,91 +123,20 @@
 			</div>
 			
 			<div id="boss_form" class="hidden">
-				<span class="boss" id="big_boss" onClick="change_boss('big_boss');">Big Boss</span>
-				<span class="boss" id="medium" onClick="change_boss('medium');">El Medium</span>
+				<span class="boss" id="double" onClick="change_boss('double');">El Doble</span>
+				<span class="boss" id="medium" onClick="change_boss('medium');">La Medium</span>
 				<span class="boss" id="depressing" onClick="change_boss('depressing');">El Deprimente</span>
 				<span class="boss" id="tiresome" onClick="change_boss('tiresome');">La Cansina</span>
 				<span class="boss" id="alternative" onClick="change_boss('alternative');">El Alternativo</span>
 				<span class="boss" id="forbidden" onClick="change_boss('forbidden');">La Mano Prohibida</span>
-				<span class="boss" id="onehanded" onClick="change_boss('onehanded');">El manco</span>
-				<span class="boss" id="lucky" onClick="change_boss('lucky');">El afortunado</span>
+				<span class="boss" id="onehanded" onClick="change_boss('onehanded');">El Manco</span>
+				<span class="boss" id="lucky" onClick="change_boss('lucky');">La Afortunada</span>
 				<span class="boss" id="none" onClick="change_boss('none');">Ninguno</span>
 			</div>
 			
 			<div id="hands_form" class="hidden">
 				<input type="hidden" name="s_hand" id="s_hand" />
-				<div id="s_hand_12" onClick="select_hand(12);">
-					<span class="label">5 de Color</span>
-					<span class="sample"></span>
-					<span class="points"></span><span class="multi"></span>
-					<span class="level"></span><span class="plays"></span>
-				</div>
-				<div id="s_hand_11" onClick="select_hand(11);">
-					<span class="label">Full de Color</span>
-					<span class="sample"></span>
-					<span class="points"></span><span class="multi"></span>
-					<span class="level"></span><span class="plays"></span>
-				</div>
-				<div id="s_hand_10" onClick="select_hand(10);">
-					<span class="label">Repóker</span>
-					<span class="sample"></span>
-					<span class="points"></span><span class="multi"></span>
-					<span class="level"></span><span class="plays"></span>
-				</div>
-				<div id="s_hand_9" onClick="select_hand(9);">
-					<span class="label">Esc. Color/Real</span>
-					<span class="sample"></span>
-					<span class="points"></span><span class="multi"></span>
-					<span class="level"></span><span class="plays"></span>
-				</div>
-				<div id="s_hand_8" onClick="select_hand(8);">
-					<span class="label">Póker</span>
-					<span class="sample"></span>
-					<span class="points"></span><span class="multi"></span>
-					<span class="level"></span><span class="plays"></span>
-				</div>
-				<div id="s_hand_7" onClick="select_hand(7);">
-					<span class="label">Full</span>
-					<span class="sample"></span>
-					<span class="points"></span><span class="multi"></span>
-					<span class="level"></span><span class="plays"></span>
-				</div>
-				<div id="s_hand_6" onClick="select_hand(6);">
-					<span class="label">Color</span>
-					<span class="sample"></span>
-					<span class="points"></span><span class="multi"></span>
-					<span class="level"></span><span class="plays"></span>
-				</div>
-				<div id="s_hand_5" onClick="select_hand(5);">
-					<span class="label">Escalera</span>
-					<span class="sample"></span>
-					<span class="points"></span><span class="multi"></span>
-					<span class="level"></span><span class="plays"></span>
-				</div>
-				<div id="s_hand_4" onClick="select_hand(4);">
-					<span class="label">Trío</span>
-					<span class="sample"></span>
-					<span class="points"></span><span class="multi"></span>
-					<span class="level"></span><span class="plays"></span>
-				</div>
-				<div id="s_hand_3" onClick="select_hand(3);">
-					<span class="label">Doble pareja</span>
-					<span class="sample"></span>
-					<span class="points"></span><span class="multi"></span>
-					<span class="level"></span><span class="plays"></span>
-				</div>
-				<div id="s_hand_2" onClick="select_hand(2);">
-					<span class="label">Pareja</span>
-					<span class="sample"></span>
-					<span class="points"></span><span class="multi"></span>
-					<span class="level"></span><span class="plays"></span>
-				</div>
-				<div id="s_hand_1" onClick="select_hand(1);">
-					<span class="label">Carta más alta</span>
-					<span class="sample"></span>
-					<span class="points"></span><span class="multi"></span>
-					<span class="level"></span><span class="plays"></span>
-				</div>
+				
 			</div>
 			
 			<div id="points_form" class="hidden">
@@ -387,13 +208,7 @@
 				<input type="checkbox" name="savegame" id="savegame" onChange="save_game();" /><label for="savegame">Guardar partida (usa cookies)</label>
 			</div>
 			
-			<div id="new_game" onClick="new_game();">
-				<span class="red">&hearts;</span>
-				<span class="black">&clubs;</span>
-				<span>Nueva partida</span>
-				<span class="black">&spades;</span>
-				<span class="red">&diams;</span>
-			</div>
+			<div id="new_game" onClick="new_game();"><span>Nueva partida</span></div>
 		</div>
 	</div>
 </body>

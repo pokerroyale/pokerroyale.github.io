@@ -39,7 +39,7 @@
 	var total_score;
 	var suddeath = 6;
 	var nofigures = false, balanced = false;
-	var boss = "none";						// "none" / "big_boss" / "medium" / "depressing" / "tiresome" / "alternative" / "forbidden"
+	var boss = "none";						// "none" / "double" / "medium" / "depressing" / "tiresome" / "alternative" / "forbidden"
 	var timeout = 0;
 	const delay = 1500;
 	
@@ -287,7 +287,37 @@
 		}
 		save_game();
 	}
-		
+	
+	function set_levels(){
+		var hand;
+		for(var i = 1; i <= 12; i++){
+			hand = "";
+			hand += "\n<div class='hand ";
+			hand += (i % 2 === 0) ? "even" : "odd";
+			hand += "' id='hand_" + i + "' onClick='change_level(" + i + ", 0);'>";
+			hand += "<span class='sample'></span>";
+			hand += "<span class='label'>" + get_label(i) + "</span>";
+			hand += "<span class='plays'></span>";
+			hand += "<span class='level'></span>";
+			hand += "<span class='buttons'><div class='button down' onClick='change_level(" + i + ", -1);'>-</div><div class='button up' onClick='change_level(" + i + ", 1);'>+</div></span>";
+			hand += "<span class='points'></span>";
+			hand += "<span class='multi'></span>";
+			hand += "</div>";
+			
+			$("#levels #levels_header").after(hand);
+			
+			hand = "";
+			hand += "<div id='s_hand_" + i + "' onClick='select_hand(" + i + ");'>";
+			hand += "<span class='label'>" + get_label(i, true) + "</span>";
+			hand += "<span class='sample'></span>";
+			hand += "<span class='points'></span><span class='multi'></span>";
+			hand += "<span class='level'></span><span class='plays'></span>";			
+			hand += "</div>";
+			
+			$("#hands_form #s_hand").after(hand);
+		}
+	}
+	
 	function show_levels(){
 		if(!$("#header_levels").is(":disabled")){
 			$("#header_levels").prop("checked", true);
@@ -418,7 +448,7 @@
 			$("#game #play").addClass("suddeath");
 		}
 		
-		if(boss == "big_boss") goal *= 2;
+		if(boss == "double") goal *= 2;
 		if(balanced) goal *= 2;
 		
 		$("#game_header #goal").text(goal.toLocaleString());
@@ -460,8 +490,7 @@
 	}
 	
 	function change_boss(b){
-		//boss = b;
-		// big_boss --> duplica la puntuación objetivo.
+		// double --> duplica la puntuación objetivo.
 		// medium --> reduce a la mitad la puntuación base
 		// depressing --> reduce un nivel la mano jugada
 		// tiresome --> sólo se puede jugar un tipo de mano
@@ -486,7 +515,7 @@
 		boss = b;
 		var warning;
 		switch(boss){
-			case "big_boss":
+			case "double":
 				warning = "Duplica la puntuación objetivo.";
 				break;
 			case "medium":
@@ -566,7 +595,6 @@
 				else if(boss == "medium"){
 					search = (inc > 0) ? Math.floor((points[hand] + inc_points[hand] * (level[hand] - 2)) / 2) : Math.floor((points[hand] + inc_points[hand] * level[hand]) / 2);
 					$("#points_form #points_string").text($("#points_string").text().replace(search, Math.floor((points[hand] + inc_points[hand] * (level[hand] - 1)) / 2)));
-//					alert(search + " - " + (Math.floor((points[hand] + inc_points[hand] * (level[hand] - 1)) / 2)));
 					search = (inc > 0) ? Math.floor((points[hand] + inc_points[hand] * (level[hand] - 2)) / 2) : Math.floor((points[hand] + inc_points[hand] * level[hand]) / 2);
 					$("#multi_form #multi_string").text($("#multi_string").text().replace(search, Math.floor((multi[hand] + inc_multi[hand] * (level[hand] - 1)) / 2)));
 				}
@@ -593,7 +621,7 @@
 			else enable($("#levels #max_plays .button.down"));
 			$("#levels #max_plays .counter").text(max_plays);
 			
-			if(plays_left){
+			if((plays_left) && (!current_play.length) && (boss != "onehanded")){
 				plays_left += inc;
 				if(!plays_left){
 					disable($("#play #play_confirm"));
@@ -622,7 +650,7 @@
 			else enable($("#levels #max_discards .button.down"));
 			$("#levels #max_discards .counter").text(max_discards);
 			
-			if(discards_left){
+			if((discards_left) && (!current_play.length) && (boss != "lucky")){
 				discards_left += inc;
 				if(!discards_left){
 					disable($("#play #play_discard"));
