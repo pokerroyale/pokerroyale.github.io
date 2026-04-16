@@ -86,15 +86,15 @@
 			
 			<div id="played"></div>
 			
-			<form id="play">
-				<div id="play_hand" class="empty" onClick="$('#hands_form').removeClass('hidden');">
+			<form id="play" class="hidden">
+				<div id="play_hand" class="empty" onClick="show($('#hands_form'));">
 					<span id="sample"></span>
 					<span id="label"></span>
 					<span id="level"></span>
 					<span id="plays"></span>
 				</div>
-				<div id="play_points" onClick="if(parseInt($('#s_hand').val())) $('#points_form').removeClass('hidden');"></div>
-				<div id="play_multi" onClick="if(parseInt($('#s_hand').val())) $('#multi_form').removeClass('hidden');"></div>
+				<div id="play_points" onClick="if(parseInt($('#s_hand').val())) show($('#points_form'));"></div>
+				<div id="play_multi" onClick="if(parseInt($('#s_hand').val())) show($('#multi_form'));"></div>
 				<div id="play_reset" onClick="play_reset();"></div>
 				<div id="play_discard" onClick="play(0);"></div>
 				<div id="play_confirm" class="empty"></div>
@@ -208,7 +208,20 @@
 				<input type="checkbox" name="savegame" id="savegame" onChange="save_game();" /><label for="savegame">Guardar partida (usa cookies)</label>
 			</div>
 			
+			<a href="#" onClick="show($('#cookies_form'));">Saber más sobre cookies</a>
+			
 			<div id="new_game" onClick="new_game();"><span>Nueva partida</span></div>
+			
+			<div id="cookies_form" class="hidden">
+				<span>
+					<p>Las cookies son archivos de texto que el navegador almacena en tu dispositivo a petición de la página web que estás visitando.</p>
+					<p>Estas cookies sirven para que la página web retome la navegación en el punto en el que te encontrabas al abandonarla. En ocasiones también se emplean con fines estadísticos.</p>
+					<p>Esta aplicación almacena cookies propias para guardar los datos de la partida en curso, tales como los niveles de las manos, las fichas acumuladas o la puntuación. Sería una pena que estos datos desaparecieran al cerrar por accidente el navegador y echar a perder toda la partida, ¿no te parece?</p>
+					<p>Estas cookies se eliminan automáticamente al cabo de siete días y en ningún caso son cedidas a terceros (¿para qué les iban a servir?). Tampoco se emplean cookies de terceros para el correcto funcionamiento de esta aplicación.</p>
+				</span>
+				<div class="button" onClick="hide($('#cookies_form'));">Entendido</div>
+			</div>
+			
 		</div>
 	</div>
 </body>

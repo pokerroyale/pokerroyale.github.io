@@ -138,12 +138,9 @@
 			boss = Cookies.get("PokerRoyale_boss");
 			if(!isNaN(parseInt(boss))) boss = parseInt(boss);
 			
-			$("#header_levels").prop("disabled", false);
-			$("#header_game").prop("disabled", false);
-			
 			$("#savegame").prop("checked", true);
 			
-			show_game();
+			start_game();
 		}
 		else{
 			current_play = new Array();
@@ -169,14 +166,65 @@
 				plays[i] = 0;
 			}
 		}
+		$("#config #suddeath").text(suddeath);
+		$("#config #nofigures").prop("checked", nofigures);
+		$("#config #balanced").prop("checked", balanced);
 		
+		if((played_plays) || (played_discards)){
+			disable($("#config .button"));
+			$("#config #nofigures").prop("disabled", true);
+			$("#config #balanced").prop("disabled", true);
+		}
+		else{
+			enable($("#config .button"));
+			if(suddeath > 1) enable($("#config .button.down"));
+			else disable($("#config .button.down"));
+			if(suddeath < 12) enable($("#config .button.up"));
+			else disable($("#config .button.up"));
+			$("#config #nofigures").prop("disabled", false);
+			$("#config #balanced").prop("disabled", false);
+		}
+	}
+	
+	function new_game(endgame = false){
+		if((played_plays) || (played_discards)){
+			if(!endgame) endgame = confirm("Esto borrará la partida en curso. ¿Continuar?");
+			if(endgame){
+				delete_game();
+				load_game();
+				
+				$("#game #game_header").removeClass("suddeath");
+				$("#game #play").removeClass("suddeath");
+				$("#game #played").text("");
+				
+				$("#header_levels").prop("disabled", true);
+				$("#header_game").prop("disabled", true);
+				
+				$("#next_blind").removeClass("button endgame");
+				hide($("#total_score"));
+			}
+		}
+		else{
+			delete_game();
+			
+			nofigures = $("#nofigures").is(":checked");
+			balanced = $("#balanced").is(":checked");
+			
+			load_game();
+			
+			$("#next_blind").removeClass("button");
+			start_game();
+		}
+	}
+	
+	function start_game(){
 		refresh();
-		refresh_game_header();
 		
 		$("#levels #max_plays .counter").text(max_plays);
 		$("#levels #max_discards .counter").text(max_discards);
 		$("#levels #tokens .counter").text(tokens);
 		
+		refresh_game_header();
 		if(boss != "none") change_boss(boss);
 		
 		for(var i = 0; i < current_play.length; i++){
@@ -184,42 +232,37 @@
 			else $("#game #played").append("<div class='play'><span class='label'>" + get_label(current_play[i]) + "</span><span class='score'>" + current_score[i].toLocaleString() + "</span></div>");
 		}
 		
-		$("#play #play_hand #label").text("");
-		$("#play #play_hand #level").text("");
-		$("#play #play_hand #plays").text("");
-		$("#play #play_hand").addClass("empty");
-		
-		$("#play #play_points").text("0");
-		$("#play #play_multi").text("0");
-		$("#play #play_confirm").text("");
 		$("#game #total_score span").text(total_score.toLocaleString());
 		
-		disable($("#play #play_points"));
-		disable($("#play #play_multi"));
-		disable($("#play #play_reset"));
-		if(discards_left) enable($("#play #play_discard"));
-		else disable($("#play #play_discard"));
-		disable($("#play #play_confirm"));
-		
-		enable($("#game_footer .button"));
 		$("#game_footer #cards .counter").text((nofigures ? 40 : 52) + cards);
 		if(((nofigures) && (cards == -39)) || ((!nofigures) && (cards == -51))) disable($("#game_footer #cards .button.down"));
 		$("#game_footer #discards_left .counter").text(discards_left);
 		if(!discards_left) disable($("#game_footer #discards_left .button_down"));
 		$("#game_footer #plays_left .counter").text(plays_left);
+		
+		if(discards_left){
+			enable($("#play #play_discard"));
+			enable($("#game_footer #discards_left .button.down"));
+		}
+		else{
+			disable($("#play #play_discard"));
+			disable($("#game_footer #discards_left .button.down"));
+		}
+		
 		if(!plays_left){
-			disable($("#game_footer #plays_left .button_down"));
+			disable($("#game_footer #plays_left .button.down"));
 			hide($("#play"));
 			$("#next_blind").addClass("button");
 			if((!defeated_blind()) && (round > suddeath)) $("#next_blind").addClass("endgame");
 		}
-		else if(defeated_blind()){
-			hide($("#play"));
-			$("#next_blind").addClass("button");
+		else{
+			enable($("#game_footer #plays_left .button.down"));
+			if(defeated_blind()){
+				hide($("#play"));
+				$("#next_blind").addClass("button");
+			}
+			else show($("#play"));
 		}
-		else show($("#play"));
-		
-		$("#hands_form #s_hand").val(0);
 		
 		$("#dice_form span").remove();
 		$("#dice_form #roll").before("<span id='die_add' onClick='add_die();'>");
@@ -230,62 +273,34 @@
 		}
 		$("#dice_form #dice_switch").removeClass("regular");
 		
-		$("#config #suddeath").text(suddeath);
-		if(suddeath > 1) enable($("#config .button.down"));
-		else disable($("#config .button.down"));
-		if(suddeath < 12) enable($("#config .button.up"));
-		else disable($("#config .button.up"));
-		$("#config #nofigures").prop("checked", nofigures);
-		$("#config #balanced").prop("checked", balanced);
-		
-		if((played_plays) || (played_discards)){
-			disable($("#config .button"));
-			$("#config #nofigures").prop("disabled", true);
-			$("#config #balanced").prop("disabled", true);
-		}
-		
 		if((!defeated_blind()) && (round > suddeath)) $("#next_blind").addClass("endgame");
-	}
-	
-	function new_game(endgame = false){
-		if((played_plays) || (played_discards)){
-			if(!endgame) endgame = confirm("Esto borrará la partida en curso. ¿Continuar?");
-			if(endgame){
-				delete_game();
-				
-				$("#game #game_header").removeClass("suddeath");
-				$("#game #play").removeClass("suddeath");
-				$("#game #played").text("");
-				
-				$("#config #nofigures").prop("disabled", false);
-				$("#config #balanced").prop("disabled", false);
-				
-				$("#header_levels").prop("disabled", true);
-				$("#header_game").prop("disabled", true);
-				
-				$("#next_blind").removeClass("button endgame");
-				hide($("#total_score"));
-				
-				load_game();
-			}
-		}
-		else{
-			nofigures = $("#nofigures").is(":checked");
-			balanced = $("#balanced").is(":checked");
-			
-			hide($("#game #hands_form"));
-			hide($("#game #points_form"));
-			hide($("#game #multi_form"));
-			hide($("#game #dice_form"));
-			
-			$("#header_levels").prop("disabled", false);
-			$("#header_game").prop("disabled", false);
-			show($("#game form"));
-			$("#next_blind").removeClass("button");
-			
-			show_game();
-		}
-		save_game();
+		
+		$("#play #play_hand #label").text("");
+		$("#play #play_hand #level").text("");
+		$("#play #play_hand #plays").text("");
+		$("#play #play_hand").addClass("empty");
+		$("#play #play_points").text("0");
+		$("#play #play_multi").text("0");
+		$("#play #play_confirm").text("");
+		$("#play #play_confirm").addClass("empty");
+		
+		disable($("#play #play_points"));
+		disable($("#play #play_multi"));
+		disable($("#play #play_reset"));
+		disable($("#play #play_confirm"));
+		
+		enable($("#game_footer .button"));
+		
+		$("#hands_form #s_hand").val(0);
+		hide($("#game #hands_form"));
+		hide($("#game #points_form"));
+		hide($("#game #multi_form"));
+		hide($("#game #dice_form"));
+		
+		$("#header_levels").prop("disabled", false);
+		$("#header_game").prop("disabled", false);
+		show_game();
+		show($("#play"));
 	}
 	
 	function set_levels(){

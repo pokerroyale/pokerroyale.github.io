@@ -21,6 +21,20 @@
 		text-align: center;
 		user-select: none;
 	}
+	
+	a{
+		display: block;
+		font-size: 18px;
+		margin: 5% auto;
+		color: #000000;
+		text-shadow: 0 0 20px #990000;
+	}
+	p{
+		text-align: justify;
+		font-size: 18px;
+		margin: 3% auto;
+	}
+	
 	div, span{ box-sizing: border-box; }
 
 	div#menu{
@@ -91,7 +105,8 @@
 	
 	div#main{
 		position: absolute;
-		display: flex;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
 		width: 300%;
 		height: 93%;
 		margin-top: 0;
@@ -100,7 +115,7 @@
 	
 	/* STYLES FOR LEVELS SCREEN */
 	div#levels{
-		width: 33.33%;
+		width: 100%;
 		height: 100%;
 	}
 	
@@ -274,7 +289,7 @@
 	
 	/* STYLES FOR GAME SCREEN */
 	div#game{
-		width: 33.34%;
+		width: 100%;
 		height: 100%;
 	}
 	
@@ -417,7 +432,7 @@
 		justify-content: center;
 		opacity: 0.5;
 	}
-	div#game form #play_hand #sample { background: center center / auto 55% no-repeat; }
+	div#game form #play_hand #sample { background: center center / auto 48% no-repeat; }
 	div#game form #play_hand #label{
 		grid-row: 1;
 		grid-column: 1 / 3;
@@ -1002,7 +1017,7 @@
 	
 	/* STYLES FOR OPTIONS SCREEN */
 	div#config{
-		width: 33.33%;
+		width: 100%;
 		height: 100%;
 	}
 	
@@ -1086,5 +1101,33 @@
 						-1px -1px 1px #000000,
 						0 0 3px #000000;
 	}
+	
+	div#config div#cookies_form{
+		position: absolute;
+		top: 0;
+		margin: 0 auto;
+		height: 100%;
+		width: 33.33%;
+		display: grid;
+		grid-template-rows: auto 12%;
+		grid-gap: 1%;
+		padding: 1%;
+		align-items: start;
+		background-color: #eeeeee;
+		border: 4px solid #cccccc;
+		border-radius: 3px;
+		transition: all 0.25s ease-out;
+		opacity: 1;
+		transform: translateY(0);
+		visibility: visible;
+		z-index: 1;
+	}
+	div#config div#cookies_form.hidden{
+		opacity: 0;
+		transform: translateX(0) translateY(200%);
+		visibility: hidden;
+	}
+	div#config div#cookies_form span{}
+	div#config div#cookies_form span p{ margin: 3% auto; }
 	
 	@media screen (max-height: 640px){}
