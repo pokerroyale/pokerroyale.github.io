@@ -638,27 +638,38 @@
 		visibility: hidden;
 	}
 	div#game div#boss_form span{
+		position: relative;
 		display: flex;
 		width: 100%;
 		height: 100%;
 		align-items: center;
-		justify-content: center;
+		padding: 5%;
 		font-size: 28px;
 		font-weight: bold;
-		text-shadow: 0 0 0 #000000, 0 0 3px #666666;
+		text-shadow: 0 0 1px #eeeeee, 0 0 6px #eeeeee;
 		border: 3px solid #990000;
 		border-radius: 6px;
 		box-shadow: 3px 3px 3px #666666;
 	}
-	div#game div#boss_form span#double{}
-	div#game div#boss_form span#medium{}
-	div#game div#boss_form span#depressing{}
+	
+	div#game div#boss_form span#double{
+		background: linear-gradient(270deg, #eeeeee80 25%, #eeeeee00, #eeeeee00), url("boss_double.png") right 10% / 130% auto no-repeat;
+		justify-content: right;
+	}
+	div#game div#boss_form span#medium{
+		background: linear-gradient(90deg, #eeeeee80 25%, #eeeeee00, #eeeeee00), url("boss_medium.png") left 24% / 130% auto no-repeat;
+		justify-content: left;
+	}
+	div#game div#boss_form span#depressing{
+		background: linear-gradient(270deg, #eeeeee80 25%, #eeeeee00, #eeeeee00), url("boss_depressing.png") 40% 10% / 150% auto no-repeat;
+		justify-content: right;		
+	}
 	div#game div#boss_form span#tiresome{}
 	div#game div#boss_form span#alternative{}
 	div#game div#boss_form span#forbidden{}
 	div#game div#boss_form span#onehanded{}
 	div#game div#boss_form span#lucky{}
-	div#game div#boss_form span#none{ background-image: linear-gradient(#dd0000, #990000 50%); color: #eeeeee; }
+	div#game div#boss_form span::before{ content: ""; position: absolute; opacity: 0.5; z-index: -1; }
 	
 	div#game div#hands_form{
 		position: absolute;
