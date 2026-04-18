@@ -346,7 +346,7 @@
 		else if(boss == "depressing") warning = "Reduce el nivel de la mano jugada.";
 		else if(boss == "tiresome") warning = "Juega un solo tipo de mano.";
 		else if(boss == "alternative") warning= "Las manos repetidas no puntúan.";
-		else if((boss == "forbidden") || (!isNaN(boss))) warning = "Jugar " + get_label(boss, false, true) + " reduce las fichas a 0.";
+		else if(!isNaN(boss)) warning = "Jugar " + get_label(boss, false, true) + " reduce las fichas a 0.";
 		else if(boss == "onehanded") warning = "Comienza con una sola mano.";
 		else if(boss == "lucky") warning = "Comienza sin descartes.";
 		
