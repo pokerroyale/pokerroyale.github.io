@@ -653,19 +653,25 @@
 	}
 	
 	div#game div#boss_form span#double{
-		background: linear-gradient(270deg, #eeeeee80 25%, #eeeeee00, #eeeeee00), url("boss_double.png") right 10% / 130% auto no-repeat;
+		background: linear-gradient(270deg, #eeeeeeaa 25%, #eeeeee00, #eeeeee00), url("boss_double.png") right 10% / 130% auto no-repeat;
 		justify-content: right;
 	}
 	div#game div#boss_form span#medium{
-		background: linear-gradient(90deg, #eeeeee80 25%, #eeeeee00, #eeeeee00), url("boss_medium.png") left 24% / 130% auto no-repeat;
+		background: linear-gradient(90deg, #eeeeeeaa 25%, #eeeeee00, #eeeeee00), url("boss_medium.png") left 24% / 130% auto no-repeat;
 		justify-content: left;
 	}
 	div#game div#boss_form span#depressing{
-		background: linear-gradient(270deg, #eeeeee80 25%, #eeeeee00, #eeeeee00), url("boss_depressing.png") 40% 10% / 150% auto no-repeat;
+		background: linear-gradient(270deg, #eeeeeeaa 25%, #eeeeee00, #eeeeee00), url("boss_depressing.png") 40% 10% / 150% auto no-repeat;
 		justify-content: right;		
 	}
-	div#game div#boss_form span#tiresome{}
-	div#game div#boss_form span#alternative{}
+	div#game div#boss_form span#tiresome{
+		background: linear-gradient(90deg, #eeeeeeaa 25%, #eeeeee00, #eeeeee00), url("boss_tiresome.png") left 30% / 140% auto no-repeat;
+		justify-content: left;
+	}
+	div#game div#boss_form span#alternative{
+		background: linear-gradient(270deg, #eeeeeeaa 25%, #eeeeee00, #eeeeee00), url("boss_alternative.png") right 12% / 130% auto no-repeat;
+		justify-content: right;
+	}
 	div#game div#boss_form span#forbidden{}
 	div#game div#boss_form span#onehanded{}
 	div#game div#boss_form span#lucky{}
