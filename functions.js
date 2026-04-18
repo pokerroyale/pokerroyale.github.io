@@ -331,7 +331,7 @@
 		else if(b == "depressing") boss_name = "El Deprimente";
 		else if(b == "tiresome") boss_name = "La Cansina";
 		else if(b == "alternative") boss_name = "El Alternativo";
-		else if((b == "forbidden") || (!isNaN(boss))) boss_name = "La Mano Prohibida";
+		else if((b == "forbidden") || (!isNaN(b))) boss_name = "La Mano Prohibida";
 		else if(b == "onehanded") boss_name = "El Manco";
 		else if(b == "lucky") boss_name = "La Afortunada";
 		else boss_name = "Ciega JEFE";
@@ -346,9 +346,9 @@
 		else if(boss == "depressing") warning = "Reduce el nivel de la mano jugada.";
 		else if(boss == "tiresome") warning = "Juega un solo tipo de mano.";
 		else if(boss == "alternative") warning= "Las manos repetidas no puntúan.";
-		else if((boss == "forbidden") || (!isNaN(boss))) boss_name = "La Mano Prohibida";
-		else if(boss == "onehanded") warning = "Jugar " + get_label(boss, false, true) + " reduce las fichas a 0.";
-		else if(boss == "lucky") warning = "Comienza con una sola mano.";
+		else if((boss == "forbidden") || (!isNaN(boss))) warning = "Jugar " + get_label(boss, false, true) + " reduce las fichas a 0.";
+		else if(boss == "onehanded") warning = "Comienza con una sola mano.";
+		else if(boss == "lucky") warning = "Comienza sin descartes.";
 		
 		return(warning);
 	}
@@ -621,6 +621,12 @@
 					$("#points_form #points_string").text($("#points_string").text().replace(search, Math.floor((points[hand] + inc_points[hand] * (level[hand] - 1)) / 2)));
 					search = (inc > 0) ? Math.floor((points[hand] + inc_points[hand] * (level[hand] - 2)) / 2) : Math.floor((points[hand] + inc_points[hand] * level[hand]) / 2);
 					$("#multi_form #multi_string").text($("#multi_string").text().replace(search, Math.floor((multi[hand] + inc_multi[hand] * (level[hand] - 1)) / 2)));
+				}
+				else{
+					search = points[hand] + inc_points[hand] * (level[hand] - 2);
+					$("#points_form #points_string").text($("#points_string").text().replace(search, points[hand] + inc_points[hand] * (level[hand] - 1)));
+					search = multi[hand] + inc_multi[hand] * (level[hand] - 2);
+					$("#multi_form #points_string").text($("#multi_string").text().replace(search, multi[hand] + inc_multi[hand] * (level[hand] - 1)));
 				}
 				
 				points_add(0);
