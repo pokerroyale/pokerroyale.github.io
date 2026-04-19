@@ -93,8 +93,8 @@
 					<span id="level"></span>
 					<span id="plays"></span>
 				</div>
-				<div id="play_points" onClick="if(parseInt($('#s_hand').val())) show($('#points_form'));"></div>
-				<div id="play_multi" onClick="if(parseInt($('#s_hand').val())) show($('#multi_form'));"></div>
+				<div id="play_points" onClick="if(hand) show($('#points_form'));"></div>
+				<div id="play_multi" onClick="if(hand) show($('#multi_form'));"></div>
 				<div id="play_reset" onClick="play_reset();"></div>
 				<div id="play_discard" onClick="play(0);"></div>
 				<div id="play_confirm" class="empty"></div>
@@ -128,7 +128,6 @@
 			</div>
 			
 			<div id="hands_form" class="hidden">
-				<input type="hidden" name="s_hand" id="s_hand" />
 				
 			</div>
 			
