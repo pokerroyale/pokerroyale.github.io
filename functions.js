@@ -239,6 +239,7 @@
 			else $("#game #played").append("<div class='play'><span class='label'>" + get_label(current_play[i]) + "</span><span class='score'>" + current_score[i].toLocaleString() + "</span></div>");
 		}
 		
+		$("#play #play_hand #sample").css("background-image", "none");
 		$("#play #play_hand #label").text("");
 		$("#play #play_hand #level").text("");
 		$("#play #play_hand #plays").text("");
