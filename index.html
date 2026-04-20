@@ -57,23 +57,23 @@
 			
 			<div class="levels_footer" id="max_plays" onClick="change_max_plays(0);">
 				<span class="label">Máx. jugadas</span>
-				<div class="button down" onClick="change_max_plays(-1);">-</div>
+				<span class="button down" onClick="change_max_plays(-1);"></span>
 				<span class="counter"></span>
-				<div class="button up" onClick="change_max_plays(1);">+</div>
+				<span class="button up" onClick="change_max_plays(1);"></span>
 			</div>
 			<div class="levels_footer" id="max_discards" onClick="change_max_discards(0);">
 				<span class="label">Máx. descartes</span>
-				<div class="button down" onClick="change_max_discards(-1);">-</div>
+				<span class="button down" onClick="change_max_discards(-1);"></span>
 				<span class="counter"></span>
-				<div class="button up" onClick="change_max_discards(1);">+</div>
+				<span class="button up" onClick="change_max_discards(1);"></span>
 			</div>
 			<div class="levels_footer" id="tokens" onClick="change_tokens(0);">
 				<span class="label">Fichas</span>
-				<div class="button down" onClick="change_tokens(-5);">-5</div>
-				<div class="button down" onClick="change_tokens(-1);">-1</div>
+				<span class="button down" onClick="change_tokens(-5);">5</span>
+				<span class="button down" onClick="change_tokens(-1);">1</span>
 				<span class="counter"></span>
-				<div class="button up" onClick="change_tokens(1);">+1</div>
-				<div class="button up" onClick="change_tokens(5);">+5</div>
+				<span class="button up" onClick="change_tokens(1);">1</span>
+				<span class="button up" onClick="change_tokens(5);">5</span>
 			</div>
 		</div>
 		
@@ -186,9 +186,9 @@
 			
 			<div class="options">
 				<span class="label">Rondas para muerte súbita:</span>
-				<div class="button down" onClick="change_suddeath(-1);">-</div>
+				<span class="button down" onClick="change_suddeath(-1);"></span>
 				<span id="suddeath"></span>
-				<div class="button up" onClick="change_suddeath(+1);">+</div>
+				<span class="button up" onClick="change_suddeath(+1);"></span>
 			</div>
 			<div class="options">
 				<input type="checkbox" name="nofigures" id="nofigures" onChange="$('#cards .counter').text((this.checked) ? 40 : 52);" /><label for="nofigures">Variante sin figuras</label>
