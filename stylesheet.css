@@ -186,7 +186,7 @@
 		z-index: 1;
 	}
 	
-	div#levels .hand .plays{ width: 6%; font-size: var(--normal); }
+	div#levels .hand .plays{ width: 6%; font-size: var(--small); }
 	div#levels .hand .level{
 		width: 26%;
 		font-size: var(--big);
@@ -277,6 +277,7 @@
 	div#levels .levels_footer .button{
 		width: 24%;
 		margin: 0 0.5%;
+		font-size: var(--giant);
 		opacity: 0;
 	}
 	div#levels .levels_footer .button.down{}
