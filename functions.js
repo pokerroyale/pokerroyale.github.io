@@ -298,7 +298,7 @@
 	
 	function set_levels(){
 		var ins;
-		for(var i = 12; i >= 1; i--){
+		for(var i = 1; i <= 12; i++){
 			ins = "";
 			ins += "\n<div class='hand ";
 			ins += (i % 2 === 0) ? "even" : "odd";
@@ -307,12 +307,12 @@
 			ins += "<span class='label'>" + get_label(i, true) + "</span>";
 			ins += "<span class='plays'></span>";
 			ins += "<span class='level'></span>";
-			ins += "<span class='buttons'><div class='button down' onClick='change_level(" + i + ", -1);'>-</div><div class='button up' onClick='change_level(" + i + ", 1);'>+</div></span>";
+			ins += "<span class='buttons'><span class='button down' onClick='change_level(" + i + ", -1);'></span><span class='button up' onClick='change_level(" + i + ", 1);'></span></span>";
 			ins += "<span class='points'></span>";
 			ins += "<span class='multi'></span>";
 			ins += "</div>";
 			
-			$("#levels #stats").before(ins);
+			$("#levels #levels_header").after(ins);
 			
 			ins = "";
 			ins += "<div id='s_hand_" + i + "' onClick='select_hand(" + i + ");'>";
@@ -322,7 +322,7 @@
 			ins += "<span class='level'></span><span class='plays'></span>";			
 			ins += "</div>";
 			
-			$("#hands_form").html($("#hands_form").html() + ins);
+			$("#hands_form").html(ins + $("#hands_form").html());
 		}
 	}
 	
@@ -414,8 +414,8 @@
 			}
 			else if(boss == "tiresome"){
 				if(current_play.length){
-					for(var i = 0; i <= current_play.length; i++) if(current_play[i] == h) break;
-					if(i > current_play.length){
+					for(var i = 0; i < current_play.length; i++) if(current_play[i]) break;
+					if((i < current_play.length) && (current_play[i] != h)){
 						$("#s_hand_" + h + " .points").text("0");
 						$("#s_hand_" + h + " .multi").text("0");
 					}
@@ -423,8 +423,8 @@
 			}
 			else if(boss == "alternative"){
 				if(current_play.length){
-					for(var i = 0; i <= current_play.length; i++) if(current_play[i] == h) break;
-					if(i <= current_play.length){
+					for(var i = 0; i < current_play.length; i++) if(current_play[i] == h) break;
+					if((i < current_play.length) && (current_play[i] == h)){
 						$("#s_hand_" + h + " .points").text("0");
 						$("#s_hand_" + h + " .multi").text("0");
 					}
@@ -506,16 +506,16 @@
 	function refresh_score(original = false){
 		if(!original){
 			if((boss == "tiresome") && (current_play.length)){
-				for(var i = 0; i <= current_play.length; i++) if(current_play[i] == hand) break;
-				if(i > current_play.length){
+				for(var i = 0; i < current_play.length; i++) if(current_play[i]) break;
+				if((i < current_play.length) && (current_play[i] != hand)){
 					$("#play #play_points").text("0");
 					$("#play #play_multi").text("0");
 					$("#play #play_confirm").text("0");
 				}
 			}
 			else if((boss == "alternative") && (current_play.length)){
-				for(var i = 0; i <= current_play.length; i++) if(current_play[i] == hand) break;
-				if(i <= current_play.length){
+				for(var i = 0; i < current_play.length; i++) if(current_play[i] == hand) break;
+				if((i < current_play.length) && (current_play[i] == hand)){
 					$("#play #play_points").text("0");
 					$("#play #play_multi").text("0");
 					$("#play #play_confirm").text("0");
@@ -576,8 +576,8 @@
 			default: $("#played .warning").remove(); break;
 		}
 		if(boss != "none"){
-			$("#played").append("<div class='warning hidden'>" + get_boss_warning() + "</div>");
-			setTimeout(function(){ show($("#played .warning")); }, 0);
+			$("#game_header").after("<div id='warning hidden'>" + get_boss_warning() + "</div>");
+			setTimeout(function(){ show($("#warning")); }, 0);
 		}
 		
 		refresh();
@@ -651,14 +651,14 @@
 			else enable($("#levels #max_plays .button.down"));
 			$("#levels #max_plays .counter").text(max_plays);
 			
-			if((plays_left) && (!current_play.length) && (boss != "onehanded")){
+			if((!current_play.length) && (plays_left) && (boss != "onehanded")){
 				plays_left += inc;
 				if(!plays_left){
 					disable($("#play #play_confirm"));
 					disable($("#game_footer #plays_left .button.down"));
 				}
 				else{
-					enable($("#play #play_confirm"));
+					if(hand) enable($("#play #play_confirm"));
 					enable($("#game_footer #plays_left .button.down"));
 				}
 				$("#game_footer #plays_left .counter").text(plays_left);
@@ -680,14 +680,14 @@
 			else enable($("#levels #max_discards .button.down"));
 			$("#levels #max_discards .counter").text(max_discards);
 			
-			if((discards_left) && (!current_play.length) && (boss != "lucky")){
+			if((!current_play.length) && (discards_left) && (boss != "lucky")){
 				discards_left += inc;
 				if(!discards_left){
 					disable($("#play #play_discard"));
 					disable($("#game_footer #discards_left .button.down"));
 				}
 				else{
-					enable($("#play #play_discard"));
+					if(hand) enable($("#play #play_discard"));
 					enable($("#game_footer #discards_left .button.down"));
 				}
 				$("#game_footer #discards_left .counter").text(discards_left);
@@ -837,15 +837,15 @@
 				$("#multi_form #multi_string").text(((multi[h] + inc_multi[h] * (level[h] - 1)) / 2 > 1) ? Math.floor((multi[h] + inc_multi[h] * (level[h] - 1)) / 2) : 1);
 			}
 			else if((boss == "tiresome") && (current_play.length)){
-				for(var i = 0; i <= current_play.length; i++) if(current_play[i] == h) break;
-				if(i > current_play.length){
+				for(var i = 0; i < current_play.length; i++) if(current_play[i]) break;
+				if((i < current_play.length) && (current_play[i] != h)){
 					$("#points_form #points_string").text("0");
 					$("#multi_form #multi_string").text("0");
 				}
 			}
 			else if((boss == "alternative") && (current_play.length)){
-				for(var i = 0; i <= current_play.length; i++) if(current_play[i] == h) break;
-				if(i <= current_play.length){
+				for(var i = 0; i < current_play.length; i++) if(current_play[i] == h) break;
+				if((i < current_play.length) && (current_play[i] == h)){
 					$("#points_form #points_string").text("0");
 					$("#multi_form #multi_string").text("0");
 				}
@@ -1016,8 +1016,8 @@
 					current_play[current_play.length] = 0;
 					current_score[current_score.length] = 0;
 					
-					$("#game #played").append("<div class='discard hidden'><span class='label'>Descarte</span><span class='score'></span></div>");
-					setTimeout(function(){ show($("#game #played div.discard")); }, 0);
+					$("#game #play").before("<div class='discard hidden'></div>");
+					setTimeout(function(){ show($("#game div.discard")); }, 0);
 					
 					played_discards++;
 					$("#stats #played_discards").text(played_discards);
@@ -1055,21 +1055,21 @@
 					activate($("#levels #hand_" + h));
 					change_level(h, -1);
 				}
-				else if((boss == "alternative") && (current_play.length)){
-					for(var i = 0; i <= current_play.length; i++) if(current_play[i] == h) break;
-					if(i <= current_play.length) current_score[current_score.length - 1] = 0;
-				}
 				else if((boss == "tiresome") && (current_play.length)){
-					for(var i = 0; i <= current_play.length; i++) if(current_play[i] == h) break;
-					if(i > current_play.length) current_score[current_score.length - 1] = 0;
+					for(var i = 0; i < current_play.length; i++) if(current_play[i]) break;
+					if((i < current_play.length) && (current_play[i] != h)) current_score[current_score.length - 1] = 0;
+				}
+				else if((boss == "alternative") && (current_play.length)){
+					for(var i = 0; i < current_play.length; i++) if(current_play[i] == h) break;
+					if((i < current_play.length) && (current_play[i] == h)) current_score[current_score.length - 1] = 0;
 				}
 				
 				total_score += current_score[current_score.length - 1];
 				
 				current_play[current_play.length] = h;
 				
-				$("#game #played").append("<div class='play hidden'><span class='label'>" + get_label(h) + "</span><span class='score'>" + current_score[current_score.length - 1].toLocaleString() + "</span></div>");
-				setTimeout(function(){ show($("#game #played div.play")); }, 0);
+				$("#game #play").before("<div class='play hidden'><span class='label'>" + get_label(h) + "</span><span class='score'>" + current_score[current_score.length - 1].toLocaleString() + "</span></div>");
+				setTimeout(function(){ show($("#game div.play")); }, 0);
 				
 				played_plays++;
 				$("#stats #played_plays").text(played_plays);
@@ -1136,8 +1136,8 @@
 				refresh();
 				refresh_game_header();
 				
-				hide($("#game #played div"));
-				setTimeout(function(){ $("#game #played").html(""); }, 200);
+				hide($("#game div.discard, #game div.play, #game #warning"));
+				setTimeout(function(){ $("#game div.discard, #game div.play, #game #warning").remove(); }, 200);
 				
 				show($("#game form"));
 				deactivate($("#next_blind"));
@@ -1149,8 +1149,14 @@
 				discards_left = max_discards;
 				$("#game_footer #discards_left .counter").text(discards_left);
 				$("#game_footer #plays_left .counter").text(plays_left);
-				if(discards_left) enable($("#game_footer #discards_left .button.down"));
-				else disable($("#game_footer #discards_left .button.down"));
+				if(discards_left){
+					enable($("#play #play_discard"));
+					enable($("#game_footer #discards_left .button.down"));
+				}
+				else{
+					disable($("#play #play_discard"));
+					disable($("#game_footer #discards_left .button.down"));
+				}
 				if(plays_left) enable($("#game_footer #plays_left .button.down"));
 				
 				save_game();

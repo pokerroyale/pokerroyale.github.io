@@ -1,3 +1,11 @@
+	:root{
+		--giant: 28px;
+		--big: 22px;
+		--normal: 18px;
+		--small: 14px;
+		--tiny: 10px;
+		
+	}
 	@font-face{
 		font-family: 'Kingthings';
 		src: url('kingthings_regular.ttf') format('truetype');
@@ -19,21 +27,21 @@
 		padding: 0;
 		overflow: hidden;
 		font-family: Kingthings, Tahoma, Verdana, sans-serif;
-		font-size: 10px;
+		font-size: var(--normal);
 		text-align: center;
 		user-select: none;
 	}
 	
 	a{
 		display: block;
-		font-size: 18px;
+		font-size: --normal;
 		margin: 5% auto;
 		color: #000000;
 		text-shadow: 0 0 20px #990000;
 	}
 	p{
 		text-align: justify;
-		font-size: 18px;
+		font-size: --normal;
 		margin: 3% auto;
 	}
 	
@@ -59,13 +67,13 @@
 		justify-content: center;
 		color: #000000;
 		background-image: linear-gradient(#eeeeee, #cccccc 50%);
-		font-size: 18px;
+		font-size: var(--normal);
 		font-weight: bold;
 		border: 1px solid transparent;
 	}
 	input[type=checkbox] + label{
 		width: 100%;
-		font-size: 16px;
+		font-size: --normal;
 		justify-content: left;
 		padding-left: 5%;
 		border-radius: 6px;
@@ -93,7 +101,7 @@
 		align-items: center;
 		justify-content: center;
 		height: 100%;
-		font-size: 28px;
+		font-size: var(--giant);
 		font-weight: bold;
 		color: #eeeeee;
 		text-shadow: 0 0 3px #000000;
@@ -164,7 +172,7 @@
 	div#levels .hand .label{
 		width: 38%;
 		margin-left: -38%;
-		font-size: 20px;
+		font-size: var(--big);
 		font-weight: bold;
 		text-shadow: -1px 0 1px #eeeeee,
 					-1px 1px 1px #eeeeee,
@@ -178,10 +186,10 @@
 		z-index: 1;
 	}
 	
-	div#levels .hand .plays{ width: 6%; font-size: 16px; }
+	div#levels .hand .plays{ width: 6%; font-size: var(--normal); }
 	div#levels .hand .level{
 		width: 26%;
-		font-size: 20px;
+		font-size: var(--big);
 		font-weight: bold;
 		opacity: 1;
 		transition: opacity 0.2s 0.2s;
@@ -205,7 +213,7 @@
 	
 	div#levels .hand .points, div#levels .hand .multi{
 		width: 15%;
-		font-size: 20px;
+		font-size: var(--big);
 		font-weight: bold;
 		color: #eeeeee;
 		text-shadow: 1px 1px 2px #000000;
@@ -217,7 +225,7 @@
 	div#levels #levels_header{ height: 4%; padding-top: 0; padding-bottom: 0; margin-bottom: 1%; }
 	div#levels #levels_header span{
 		background-color: #cccccc;
-		font-size: 9px;
+		font-size: var(--tiny);
 		font-weight: normal;
 		color: #000000;
 		text-shadow: none;
@@ -233,14 +241,14 @@
 		height: 10%;
 		margin: 1% auto;
 		grid-template-columns: 40% 10% 40% 10%;
-		font-size: 12px;
+		font-size: var(--small);
 	}
 	div#levels div#stats span{
 		display: flex;
 		align-items: center;
 	}
 	div#levels div#stats span.label{ justify-content: right; }
-	div#levels div#stats span.counter{ justify-content: center;font-weight: bold; }
+	div#levels div#stats span.counter{ justify-content: center; font-weight: bold; }
 	
 	div#levels .levels_footer{
 		position: absolute;
@@ -261,7 +269,7 @@
 		align-items: center;
 		justify-content: center;
 		height: 100%;
-		font-size: 20px;
+		font-size: var(--big);
 		font-weight: bold;
 	}
 	div#levels .levels_footer .label{ width: 40%; }
@@ -280,7 +288,7 @@
 	div#levels #max_plays{ bottom: 12%; }
 	
 	div#levels #tokens .label{ }
-	div#levels #tokens .button{ font-size: 20px; width: 11.5%; }
+	div#levels #tokens .button{ font-size: var(--big); width: 11.5%; }
 	div#levels #tokens .counter{ }
 	div#levels #tokens .counter.negative{ color: #ff0000; }
 	
@@ -304,7 +312,7 @@
 		gap: 0 1%;
 		padding: 0 1%;
 		margin: 0 auto;
-		font-size: 14px;
+		font-size: var(--small);
 		font-weight: bold;
 		color: #eeeeee;
 		background: url("token.png") 2% center / 5% no-repeat, url("token.png") 98% center / 5% no-repeat;
@@ -338,49 +346,54 @@
 	div#game div#game_header.boss_blind #blind{}
 	div#game div#game_header #goal{}
 	
-	div#game div#played{}
-	div#game div#played div{
+	div#game div#warning, div#game div.discard, div#game div.play{
 		position: relative;
 		display: flex;
-		align-items: center;
 		width: 98%;
-		height: 30px;
+		align-items: center;
+		height: 4%;
+		border-radius: 3px;
 		overflow: hidden;
 		margin: 1% auto 0;
-		font-size: 18px;
-		padding: 0 2%;
-		border-radius: 3px;
-		transition: height 0.2s;
-	}
-	div#game div#played div.hidden{ height: 0; }
-	div#game div#played div span{
-		display: flex;
-		height: 100%;
-		align-items: center;
+		font-size: var(--normal);
 		font-weight: bold;
 		color: #eeeeee;
+		padding: 0 2%;
 		text-shadow: 0 0 2px #000000;
+		transition: all 0.2s;
 	}
-	
-	div#game div#played div.warning{
+	div#game div#warning.hidden, div#game div.discard.hidden, div#game div.play.hidden{ height: 0%; }
+	div#game div#warning{
 		justify-content: center;
 		background-color: #eeeeee;
-		font-size: 16px;
+		font-size: var(--small);
 		color: #990000;
+		background-color: #eeeeee;
 		border: 1px solid #990000;
 		text-shadow: 0 0 1px #eeeeee, 0 0 12px #990000;
 		box-shadow: 3px 3px 3px #666666;
 	}
-	div#game div#played div.warning span{ display: inline; height: auto; margin: 0 1%; color: #990000; text-shadow: 0 0 1px #eeeeee, 0 0 12px #990000; }
+	div#game div#warning span{
+		display: inline;
+		height: auto;
+		margin: 0 1%;
+		font-weight: bold;
+	}
 	
-	div#game div#played div.discard{ background-color: #aaaa00; }
-	div#game div#played div.discard span.label{ width: 80%; }
-	div#game div#played div.discard span.score{ width: 20%; background: url("reject.png") right center / 30% no-repeat; }
-	
-	div#game div#played div.play{ background-color: #009900; }
-	div#game div#played div.play span.label{ width: 80%; }
-	div#game div#played div.play span.score{ width: 20%; justify-content: right; }
-	
+	div#game div.discard{
+		background: url("reject.png") 98% center / 6% no-repeat;
+		background-color: #aaaa00;
+	}
+	div#game div.discard::before{ content: "Descarte"; }
+	div#game div.play{ background-color: #009900; }
+	div#game div.play span{
+		display: flex;
+		height: 100%;
+		align-items: center;
+	}
+	div#game div.play span.label{ width: 80%; }
+	div#game div.play span.score{ width: 20%; justify-content: right; }
+
 	div#game form{
 		position: relative;
 		display: grid;
@@ -407,7 +420,7 @@
 		justify-content: center;
 		height: 100%;
 		border-radius: 3px;
-		font-size: 18px;
+		font-size: var(--normal);
 		font-weight: bold;
 		color: #eeeeee;
 		border-style: solid;
@@ -457,9 +470,9 @@
 		z-index: 1;
 	}
 	div#game form #play_hand #level, div#game form #play_hand #plays{ text-shadow: 0 0 2px #eeeeee; }
-	div#game form #play_hand #level{ font-size: 18px; font-weight: bold; }
-	div#game form #play_hand #plays{ font-size: 16px; font-weight: normal; }
-	div#game form #play_points, div#game form #play_multi{ font-size: 28px; text-shadow: 1px 1px 2px #000000; }
+	div#game form #play_hand #level{ font-size: var(--normal); font-weight: bold; }
+	div#game form #play_hand #plays{ font-size: var(--normal); font-weight: normal; }
+	div#game form #play_points, div#game form #play_multi{ font-size: var(--giant); text-shadow: 1px 1px 2px #000000; }
 	div#game form #play_points{ background-image: linear-gradient(#8888ff, #2222ff 50%); border-color: #2222ff; }
 	div#game form #play_multi{ background-image: linear-gradient(#ffaa00, #ff5500 50%); border-color: #ff5500; }
 	div#game form #play_reset{
@@ -473,7 +486,7 @@
 	div#game form #play_confirm{
 		background-image: linear-gradient(#00dd00, #009900 50%);
 		border: 1px solid #009900;
-		font-size: 28px;
+		font-size: var(--giant);
 		text-shadow: 1px 1px 2px #000000;
 	}
 	div#game form #play_confirm.empty{ background: url("confirm.png") center center / 30% no-repeat, linear-gradient(#00dd00, #009900 50%); }
@@ -498,7 +511,7 @@
 		background: linear-gradient(#dd0000, #990000 25%) center bottom / 100% 200%;
 		border: 1px solid #990000;
 		border-radius: 6px;
-		font-size: 24px;
+		font-size: var(--big);
 		font-weight: bold;
 		color: #eeeeee;
 		padding: 0 2%;
@@ -536,7 +549,7 @@
 		height: 28px;
 		width: 98%;
 		margin: 1% auto;
-		font-size: 18px;
+		font-size: var(--normal);
 		color: #000000;
 		padding: 0 2%;
 		overflow: hidden;
@@ -585,7 +598,7 @@
 	}
 	div#game div#game_footer div span.icon{}
 	div#game div#game_footer div span.counter{
-		font-size: 24px;
+		font-size: var(--big);
 		font-weight: bold;
 		color: #eeeeee;
 		text-shadow: 0 0 2px #000000;
@@ -654,7 +667,7 @@
 		align-items: center;
 		justify-content: left;
 		padding: 0 5%;
-		font-size: 28px;
+		font-size: var(--giant);
 		font-weight: bold;
 		text-shadow: 0 0 1px #eeeeee, 0 0 6px #eeeeee;
 		border: 3px solid #990000;
@@ -735,7 +748,7 @@
 	div#game div#hands_form div span.label{
 		grid-row: 1;
 		grid-column: 1 / 3;
-		font-size: 18px;
+		font-size: var(--normal);
 		font-weight: bold;
 		padding-top: 18%;
 		text-shadow: 0 0 0 #eeeeee, 0 0 3px #eeeeee;
@@ -761,7 +774,7 @@
 	div#game div#hands_form div span.points, div#game div#hands_form div span.multi{
 		grid-row: 3;
 		width: 100%;
-		font-size: 20px;
+		font-size: var(--big);
 		font-weight: bold;
 		color: #eeeeee;
 		text-shadow: 2px 2px 3px #666666;
@@ -771,14 +784,14 @@
 	div#game div#hands_form div span.multi{ background-color: #ff5500; }
 	div#game div#hands_form div span.level{
 		grid-row: 4;
-		font-size: 16px;
+		font-size: var(--small);
 		font-weight: bold;
 		text-shadow: 0 0 2px #eeeeee;
 	}
 	div#game div#hands_form div span.level::before{ content: "Niv.:\00a0"; }
 	div#game div#hands_form div span.plays{
 		grid-row: 4;
-		font-size: 16px;
+		font-size: var(--small);
 		text-shadow: 0 0 2px #eeeeee;
 	}
 	div#game div#hands_form div span.plays::before{ content: "Jug.:\00a0"; }
@@ -822,14 +835,14 @@
 		background-color: #2222ff;
 		border: 3px solid #2222ff;
 		border-radius: 10px;
-		font-size: 32px;
+		font-size: var(--giant);
 		font-weight: bold;
 		color: #eeeeee;
 		text-shadow: 2px 2px 3px #000000;
 		overflow: hidden;
 	}
 	div#game div#points_form span.add{
-		font-size: 24px;
+		font-size: var(--big);
 		font-weight: bold;
 		color: #2222ff;
 		border: 3px solid #2222ff;
@@ -850,7 +863,7 @@
 		grid-column: 3 / 6;
 		background-image: linear-gradient(#8888ff, #2222ff 50%);
 		border: 1px solid #2222ff;
-		font-size: 28px;
+		font-size: var(--giant);
 		text-shadow: 2px 2px 3px #000000;
 	}
 	
@@ -893,14 +906,14 @@
 		background-color: #ff5500;
 		border: 3px solid #ff5500;
 		border-radius: 10px;
-		font-size: 32px;
+		font-size: var(--giant);
 		font-weight: bold;
 		color: #eeeeee;
 		text-shadow: 2px 2px 3px #000000;
 		overflow: hidden;
 	}
 	div#game div#multi_form span.add, div#game div#multi_form span.plus{
-		font-size: 24px;
+		font-size: var(--big);
 		font-weight: bold;
 		border: 3px solid #ff5500;
 		border-radius: 3px;
@@ -932,7 +945,7 @@
 		background-image: linear-gradient(#ff8800, #ff5500 50%);
 		border: 1px solid #ff5500;
 		text-shadow: 2px 2px 3px #000000;
-		font-size: 28px;
+		font-size: var(--giant);
 	}
 	
 	div#game div#dice_form{
@@ -976,7 +989,7 @@
 		align-items: center;
 		justify-content: center;
 		background: url("teseract.png") center / 60% no-repeat;
-		font-size: 58px;
+		font-size: 60px;
 		text-shadow: 0 0 10px #800080;
 		border: 3px solid #800080;
 	}
@@ -1015,7 +1028,7 @@
 	}
 	div#game div#dice_form span.rolling{ background-color: #aaaaaa !important; }
 	
-	div#game div#dice_form div.button{ font-size: 28px; }
+	div#game div#dice_form div.button{ font-size: var(--giant); }
 	
 	div#game div#dice_form div#roll{
 		grid-column: 1 / 4;
@@ -1064,7 +1077,7 @@
 			linear-gradient(#ff0000 0 0);
 		color: #eeeeee;
 		text-shadow: 1px 1px 2px #000000;
-		font-size: 18px;
+		font-size: var(--normal);
 		font-weight: bold;
 	}
 	
@@ -1077,7 +1090,7 @@
 		height: 6%;
 		margin: 2% auto;
 	}
-	div#config div.options span, div#config div.options div{
+	div#config div.options span{
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -1085,14 +1098,14 @@
 	}
 	div#config div.options span.label{
 		width: 55%;
-		justify-content: right;
+		justify-content: left;
 		padding-right: 8px;
-		font-size: 14px;
+		font-size: var(--small);
 	}
 	div#config div.options div.button{}
 	div#config div.options div.button.disabled{}
 	div#config div.options span#suddeath{
-		font-size: 18px;
+		font-size: var(--normal);
 		font-weight: bold;
 	}
 	
@@ -1113,7 +1126,7 @@
 		width: 100%;
 		align-items: center;
 		justify-content: center;
-		font-size: 20px;
+		font-size: var(--big);
 		font-weight: bold;
 		color: #eeeeee;
 		background: url("icon.png") 5% center / 15% no-repeat, url("icon.png") 95% center / 15% no-repeat;
