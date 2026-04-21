@@ -196,7 +196,7 @@
 				
 				$("#game #game_header").removeClass("suddeath");
 				$("#game #play").removeClass("suddeath");
-				$("#game #played").text("");
+				$("#game #warning, #game .discard, #game .play").remove();
 				
 				$("#header_levels").prop("disabled", true);
 				$("#header_game").prop("disabled", true);
@@ -235,8 +235,8 @@
 		if(boss != "none") change_boss(boss);
 		
 		for(var i = 0; i < current_play.length; i++){
-			if(!current_play[i]) $("#game #played").append("<div class='discard'><span class='label'>Descarte</span><span class='score'></span></div>");
-			else $("#game #played").append("<div class='play'><span class='label'>" + get_label(current_play[i]) + "</span><span class='score'>" + current_score[i].toLocaleString() + "</span></div>");
+			if(!current_play[i]) $("#game #play").before("<div class='discard'></div>");
+			else $("#game #play").before("<div class='play'><span class='label'>" + get_label(current_play[i]) + "</span><span class='score'>" + current_score[i].toLocaleString() + "</span></div>");
 		}
 		
 		$("#play #play_hand #sample").css("background-image", "none");
@@ -537,15 +537,6 @@
 	}
 	
 	function change_boss(b){
-		// double --> duplica la puntuación objetivo.
-		// medium --> reduce a la mitad la puntuación base
-		// depressing --> reduce un nivel la mano jugada
-		// tiresome --> sólo se puede jugar un tipo de mano
-		// alternative -- > las manos repetidas no puntúan
-		// forbidden --> la/s mano/s más jugadas reducen las fichas a 0
-		// onehanded --> se juega una sola mano
-		// lucky --> se juega sin descartes
-		
 		switch(boss){
 			case "onehanded":
 				activate($("#game_footer #plays_left"));
@@ -557,7 +548,7 @@
 				break;
 			default: break;
 		}
-		$("#played .warning").remove();
+		$("#game #warning").remove();
 		
 		boss = b;
 		switch(boss){
@@ -573,10 +564,10 @@
 				activate($("#game_footer #discards_left"));
 				change_discards(-discards_left - current_play.filter(x => x === 0).length);
 				break;
-			default: $("#played .warning").remove(); break;
+			default: $("#game #warning").remove(); break;
 		}
 		if(boss != "none"){
-			$("#game_header").after("<div id='warning hidden'>" + get_boss_warning() + "</div>");
+			$("#game_header").after("<div id='warning' class='hidden'>" + get_boss_warning() + "</div>");
 			setTimeout(function(){ show($("#warning")); }, 0);
 		}
 		
