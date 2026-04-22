@@ -189,6 +189,10 @@
 				<span class="button up" onClick="change_suddeath(+1);"></span>
 			</div>
 			<div class="options">
+				<input type="radio" name="diff" id="diff_easy" value="0" onChange="diff = 0;" checked /><label for="diff_easy">Modo fácil</label>
+				<input type="radio" name="diff" id="diff_hard" value="1" onChange="diff = 1;" /><label for="diff_hard">Modo difícil</label>
+			</div>
+			<div class="options">
 				<input type="checkbox" name="nofigures" id="nofigures" onChange="$('#cards .counter').text((this.checked) ? 40 : 52);" /><label for="nofigures">Variante sin figuras</label>
 			</div>
 			<div class="options">

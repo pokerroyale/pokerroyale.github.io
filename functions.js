@@ -39,8 +39,9 @@
 	var defeated_blinds, not_defeated_blinds;
 	var total_score;
 	var suddeath = 6;
+	var diff = 0;
 	var nofigures = false, balanced = false;
-	var boss = "none";						// "none" / "double" / "medium" / "depressing" / "tiresome" / "alternative" / "forbidden"
+	var boss = "none";
 	var timeout = 0;
 	const delay = 1500;
 	
@@ -64,6 +65,7 @@
 		Cookies.remove("PokerRoyale_not_played_discards");
 		Cookies.remove("PokerRoyale_defeated_blinds");
 		Cookies.remove("PokerRoyale_not_defeated_blinds");
+		Cookies.remove("PokerRoyale_diff");
 		Cookies.remove("PokerRoyale_nofigures");
 		Cookies.remove("PokerRoyale_balanced");
 		Cookies.remove("PokerRoyale_suddeath");
@@ -101,6 +103,7 @@
 			Cookies.set("PokerRoyale_defeated_blinds", defeated_blinds, { expires: 7 });
 			Cookies.set("PokerRoyale_not_defeated_blinds", not_defeated_blinds, { expires: 7 });
 			Cookies.set("PokerRoyale_nofigures", nofigures, { expires: 7 });
+			Cookies.set("PokerRoyale_diff", diff, { expires: 7 });
 			Cookies.set("PokerRoyale_balanced", balanced, { expires: 7 });
 			Cookies.set("PokerRoyale_suddeath", suddeath, { expires: 7 });
 			Cookies.set("PokerRoyale_dice", dice, { expires: 7 });
@@ -132,9 +135,10 @@
 			not_played_discards = parseInt(Cookies.get("PokerRoyale_not_played_discards"));
 			defeated_blinds = parseInt(Cookies.get("PokerRoyale_defeated_blinds"));
 			not_defeated_blinds = parseInt(Cookies.get("PokerRoyale_not_defeated_blinds"));
+			suddeath = parseInt(Cookies.get("PokerRoyale_suddeath"));
+			diff = parseInt(Cookies.get("PokerRoyale_diff"));
 			nofigures = (Cookies.get("PokerRoyale_nofigures") === "true");
 			balanced = (Cookies.get("PokerRoyale_balanced") === "true");
-			suddeath = parseInt(Cookies.get("PokerRoyale_suddeath"));
 			dice = parseInt(Cookies.get("PokerRoyale_dice"));
 			boss = Cookies.get("PokerRoyale_boss");
 			if(!isNaN(parseInt(boss))) boss = parseInt(boss);
@@ -168,20 +172,23 @@
 			}
 		}
 		$("#config #suddeath").text(suddeath);
+		if(diff) $("#config #diff_hard").prop("checked", true);
 		$("#config #nofigures").prop("checked", nofigures);
 		$("#config #balanced").prop("checked", balanced);
 		
 		if((played_plays) || (played_discards)){
 			disable($("#config .options .button"));
+			$("#config input[type=radio]").prop("disabled", true);
 			$("#config #nofigures").prop("disabled", true);
 			$("#config #balanced").prop("disabled", true);
 		}
 		else{
-			enable($("#config #option .button"));
+			enable($("#config .options .button"));
 			if(suddeath > 1) enable($("#config .options .button.down"));
 			else disable($("#config .options .button.down"));
 			if(suddeath < 12) enable($("#config .options .button.up"));
 			else disable($("#config .options .button.up"));
+			$("#config input[type=radio]").prop("disabled", false);
 			$("#config #nofigures").prop("disabled", false);
 			$("#config #balanced").prop("disabled", false);
 		}
@@ -447,22 +454,26 @@
 	function refresh_game_header(){
 		round = Math.trunc((blind + 2) / 3);
 		
-		if(round <= suddeath) goal = 300 * (2 ** (round - 1));
-		else{
-			goal = 300 * (2 ** (suddeath - 1));
-			for(var i = 1; i <= round - suddeath; i++) goal = goal * 2 + (200 * (2 ** (i - 1)));
-		}
-		
-/*		if(round <= suddeath){
-			goal = 300 * (2 ** (round - 1));
-			for(var i = 1; i < round; i++) goal = goal * 2 + (200 * (2 ** (i - 1)));
+		if(!diff){
+			if(round <= suddeath) goal = 300 * (2 ** (round - 1));
+			else{
+				goal = 300 * (2 ** (suddeath - 1));
+				for(var i = 1; i <= round - suddeath; i++) goal = goal * 2 + (200 * (2 ** (i - 1)));
+			}
 		}
 		else{
-			goal = 300 * (2 ** (suddeath - 1));
-			for(var i = 1; i <= round - suddeath; i++) goal = goal * 2 + (300 * (2 ** (i - 1)));
+			if(round <= suddeath){
+				goal = 300 * (2 ** (round - 1));
+				for(var i = 1; i <= round; i++) goal = goal + (200 * (i - 1));
+			//	for(var i = 1; i < round; i++) goal = goal + (200 * (2 ** (i - 1)));
+			}
+			else{
+				goal = 300 * (2 ** (suddeath - 1));
+				for(var i = 1; i <= round; i++) goal = goal + (200 * (i - 1));
+			//	for(var i = 1; i < suddeath; i++) goal = goal + (200 * (2 ** (i - 1)));
+				for(i = 1; i <= round - suddeath; i++) goal = goal * 2 + (300 * (2 ** (i - 1)));
+			}
 		}
-*/		
-		
 		$("#game_header #round").html("Ronda " + round);
 
 		switch(blind - (3 * (round - 1))){
@@ -624,7 +635,7 @@
 				multi_add(0);
 			}
 			
-			setTimeout(function(){ $("#hand_" + hand).attr("onClick", "change_level(" + h + ", 0);"); }, 0);
+			setTimeout(function(){ $("#hand_" + h).attr("onClick", "change_level(" + h + ", 0);"); }, 0);
 			
 			save_game();
 		}
@@ -1085,6 +1096,7 @@
 			refresh();
 			refresh_game_header();
 			$("#total_score span").text(total_score.toLocaleString());
+			$("#config input[type=radio]").prop("disabled", true);
 			disable($("#config .options .button"));
 			$("#config #nofigures").prop("disabled", true);
 			$("#config #balanced").prop("disabled", true);
