@@ -340,7 +340,7 @@
 		else if(b == "depressing") boss_name = "El Deprimente";
 		else if(b == "tiresome") boss_name = "La Cansina";
 		else if(b == "alternative") boss_name = "El Alternativo";
-		else if((b == "forbidden") || (!isNaN(b))) boss_name = "La Mano Prohibida";
+		else if((b == "forbidden") || (!isNaN(b))) boss_name = "El Reincidente";
 		else if(b == "onehanded") boss_name = "El Manco";
 		else if(b == "lucky") boss_name = "La Afortunada";
 		else boss_name = "Ciega JEFE";
@@ -458,20 +458,15 @@
 			if(round <= suddeath) goal = 300 * (2 ** (round - 1));
 			else{
 				goal = 300 * (2 ** (suddeath - 1));
-				for(var i = 1; i <= round - suddeath; i++) goal = goal * 2 + (200 * (2 ** (i - 1)));
+				for(var i = 1; i <= round - suddeath; i++) goal = goal * 2 + 200 * (2 ** (i - 1));
 			}
 		}
 		else{
-			if(round <= suddeath){
-				goal = 300 * (2 ** (round - 1));
-				for(var i = 1; i <= round; i++) goal = goal + (200 * (i - 1));
-			//	for(var i = 1; i < round; i++) goal = goal + (200 * (2 ** (i - 1)));
-			}
+			goal = 300;
+			if(round <= suddeath) for(var i = 1; i < round; i++) goal = goal * 2 + 200;
 			else{
-				goal = 300 * (2 ** (suddeath - 1));
-				for(var i = 1; i <= round; i++) goal = goal + (200 * (i - 1));
-			//	for(var i = 1; i < suddeath; i++) goal = goal + (200 * (2 ** (i - 1)));
-				for(i = 1; i <= round - suddeath; i++) goal = goal * 2 + (300 * (2 ** (i - 1)));
+				for(var i = 1; i < suddeath; i++) goal = goal * 2 + 200;
+				for(i = 1; i <= round - suddeath; i++) goal = goal * 2 + 300 * (2 ** (i - 1));
 			}
 		}
 		$("#game_header #round").html("Ronda " + round);
