@@ -459,6 +459,19 @@
 		opacity: 0.5;
 		background: center center / auto 48% no-repeat;
 	}
+	div#game form #play_hand #sample.sample_1{ background-image: url("img/sample_1.png"); }
+	div#game form #play_hand #sample.sample_2{ background-image: url("img/sample_2.png"); }
+	div#game form #play_hand #sample.sample_3{ background-image: url("img/sample_3.png"); }
+	div#game form #play_hand #sample.sample-4{ background-image: url("img/sample_4.png"); }
+	div#game form #play_hand #sample.sample_5{ background-image: url("img/sample_5.png"); }
+	div#game form #play_hand #sample.sample_6{ background-image: url("img/sample_6.png"); }
+	div#game form #play_hand #sample.sample_7{ background-image: url("img/sample_7.png"); }
+	div#game form #play_hand #sample.sample_8{ background-image: url("img/sample_8.png"); }
+	div#game form #play_hand #sample.sample_9{ background-image: url("img/sample_9.png"); }
+	div#game form #play_hand #sample.sample_10{ background-image: url("img/sample_10.png"); }
+	div#game form #play_hand #sample.sample_11{ background-image: url("img/sample_10.png"); }
+	div#game form #play_hand #sample.sample_12{ background-image: url("img/sample_12.png"); }
+
 	div#game form #play_hand #label{
 		grid-row: 1;
 		grid-column: 1 / 3;
