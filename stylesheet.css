@@ -4,7 +4,19 @@
 		--normal: 18px;
 		--small: 14px;
 		--tiny: 10px;
-		
+		--pm-shadow: 2px 2px 3px #000000;
+		--white-shadow: 0 0 0 #eeeeee, 0 0 3px #eeeeee;
+		--black-shadow: 0 0 0 #000000, 0 0 3px #000000;
+		--label-shadow: 0 0 0 #eeeeee,
+						-1px 0 1px #eeeeee,
+						-1px 1px 1px #eeeeee,
+						0 1px 1px #eeeeee,
+						1px 1px 1px #eeeeee,
+						1px 0 1px #eeeeee,
+						1px -1px 1px #eeeeee,
+						0 -1px 1px #eeeeee,
+						-1px -1px 1px #eeeeee,
+						0 0 3px #eeeeee;
 	}
 	@font-face{
 		font-family: 'Kingthings';
@@ -19,6 +31,10 @@
 		font-weight: bold;
 		font-style: normal;
 		size-adjust: 125%;
+	}
+	@keyframes suddeath_shadow{
+		0%{ box-shadow: 0 0 0px #ff0000; }
+		100%{ box-shadow: 0 0 6px #ff0000; }
 	}
 	html, body{
 		width: 100%;
@@ -37,7 +53,7 @@
 		font-size: var(--normal);
 		margin: 5% auto;
 		color: #000000;
-		text-shadow: 0 0 20px #990000;
+		text-shadow: 0 0 24px #990000;
 	}
 	p{
 		text-align: justify;
@@ -53,7 +69,6 @@
 	}
 	label{
 		display: flex;
-		width: 33.33%;
 		height: 100%;
 		align-items: center;
 		justify-content: center;
@@ -90,8 +105,9 @@
 	
 	input[type=radio]:checked + label, input[type=checkbox]:checked + label{
 		background-image: linear-gradient(#ff0000, #990000 50%);
-		border: 1px solid #990000;
+		border: 1px solid #990000 !important;
 		color: #eeeeee;
+		text-shadow: var(--black-shadow);
 	}
 	input[type=checkbox]:checked + label{
 		align-items: right;
@@ -108,7 +124,7 @@
 		font-size: var(--giant);
 		font-weight: bold;
 		color: #eeeeee;
-		text-shadow: 0 0 3px #000000;
+		text-shadow: var(--black-shadow);
 		background-image: linear-gradient(#ff0000, #990000 50%);
 		border: 1px solid #990000;
 		border-radius: 6px;
@@ -178,15 +194,7 @@
 		margin-left: -38%;
 		font-size: var(--big);
 		font-weight: bold;
-		text-shadow: -1px 0 1px #eeeeee,
-					-1px 1px 1px #eeeeee,
-					0 1px 1px #eeeeee,
-					1px 1px 1px #eeeeee,
-					1px 0 1px #eeeeee,
-					1px -1px 1px #eeeeee,
-					0 -1px 1px #eeeeee,
-					-1px -1px 1px #eeeeee,
-					0 0 3px #eeeeee;
+		text-shadow: var(--label-shadow);
 		z-index: 1;
 	}
 	
@@ -220,7 +228,7 @@
 		font-size: var(--big);
 		font-weight: bold;
 		color: #eeeeee;
-		text-shadow: 1px 1px 2px #000000;
+		text-shadow: var(--pm-shadow);
 		border-radius: 6px;
 	}
 	div#levels .hand .points{ background-color: #2222ff; }
@@ -266,7 +274,7 @@
 		border-radius: 6px;
 		background-image: linear-gradient(#eeeeee, #cccccc 50%);
 	}
-	div#levels .levels_footer.active{ color: #eeeeee; text-shadow: 0 0 2px #000000; }
+	div#levels .levels_footer.active{ color: #eeeeee; text-shadow: var(--black-shadow); }
 	
 	div#levels .levels_footer span{
 		display: flex;
@@ -334,7 +342,8 @@
 		height: 8%;
 		border-radius: 6px;
 	}
-	div#game div#game_header.suddeath{ box-shadow: 0 0 5px #ff0000; }
+	
+	div#game div#game_header.suddeath{ animation: suddeath_shadow 0.5s infinite alternate; }
 	
 	div#game div#game_header span{
 		display: flex;
@@ -364,7 +373,7 @@
 		font-weight: bold;
 		color: #eeeeee;
 		padding: 0 2%;
-		text-shadow: 0 0 2px #000000;
+		text-shadow: var(--black-shadow);
 		transition: all 0.2s;
 	}
 	div#game div#warning.hidden, div#game div.discard.hidden, div#game div.play.hidden{ height: 0%; margin: 0 auto; }
@@ -375,7 +384,7 @@
 		color: #990000;
 		background-color: #eeeeee;
 		border: 1px solid #990000;
-		text-shadow: 0 0 1px #eeeeee, 0 0 12px #990000;
+		text-shadow: var(--white-shadow), 0 0 12px #990000;
 		box-shadow: 3px 3px 3px #666666;
 	}
 	div#game div#warning span{
@@ -410,13 +419,14 @@
 		overflow: hidden;
 		opacity: 1;
 		margin: 1% auto;
-		background-color: #ccccff;
+		background-color: #cccccc;
+		border: 1px solid #666666;
 		box-sizing: border-box;
 		padding: 1%;
 		transition: opacity 0.2s, height 0.3s 0.2s, width 0.3s 0.5s;
 	}
 	div#game form.hidden{ width: 0; height: 0; opacity: 0; transition: width 0.3s, height 0.3s 0.3s, opacity 0.3s 0.6s; }
-	div#game form.suddeath{ background-color: #ffcccc; box-shadow: 0 0 5px #ff0000; }
+	div#game form.suddeath{ border: 1px solid #ffcccc; animation: suddeath_shadow 0.5s infinite alternate;  }
 	
 	div#game form div{
 		display: flex;
@@ -475,21 +485,13 @@
 	div#game form #play_hand #label{
 		grid-row: 1;
 		grid-column: 1 / 3;
-		text-shadow: -1px 0 1px #eeeeee,
-					-1px 1px 1px #eeeeee,
-					0 1px 1px #eeeeee,
-					1px 1px 1px #eeeeee,
-					1px 0 1px #eeeeee,
-					1px -1px 1px #eeeeee,
-					0 -1px 1px #eeeeee,
-					-1px -1px 1px #eeeeee,
-					0 0 3px #eeeeee;
+		text-shadow: var(--label-shadow);
 		z-index: 1;
 	}
-	div#game form #play_hand #level, div#game form #play_hand #plays{ text-shadow: 0 0 2px #eeeeee; }
+	div#game form #play_hand #level, div#game form #play_hand #plays{ text-shadow: var(--white-shadow); }
 	div#game form #play_hand #level{ font-size: var(--normal); font-weight: bold; }
 	div#game form #play_hand #plays{ font-size: var(--normal); font-weight: normal; }
-	div#game form #play_points, div#game form #play_multi{ font-size: var(--giant); text-shadow: 1px 1px 2px #000000; }
+	div#game form #play_points, div#game form #play_multi{ font-size: var(--giant); text-shadow: var(--pm-shadow); }
 	div#game form #play_points{ background-image: linear-gradient(#8888ff, #2222ff 50%); border-color: #2222ff; }
 	div#game form #play_multi{ background-image: linear-gradient(#ffaa00, #ff5500 50%); border-color: #ff5500; }
 	div#game form #play_reset{
@@ -532,9 +534,10 @@
 		font-weight: bold;
 		color: #eeeeee;
 		padding: 0 2%;
-		text-shadow: 0 0 3px #000000;
+		text-shadow: var(--black-shadow);
 		transition: all 0.2s;
 	}
+	div#game div#next_blind.suddeath{ animation: suddeath_shadow 0.5s infinite alternate; }
 	div#game div#next_blind.button{
 		border-radius: 6px;
 		background: linear-gradient(#dd0000, #990000 25%) center top / 100% 200%;
@@ -687,7 +690,7 @@
 		padding: 0 5%;
 		font-size: var(--giant);
 		font-weight: bold;
-		text-shadow: 0 0 1px #eeeeee, 0 0 6px #eeeeee;
+		text-shadow: var(--white-shadow), 0 0 6px #eeeeee;
 		border: 3px solid #990000;
 		border-radius: 6px;
 		box-shadow: 3px 3px 3px #666666;
@@ -774,7 +777,7 @@
 		font-size: var(--normal);
 		font-weight: bold;
 		padding-top: 18%;
-		text-shadow: 0 0 0 #eeeeee, 0 0 3px #eeeeee;
+		text-shadow: var(--white-shadow);
 	}
 	div#game div#hands_form div span.sample{
 		grid-row: 2;
@@ -800,7 +803,7 @@
 		font-size: var(--big);
 		font-weight: bold;
 		color: #eeeeee;
-		text-shadow: 2px 2px 3px #666666;
+		text-shadow: var(--pm-shadow);
 		border-radius: 6px;
 	}
 	div#game div#hands_form div span.points{ background-color: #2222ff; }
@@ -809,13 +812,13 @@
 		grid-row: 4;
 		font-size: var(--small);
 		font-weight: bold;
-		text-shadow: 0 0 2px #eeeeee;
+		text-shadow: var(--white-shadow);
 	}
 	div#game div#hands_form div span.level::before{ content: "Niv.:\00a0"; }
 	div#game div#hands_form div span.plays{
 		grid-row: 4;
 		font-size: var(--small);
-		text-shadow: 0 0 2px #eeeeee;
+		text-shadow: var(--white-shadow);
 	}
 	div#game div#hands_form div span.plays::before{ content: "Jug.:\00a0"; }
 	
@@ -861,7 +864,7 @@
 		font-size: var(--giant);
 		font-weight: bold;
 		color: #eeeeee;
-		text-shadow: 2px 2px 3px #000000;
+		text-shadow: var(--pm-shadow);
 		overflow: hidden;
 	}
 	div#game div#points_form span.add{
@@ -887,7 +890,7 @@
 		background-image: linear-gradient(#8888ff, #2222ff 50%);
 		border: 1px solid #2222ff;
 		font-size: var(--giant);
-		text-shadow: 2px 2px 3px #000000;
+		text-shadow: var(--pm-shadow);
 	}
 	
 	div#game div#multi_form{
@@ -949,7 +952,7 @@
 	div#game div#multi_form span.plus{
 		background-image: linear-gradient(#ffaa00, #ff5500 50%);
 		color: #eeeeee;
-		text-shadow: 0 0 2px #000000;
+		text-shadow: var(--black-shadow);
 	}
 	div#game div#multi_form div#multi_reset.button{
 		grid-row: 5;
@@ -1013,7 +1016,7 @@
 		justify-content: center;
 		background: url("img/teseract.png") center / 60% no-repeat;
 		font-size: 60px;
-		text-shadow: 0 0 10px #800080;
+		text-shadow: 0 0 0 #800080, 0 0 10px #800080;
 		border: 3px solid #800080;
 	}
 	div#game div#dice_form span.die_1{ background: url("img/die_1.png") center / 60% no-repeat; }
@@ -1134,6 +1137,7 @@
 		margin: 10% auto auto;
 		border-radius: 50px;
 		background-image: linear-gradient(#ff0000, #990000 50%);
+		border: 1px solid #990000;
 	}
 	div#config div#new_game span{
 		display: flex;
@@ -1145,8 +1149,8 @@
 		font-weight: bold;
 		color: #eeeeee;
 		background: url("img/icon.png") 5% center / 15% no-repeat, url("img/icon.png") 95% center / 15% no-repeat;
-		filter: drop-shadow(0 0 1px #000000) drop-shadow(0 0 6px #eeeeee);
-		text-shadow: -1px 0 1px #000000,
+		text-shadow: 0 0 0 #000000,
+						-1px 0 1px #000000,
 						-1px 1px 1px #000000,
 						0 1px 1px #000000,
 						1px 1px 1px #000000,
@@ -1155,6 +1159,7 @@
 						0 -1px 1px #000000,
 						-1px -1px 1px #000000,
 						0 0 3px #000000;
+		filter: drop-shadow(0 0 1px #000000) drop-shadow(0 0 3px #eeeeee);
 	}
 	
 	div#config div#cookies_form{

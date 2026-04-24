@@ -201,8 +201,7 @@
 				delete_game();
 				load_game();
 				
-				$("#game #game_header").removeClass("suddeath");
-				$("#game #play").removeClass("suddeath");
+				$("#game .suddeath").removeClass("suddeath");
 				$("#game #warning, #game .discard, #game .play").remove();
 				
 				$("#header_levels").prop("disabled", true);
@@ -501,6 +500,7 @@
 		if(round > suddeath){
 			$("#game_header").addClass("suddeath");
 			$("#game #play").addClass("suddeath");
+			$("#game #next_blind").addClass("suddeath");
 		}
 		
 		if(boss == "double") goal *= 2;
