@@ -816,7 +816,7 @@
 		if(h != hand){
 			$("#play #play_hand").removeClass("empty");
 			$("#play #play_hand #label").text(get_label(h, true));
-			$("#play #play_hand #sample").addClass("sample_" + h );
+			$("#play #play_hand #sample").attr("class", "sample_" + h );
 			
 			$("#play #play_hand #level").text(level[h]);
 			$("#play #play_hand #plays").text(plays[h] + " +1");
