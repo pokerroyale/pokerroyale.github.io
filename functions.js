@@ -78,11 +78,11 @@
 	function save_game(){
 		if($("#savegame").prop("checked")){
 			var string = "";
-			for(var i = 1; i <= 12; i++) string += (i < 12) ? level[i] + "_" : level[i];
-			Cookies.set("PokerRoyale_level", "0_" + string, { expires: 7 });
+			for(var i = 0; i <= 12; i++) string += (i < 12) ? level[i] + "_" : level[i];
+			Cookies.set("PokerRoyale_level", string, { expires: 7 });
 			string = "";
-			for(i = 1; i <= 12; i++) string += (i < 12) ? plays[i] + "_" : plays[i];
-			Cookies.set("PokerRoyale_plays", "0_" + string, { expires: 7 });
+			for(i = 0; i <= 12; i++) string += (i < 12) ? plays[i] + "_" : plays[i];
+			Cookies.set("PokerRoyale_plays", string, { expires: 7 });
 			string = "";
 			for(i = 0; i < current_play.length; i++) string += (i < current_play.length - 1) ? current_play[i] + "_" : current_play[i];
 			Cookies.set("PokerRoyale_current_play", string, { expires: 7 });
@@ -1030,7 +1030,10 @@
 			$("#next_blind").removeClass("button endgame");
 			hide($("#total_score"));
 			
-			if(!current_play.length) disable($("#game #undo"));
+			if(!current_play.length){
+				disable($("#game #undo"));
+				refresh_game_header();
+			}
 			
 			refresh();
 			save_game();
@@ -1176,7 +1179,7 @@
 				$("#next_blind").removeClass("button");
 				$("#next_blind span").text(0);
 				hide($("#total_score"));
-				deactivate($("#game #undo"));
+				disable($("#game #undo"));
 				
 				plays_left = max_plays;
 				discards_left = max_discards;
