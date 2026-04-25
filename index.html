@@ -37,12 +37,12 @@
 				<span class="label">Manos jugadas:</span>
 				<span class="counter" id="played_plays"></span>
 				<span class="label">Manos no jugadas:</span>
-				<span class="counter" id="not_played_plays"></span>
+				<span class="counter" id="saved_plays"></span>
 			
 				<span class="label">Descartes usados:</span>
 				<span class="counter" id="played_discards"></span>
 				<span class="label">Descartes sin usar:</span>
-				<span class="counter" id="not_played_discards"></span>
+				<span class="counter" id="saved_discards"></span>
 			
 				<span class="label">Ciegas superadas:</span>
 				<span class="counter" id="defeated_blinds"></span>
@@ -94,12 +94,14 @@
 				<div id="play_points" onClick="if(hand) show($('#points_form'));"></div>
 				<div id="play_multi" onClick="if(hand) show($('#multi_form'));"></div>
 				<div id="play_reset" onClick="play_reset();"></div>
-				<div id="play_discard" onClick="play(0);"></div>
-				<div id="play_confirm" class="empty"></div>
+				<div id="play_discard" onClick="play(true);"></div>
+				<div id="play_confirm" class="empty" onClick="play();"></div>
 			</form>
 			
 			<div id="next_blind" onClick="next_blind();"><span></span></div>
 			<div id="total_score" class="hidden"><span></span></div>
+			
+			<div id="undo" class="button" onClick="play_undo();"></div>
 			
 			<div id="game_footer">
 				<div id="dice" onClick="$('#dice_form').removeClass('hidden');"></div>
