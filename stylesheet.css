@@ -492,7 +492,7 @@
 		text-shadow: var(--label-shadow);
 		z-index: 1;
 	}
-	div#game form #play_hand #level, div#game form #play_hand #plays{ text-shadow: var(--white-shadow); }
+	div#game form #play_hand #level, div#game form #play_hand #plays{ color: #eeeeee; text-shadow: var(--black-shadow); }
 	div#game form #play_hand #level{ font-size: var(--normal); font-weight: bold; }
 	div#game form #play_hand #plays{ font-size: var(--normal); font-weight: normal; }
 	div#game form #play_points, div#game form #play_multi{ font-size: var(--giant); text-shadow: var(--pm-shadow); }
@@ -839,13 +839,15 @@
 		grid-row: 4;
 		font-size: var(--small);
 		font-weight: bold;
-		text-shadow: var(--white-shadow);
+		color: #eeeeee;
+		text-shadow: var(--black-shadow);
 	}
 	div#game div#hands_form div span.level::before{ content: "Niv.:\00a0"; }
 	div#game div#hands_form div span.plays{
 		grid-row: 4;
 		font-size: var(--small);
-		text-shadow: var(--white-shadow);
+		color: #eeeeee;
+		text-shadow: var(--black-shadow);
 	}
 	div#game div#hands_form div span.plays::before{ content: "Jug.:\00a0"; }
 	
