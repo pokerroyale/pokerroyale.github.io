@@ -1149,8 +1149,7 @@
 	}
 	div#config div.options span.label{
 		width: 50%;
-		justify-content: left;
-		padding-left: 2%;
+		justify-content: center;
 		font-size: var(--small);
 	}
 	div#config div.options span.button{ width: 18%; }
