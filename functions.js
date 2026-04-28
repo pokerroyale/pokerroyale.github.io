@@ -15,14 +15,14 @@
 	points[2] = 10;		multi[2] = 2;		inc_points[2] = 15;		inc_multi[2] = 1;
 	points[3] = 20;		multi[3] = 2;		inc_points[3] = 20;		inc_multi[3] = 1;
 	points[4] = 30;		multi[4] = 3;		inc_points[4] = 20;		inc_multi[4] = 2;
-	points[5] = 30;		multi[5] = 4;		inc_points[5] = 25;		inc_multi[5] = 2;	// 30
-	points[6] = 35;		multi[6] = 4;		inc_points[6] = 25;		inc_multi[6] = 2;	// 15
-	points[7] = 40;		multi[7] = 4;		inc_points[7] = 30;		inc_multi[7] = 2;	// 15
+	points[5] = 30;		multi[5] = 4;		inc_points[5] = 25;		inc_multi[5] = 2;	// 30x3
+	points[6] = 35;		multi[6] = 4;		inc_points[6] = 25;		inc_multi[6] = 2;	// 15x2
+	points[7] = 40;		multi[7] = 4;		inc_points[7] = 30;		inc_multi[7] = 2;	// 25x2
 	points[8] = 60;		multi[8] = 7;		inc_points[8] = 30;		inc_multi[8] = 3;
-	points[9] = 100;	multi[9] = 8;		inc_points[9] = 40;		inc_multi[9] = 3;
-	points[10] = 120;	multi[10] = 12;		inc_points[10] = 35;	inc_multi[10] = 3;
-	points[11] = 140;	multi[11] = 14;		inc_points[11] = 40;	inc_multi[11] = 3;
-	points[12] = 160;	multi[12] = 16;		inc_points[12] = 40;	inc_multi[12] = 3;
+	points[9] = 100;	multi[9] = 8;		inc_points[9] = 40;		inc_multi[9] = 3;	// 40x4
+	points[10] = 120;	multi[10] = 12;		inc_points[10] = 40;	inc_multi[10] = 4;	// 35x3
+	points[11] = 140;	multi[11] = 14;		inc_points[11] = 40;	inc_multi[11] = 5;	// 40x4
+	points[12] = 160;	multi[12] = 16;		inc_points[12] = 50;	inc_multi[12] = 5;	// 50x3
 	
 	var level = new Array();
 	var plays = new Array();
@@ -590,8 +590,8 @@
 			refresh();
 			
 			activate($("#hand_" + h));
-			$("#hand_" + h + " .points").html(((level[h] > 1) ? "&plusmn; " : "+ ") + inc_points[h]);
-			$("#hand_" + h + " .multi").html(((level[h] > 1) ? "&plusmn; " : "+ ") + inc_multi[h]);
+			$("#hand_" + h + " .points").html(((level[h] > 1) ? "&plusmn;" : "+") + inc_points[h]);
+			$("#hand_" + h + " .multi").html(((level[h] > 1) ? "&plusmn;" : "+") + inc_multi[h]);
 			
 			timeout = setTimeout(function(){ refresh(); }, delay);
 		}
