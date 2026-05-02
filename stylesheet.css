@@ -305,7 +305,7 @@
 	
 	div#levels #max_plays.active{ background-image: linear-gradient(#00dd00, #009900 50%); }
 	div#levels #max_discards.active{ background-image: linear-gradient(#eeee00, #aaaa00 50%); }
-	div#levels #tokens.active{ background-image: linear-gradient(#666666, #222222 50%); }
+	div#levels #tokens.active{ background-image: linear-gradient( #ffffaa, #b2882b 50%); }
 
 	div#levels .levels_footer.active .button{ opacity: 1; }
 	div#levels .levels_footer.active .button.disabled{ opacity: 0.25; }

@@ -233,6 +233,8 @@
 		$("#levels #max_plays .counter").text(max_plays);
 		$("#levels #max_discards .counter").text(max_discards);
 		$("#levels #tokens .counter").text(tokens);
+		if(tokens < 0) $("#levels #tokens .counter").addClass("negative");
+		else $("#levels #tokens .counter").removeClass("negative");
 		
 		refresh_game_header();
 		if(boss != "none") change_boss(boss);
@@ -400,6 +402,8 @@
 		for(var h = 1; h <= 12; h++){
 			$("#hand_" + h + " .level").text(level[h]);
 			$("#hand_" + h + " .plays").text(plays[h]);
+			if(level[h] == 1) disable($("#hand_" + h + " .button.down"));
+			else enable($("#hand_" + h + " .button.down"));
 			$("#hand_" + h + " .points").text(points[h] + inc_points[h] * (level[h] - 1));
 			$("#hand_" + h + " .multi").text(multi[h] + inc_multi[h] * (level[h] - 1));
 				
@@ -598,9 +602,6 @@
 		}
 		else if((inc > 0) || (level[h] > 1)){
 			level[h] += inc;
-			
-			if(level[h] == 1) disable($("#hand_" + h + " .button.down"));
-			else enable($("#hand_" + h + " .button.down"));
 			
 			$("#hand_" + h).removeAttr("onClick");
 			
