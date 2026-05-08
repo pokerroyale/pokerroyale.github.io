@@ -1034,6 +1034,12 @@
 		transform: translateX(-100%) translateY(200%);
 		visibility: hidden;
 	}
+	div#game div#dice_form div{
+		display: flex;
+		width: 100%;
+		height: 100%;
+		border-radius: 6px;
+	}
 	
 	div#game div#dice_form span{
 		height: 100%;
@@ -1049,9 +1055,45 @@
 		justify-content: center;
 		background: url("img/teseract.png") center / 60% no-repeat;
 		font-size: 60px;
+		font-weight: bold;
 		text-shadow: 0 0 0 #800080, 0 0 10px #800080;
+		filter: drop-shadow(0 0 10px #800080);
 		border: 3px solid #800080;
 	}
+	div#game div#dice_form span#die_0.randomizer{
+		display: grid;
+		grid-template-columns: 100%;
+		grid-template-rows: repeat(2, 1fr);
+		grid-template-areas: "hand";
+		background: none;
+		text-shadow: 0 0 0 #00dddd, 0 0 10px #00dddd;
+		filter: drop-shadow(0 0 10px #00dddd);
+		border: 3px solid #00dddd;
+	}
+	div#game div#dice_form span#die_0.randomizer span{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		filter: drop-shadow(0 0 3px #00dddd);
+	}
+	div#game div#dice_form span#die_0.randomizer #randomizer_hand{
+		grid-area: hand;
+		background: url("img/randomizer.png") center center no-repeat;
+		background-size: auto 50%;
+	}
+	div#game div#dice_form span#die_0.randomizer #randomizer_label{
+		grid-area: hand;
+		height: 100%;
+		font-size: 36px;
+		z-index: 1;
+	}
+	
+	div#game div#dice_form span#die_0.randomizer #randomizer_suit{ background: url("img/icon.png") center center / 40% no-repeat; }
+	div#game div#dice_form span#die_0.randomizer #randomizer_suit.suit_0{ background-image: url("img/icon_spades.png"); }
+	div#game div#dice_form span#die_0.randomizer #randomizer_suit.suit_1{ background-image: url("img/icon_hearts.png"); }
+	div#game div#dice_form span#die_0.randomizer #randomizer_suit.suit_2{ background-image: url("img/icon_clubs.png"); }
+	div#game div#dice_form span#die_0.randomizer #randomizer_suit.suit_3{ background-image: url("img/icon_diamonds.png"); }
+	
 	div#game div#dice_form span.die_1{ background: url("img/die_1.png") center / 60% no-repeat; }
 	div#game div#dice_form span.die_1.button{ background: url("img/die_1.png") center / 60% no-repeat, linear-gradient(#eeeeee, #cccccc 50%) center/cover; }
 	div#game div#dice_form span.die_2{ background: url("img/die_2.png") center / 60% no-repeat; }
@@ -1101,14 +1143,22 @@
 	div#game div#dice_form div#dice_switch{
 		grid-row: 5;
 		grid-column: 1;
+		opacity: 1;
+		transition: opacity 0.2s;
+	}
+	div#game div#dice_form div#dice_switch.teseract{
 		background: url("img/die_teseract.png") center / 40% no-repeat, radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080);
 		border: 3px solid #800080;
 	}
 	div#game div#dice_form div#dice_switch.regular{
 		background: url("img/die_regular.png") center / 40% no-repeat, radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080);
-		border-color: #808080;
+		border: 3px solid #808080;
 	}
-	div#game div#dice_form div#dice_switch.disabled{}
+	div#game div#dice_form div#dice_switch.randomizer{
+		background: url("img/randomizer.png") center / 60% no-repeat, radial-gradient(#00dddd, #008888, #00dddd, #008888);
+		border: 3px solid #00dddd;
+	}
+	div#game div#dice_form div#dice_switch.disabled{ opacity: 0.25; }
 	div#game div#dice_form div#dice_close{
 		grid-row: 5;
 		grid-column: 2 / 4;

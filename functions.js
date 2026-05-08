@@ -1,5 +1,6 @@
 	function enable(e){ e.removeClass("disabled"); }
 	function disable(e){ e.addClass("disabled"); }
+	function is_enabled(e){ return(!e.hasClass("disabled")); }
 	function activate(e){ e.addClass("active"); }
 	function deactivate(e){ e.removeClass("active"); }
 	function is_active(e){ return(e.hasClass("active")); }
@@ -297,7 +298,7 @@
 			$("#dice_form #die_" + dice).addClass("button");
 			$("#dice_form #die_" + dice).attr("onClick", "remove_die();");
 		}
-		$("#dice_form #dice_switch").removeClass("regular");
+		$("#dice_form #dice_switch").attr("class", "teseract");
 		
 		$("#header_levels").prop("disabled", false);
 		$("#header_game").prop("disabled", false);
@@ -1203,14 +1204,19 @@
 	}
 	
 	function change_dice(){
-		if(!$("#game #dice_switch").hasClass("disabled")){
-			if(!$("#game #dice_switch").hasClass("regular")){
+		if(is_enabled($("#game #dice_switch"))){
+			if($("#game #dice_switch").hasClass("regular")){
+				$("#game #die_0").remove();
+				$("#game #dice_switch").attr("class", "teseract");
+			}
+			else if($("#game #dice_switch").hasClass("teseract")){
 				$("#game #die_1").before("<span id='die_0' class='die'>&#63;</span>");
-				$("#game #dice_switch").addClass("regular");
+				$("#game #dice_switch").attr("class", "randomizer");
 			}
 			else{
-				$("#game #die_0").remove();
-				$("#game #dice_switch").removeClass("regular");
+				$("#game #die_0").addClass("randomizer");
+				$("#game #die_0").html("<span id='randomizer_hand' class='empty'></span><span id='randomizer_label'></span><span id='randomizer_suit' class='empty'></span>");
+				$("#game #dice_switch").attr("class", "regular");
 			}
 		}
 	}
@@ -1249,7 +1255,15 @@
 		if(times){
 			setTimeout(function(){
 				if(die) $("#game #die_" + die).attr("class", "die_" + (1 + Math.floor(Math.random() * 12)));
-				else $("#game #die_0").text(Math.floor(Math.random() * 26));
+				else if(!$("#game #die_0").hasClass("randomizer")) $("#game #die_0").text(Math.floor(Math.random() * 26));
+				else{
+					var rand_hand = 1 + Math.floor(Math.random() * 12);
+					$("#game #die_0 #randomizer_hand").css("background-image", "url('img/sample_" + rand_hand + ".png')");
+					$("#game #die_0 #randomizer_hand").css("opacity", "0.5");
+					$("#game #die_0 #randomizer_hand").css("background-size", "auto 30%");
+					$("#game #die_0 #randomizer_label").text(get_label(rand_hand));
+					$("#game #die_0 #randomizer_suit").attr("class", "suit_" + Math.floor(Math.random() * 4));
+				}
 				$("#game #die_" + die).addClass("rolling");
 				roll_die(die, times - 1);
 			}, 5 * (30 - times));
@@ -1258,7 +1272,7 @@
 	}
 	
 	function roll_dice(){
-		if(!$("#game #roll").hasClass("disabled")){
+		if(is_enabled($("#game #roll"))){
 			clearTimeout(timeout);
 			$("#game #die_" + dice).removeClass("button");
 			$("#game #die_add").hide();
