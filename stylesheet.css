@@ -1045,6 +1045,7 @@
 		height: 100%;
 		border: 1px solid #cccccc;
 		border-radius: 6px;
+		filter: drop-shadow(0 0 6px #cccccc);
 	}
 	div#game div#dice_form span.button{}
 	div#game div#dice_form span#die_0{
@@ -1057,7 +1058,7 @@
 		font-size: 60px;
 		font-weight: bold;
 		text-shadow: 0 0 0 #800080, 0 0 10px #800080;
-		filter: drop-shadow(0 0 0 #800080) drop-shadow(0 0 10px #800080);
+		filter: drop-shadow(0 0 10px #800080);
 		border: 3px solid #800080;
 	}
 	div#game div#dice_form span#die_0.randomizer{
@@ -1066,15 +1067,14 @@
 		grid-template-rows: repeat(2, 1fr);
 		grid-template-areas: "hand";
 		background: none;
-		text-shadow: 0 0 0 #00dddd, 0 0 10px #00dddd;
-		filter: drop-shadow(0 0 0 #00dddd) drop-shadow(0 0 10px #00dddd);
+		text-shadow: 0 0 1px #00dddd, 0 0 6px #00dddd;
+		filter: drop-shadow(0 0 6px #00dddd);
 		border: 3px solid #00dddd;
 	}
 	div#game div#dice_form span#die_0.randomizer span{
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		filter: drop-shadow(0 0 3px #00dddd);
 	}
 	div#game div#dice_form span#die_0.randomizer #randomizer_hand{
 		grid-area: hand;
@@ -1271,5 +1271,3 @@
 	}
 	div#config div#cookies_form span{}
 	div#config div#cookies_form span p{ margin: 3% auto; }
-	
-	@media screen (max-height: 640px){}
