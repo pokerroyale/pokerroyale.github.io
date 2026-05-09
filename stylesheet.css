@@ -1057,7 +1057,7 @@
 		font-size: 60px;
 		font-weight: bold;
 		text-shadow: 0 0 0 #800080, 0 0 10px #800080;
-		filter: drop-shadow(0 0 10px #800080);
+		filter: drop-shadow(0 0 0 #800080) drop-shadow(0 0 10px #800080);
 		border: 3px solid #800080;
 	}
 	div#game div#dice_form span#die_0.randomizer{
@@ -1067,7 +1067,7 @@
 		grid-template-areas: "hand";
 		background: none;
 		text-shadow: 0 0 0 #00dddd, 0 0 10px #00dddd;
-		filter: drop-shadow(0 0 10px #00dddd);
+		filter: drop-shadow(0 0 0 #00dddd) drop-shadow(0 0 10px #00dddd);
 		border: 3px solid #00dddd;
 	}
 	div#game div#dice_form span#die_0.randomizer span{
