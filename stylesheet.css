@@ -1073,6 +1073,7 @@
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		grid-template-rows: repeat(2, 1fr);
+		grid-gap: 1%;
 		background: none;
 		text-shadow: 0 0 1px #00dddd, 0 0 6px #00dddd;
 		filter: drop-shadow(0 0 6px #00dddd);
