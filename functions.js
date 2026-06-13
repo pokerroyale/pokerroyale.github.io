@@ -33,7 +33,7 @@
 	var plays_left, discards_left;
 	var round, blind, goal;
 	var hand = 0;
-	var tokens;
+	var tokens, tokens_backup;
 	var cards;
 	var dice = 1;
 	var die_0 = 0;
@@ -66,6 +66,7 @@
 		Cookies.remove("PokerRoyale_max_discards");
 		Cookies.remove("PokerRoyale_discards_left");
 		Cookies.remove("PokerRoyale_tokens");
+		Cookies.remove("PokerRoyale_tokens_backup");
 		Cookies.remove("PokerRoyale_cards");
 		Cookies.remove("PokerRoyale_blind");
 		Cookies.remove("PokerRoyale_round");
@@ -105,6 +106,7 @@
 			Cookies.set("PokerRoyale_max_discards", max_discards, { expires: 7 });
 			Cookies.set("PokerRoyale_discards_left", discards_left, { expires: 7 });
 			Cookies.set("PokerRoyale_tokens", tokens, { expires: 7 });
+			Cookies.set("PokerRoyale_tokens_backup", tokens_backup, { expires: 7 });
 			Cookies.set("PokerRoyale_cards", cards, { expires: 7 });
 			Cookies.set("PokerRoyale_blind", blind, { expires: 7 });
 			Cookies.set("PokerRoyale_round", round, { expires: 7 });
@@ -140,6 +142,7 @@
 			max_discards = parseInt(Cookies.get("PokerRoyale_max_discards"));
 			discards_left = parseInt(Cookies.get("PokerRoyale_discards_left"));
 			tokens = parseInt(Cookies.get("PokerRoyale_tokens"));
+			tokens_backup = parseInt(Cookies.get("PokerRoyale_tokens_backup"));
 			cards = parseInt(Cookies.get("PokerRoyale_cards"));
 			blind = parseInt(Cookies.get("PokerRoyale_blind"));
 			round = parseInt(Cookies.get("PokerRoyale_round"));
@@ -171,6 +174,7 @@
 			max_discards = 3;
 			discards_left = max_discards;
 			tokens = 4;
+			tokens_backup = 0;
 			cards = 0;
 			round = 1;
 			blind = 1;
@@ -1045,6 +1049,15 @@
 				change_discards(1);
 			}
 			else{
+				if(boss == "depressing"){
+					activate($("#levels #hand_" + current_play.at(-1)));
+					change_level(current_play.at(-1), 1);
+				}
+				else if(tokens_backup){
+					tokens = tokens_backup;
+					tokens_backup = 0;
+					$("#levels #tokens .counter").text(tokens);
+				}
 				plays[current_play.at(-1)]--;
 				activate($("#plays_left"));
 				change_plays(1);
@@ -1116,6 +1129,7 @@
 				current_score.push(balanced ? Math.floor((get_points() + get_multi()) / 2) ** 2 : get_score());
 				
 				if((!isNaN(parseInt(boss))) && (boss == hand) && (tokens > 0)){
+					tokens_backup = tokens;
 					tokens = 0;
 					$("#levels #tokens .counter").text(tokens);
 				}
