@@ -1057,7 +1057,7 @@
 				else if(tokens_backup){
 					tokens = tokens_backup;
 					tokens_backup = 0;
-					$("#levels #tokens .counter").text(tokens);
+					$("#tokens .counter").text(tokens);
 				}
 				plays[current_play.at(-1)]--;
 				activate($("#plays_left"));
@@ -1132,7 +1132,7 @@
 				if((!isNaN(parseInt(boss))) && (boss == hand) && (tokens > 0)){
 					tokens_backup = tokens;
 					tokens = 0;
-					$("#levels #tokens .counter").text(tokens);
+					$("#tokens .counter").text(tokens);
 				}
 				else if(boss == "depressing"){
 					activate($("#levels #hand_" + hand));
