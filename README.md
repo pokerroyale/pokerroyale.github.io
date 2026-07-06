@@ -1,3 +1,3 @@
-Poker-Royale es un juego de mesa competitivo basado en el popular videojuego Balatro.
+Poker Royale es un juego de mesa competitivo basado en el popular videojuego Balatro.
 
 Actualmente en desarrollo...
