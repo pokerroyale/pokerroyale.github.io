@@ -418,7 +418,7 @@
 		grid-gap: 2% 1%;
 		opacity: 1;
 		width: 98%;
-		height: 28%;
+		height: 25%;
 		margin: 1% auto;
 		overflow: hidden;
 		background-color: #cccccc;
@@ -601,7 +601,7 @@
 		height: 3%;
 		width: 33%;
 		margin: 0.2%;
-		bottom: 12.5%;
+		bottom: 12.75%;
 		font-size: var(--normal);
 		filter: saturate(0.25);
 		transition: all 0.2s;
