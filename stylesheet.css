@@ -164,7 +164,7 @@
 		gap: 0.5%;
 		padding: 0.5%;
 		width: 98%;
-		height: 5.5%;
+		height: 5.75%;
 		border-radius: 6px;
 		margin: 0 auto;
 	}
@@ -212,7 +212,6 @@
 		transition: opacity 0.2s 0.2s;
 	}
 	div#levels .hand .buttons{
-		z-index: 1;
 		width: 26%;
 		margin-left: -26%;
 		opacity: 0;
@@ -223,7 +222,7 @@
 		margin: 0 1%;
 	}
 	div#levels .hand.active .level{ opacity: 0; transition: opacity 0.2s; }
-	div#levels .hand.active .buttons{ opacity: 1; transition: opacity 0.2s 0.2s; }
+	div#levels .hand.active .buttons{ opacity: 1; transition: opacity 0.2s 0.2s; z-index: 1; }
 	div#levels .hand .button.up{}
 	div#levels .hand .button.down{}
 	div#levels .hand .button.up.disabled, div#levels .hand .button.down.disabled{}
@@ -275,7 +274,7 @@
 		padding: 0.2% 0;
 		width: 32.66%;
 		margin: 0 0.33%;
-		height: 5.5%;
+		height: 6%;
 		border-radius: 6px;
 		background-image: linear-gradient(#eeeeee, #cccccc 50%);
 	}
@@ -301,18 +300,11 @@
 	div#levels .levels_footer .button.up{}
 	div#levels .levels_footer .button.disabled{}
 	
-	div#levels #tokens{ bottom: 0; }
-	div#levels #max_discards{ bottom: 6%; }
-	div#levels #max_plays{ bottom: 12%; }
-	
-	div#levels #tokens .label{ }
-	div#levels #tokens .button{ font-size: var(--big); width: 11.5%; }
-	div#levels #tokens .counter{ }
-	div#levels #tokens .counter.negative{ color: #ff0000; }
+	div#levels #max_discards{ bottom: 0; }
+	div#levels #max_plays{ bottom: 6.5%; }
 	
 	div#levels #max_plays.active{ background-image: linear-gradient(#00dd00, #009900 50%); }
 	div#levels #max_discards.active{ background-image: linear-gradient(#eeee00, #aaaa00 50%); }
-	div#levels #tokens.active{ background-image: linear-gradient( #ffffaa, #b2882b 50%); }
 
 	div#levels .levels_footer.active .button{ opacity: 1; }
 	div#levels .levels_footer.active .button.disabled{ opacity: 0.25; }
@@ -609,7 +601,7 @@
 		height: 3%;
 		width: 33%;
 		margin: 0.2%;
-		bottom: 6.5%;
+		bottom: 12.5%;
 		font-size: var(--normal);
 		filter: saturate(0.25);
 		transition: all 0.2s;
@@ -622,68 +614,78 @@
 	
 	div#game div#game_footer{
 		position: absolute;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 1%;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: 50% 50%;
+		grid-gap: 4% 0.5%;
+		padding: 0 0.25%;
 		width: 33.34%;
-		height: 6%;
+		height: 12%;
 		margin: 0 auto;
-		bottom: 0;
+		bottom: 0.5%;
 	}
 	div#game div#game_footer div{
-		display: flex;
+		grid-row: 2;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: 1;
+		grid-gap: 2%;
+		padding: 1%;
 		align-items: center;
 		justify-content: center;
-		padding: 0.5% 0;
-		height: 100%;
-		width: 24%;
 		border-radius: 6px;
 	}
 	div#game div#game_footer div span{
 		display: flex;
-		height: 100%;
-		width: 50%;
 		align-items: center;
 		justify-content: center;
-		opacity: 1;
-		transition: opacity 0.2s 0.2s;
 	}
-	div#game div#game_footer div span.icon{}
 	div#game div#game_footer div span.counter{
+		grid-row: 1;
+		grid-column: 1 / 3;
 		font-size: var(--big);
 		font-weight: bold;
 		color: #eeeeee;
+		justify-content: right;
+		padding-right: 25%;
 		text-shadow: var(--black-shadow);
+		opacity: 1;
+		transition: opacity 0.2s 0.2s;
 	}
-	div#game div#game_footer div span.buttons{
-		height: 100%;
-		width: 100%;
-		margin-left: -100%;
-		opacity: 0;
-		transition: opacity 0.2s;
-		z-index: 1;
-	}
-	div#game div#game_footer div span.buttons .button{
-		width: 48%;
-		margin: 0 1%;
-	}
-	div#game div#game_footer div span.buttons .button.up{}
-	div#game div#game_footer div span.buttons .button.down{}
-	div#game div#game_footer div span.buttons .button.disabled{ opacity: 0.25; }
+	div#game div#game_footer div span.button{ grid-row: 1; opacity: 0; transition: opacity: 0.2s; }
+	div#game div#game_footer div span.button.down{ grid-column: 1; }
+	div#game div#game_footer div span.button.up{ grid-column: 2; }
+	div#game div#game_footer div span.button.disabled{ opacity: 0; }
 	
-	div#game div#game_footer div#dice{ background: url("img/die_button.png") center center / 25% no-repeat, radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080); border: 1px solid #cccccc; }
+	div#game div#game_footer div.active span.counter{ opacity: 0; }
+	div#game div#game_footer div.active span.button{ opacity: 1; }
+	div#game div#game_footer div.active span.button.disabled{ opacity: 0.25; }
+	
+	div#game div#game_footer div#tokens{
+		grid-row: 1;
+		grid-column: 1 / 5;
+		display: grid;
+		grid-gap: 0.5%;
+		padding: 0.5% 0;
+		background-image: linear-gradient( #ffffaa, #b2882b 50%);
+		grid-template-columns: 24.5% 12% 25% 12% 24.5%;
+	}
+	div#game div#game_footer div#tokens span.counter{ background: url("img/token.png") 20% center / 30% no-repeat; grid-column: 3; padding-right: 10%; }
+	div#game div#game_footer div#tokens span.counter.negative{ color: #bb0000; }
+	div#game div#game_footer div#tokens span.button{ grid-column: auto; font-size: var(--big); }
+	div#game div#game_footer div#dice{ background: url("img/die_button.png") center center / 30% no-repeat, radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080); border: 1px solid #cccccc; }
 	div#game div#game_footer div#cards{ background-image: linear-gradient(#00dddd, #008888 50%); border: 1px solid #008888; }
-	div#game div#game_footer div#cards span.icon{ background: url("img/deck.png") center / 50% no-repeat; }
+	div#game div#game_footer div#cards span.counter{ background: url("img/deck.png") 25% center / 30% no-repeat; padding-right: 20%; }
 	div#game div#game_footer div#discards_left{ background-image: linear-gradient(#eeee00, #aaaa00 50%); border: 1px solid #aaaa00; }
-	div#game div#game_footer div#discards_left span.icon{ background: url("img/reject.png") center / 50% no-repeat; }
+	div#game div#game_footer div#discards_left span.counter{ background: url("img/reject.png") 25% center / 30% no-repeat; }
 	div#game div#game_footer div#plays_left{ background-image: linear-gradient(#00dd00, #009900 50%); border: 1px solid #009900; }
-	div#game div#game_footer div#plays_left span.icon{ background: url("img/confirm.png") center / 50% no-repeat; }
+	div#game div#game_footer div#plays_left span.counter{ background: url("img/confirm.png") 25% center / 30% no-repeat; }
 	
 	div#game div#game_footer div.active{}
-	div#game div#game_footer div.active span.icon{ opacity: 0; transition: opacity 0.2s; }
 	div#game div#game_footer div.active span.counter{ opacity: 0; transition: opacity 0.2s; }
-	div#game div#game_footer div.active span.buttons{ opacity: 1; transition: opacity 0.2s 0.2s; }
+	div#game div#game_footer div.active span.button{ opacity: 1; transition: opacity 0.2s 0.2s; z-index: 1; }
+	
+	div#game div#game_footer div#tokens.active span.counter{ opacity: 1; }
 	
 	/* STYLE FOR EMERGENT FORMS */
 	div#game div#boss_form{

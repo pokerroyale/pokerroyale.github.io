@@ -253,9 +253,6 @@
 		
 		$("#levels #max_plays .counter").text(max_plays);
 		$("#levels #max_discards .counter").text(max_discards);
-		$("#levels #tokens .counter").text(tokens);
-		if(tokens < 0) $("#levels #tokens .counter").addClass("negative");
-		else $("#levels #tokens .counter").removeClass("negative");
 		
 		refresh_game_header();
 		if(boss != "none") change_boss(boss);
@@ -284,6 +281,10 @@
 		
 		if(current_play.length) enable($("#game #undo"));
 		else disable($("#game #undo"));
+		
+		$("#tokens .counter").text(tokens);
+		if(tokens < 0) $("#tokens .counter").addClass("negative");
+		else $("#tokens .counter").removeClass("negative");
 		
 		enable($("#game_footer .button"));
 		$("#game_footer #cards .counter").text((nofigures ? 40 : 52) + cards);
@@ -720,18 +721,18 @@
 	
 	function change_tokens(inc){
 		clearTimeout(timeout);
-		if(!is_active($("#levels #tokens"))){
+		if(!is_active($("#tokens"))){
 			refresh();
-			activate($("#levels #tokens"));
+			activate($("#tokens"));
 		}
 		else{
 			tokens += inc;
-			$("#levels #tokens .counter").text(tokens);
-			if(tokens < 0) $("#levels #tokens .counter").addClass("negative");
-			else $("#levels #tokens .counter").removeClass("negative");
+			$("#tokens .counter").text(tokens);
+			if(tokens < 0) $("#tokens .counter").addClass("negative");
+			else $("#tokens .counter").removeClass("negative");
 			save_game();
 		}
-		timeout = setTimeout(function(){ deactivate($("#levels #tokens")); }, delay);
+		timeout = setTimeout(function(){ deactivate($("#tokens")); }, delay);
 	}
 	
 	function change_cards(inc){

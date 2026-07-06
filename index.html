@@ -67,14 +67,14 @@
 				<span class="counter"></span>
 				<span class="button up" onClick="change_max_discards(1);"></span>
 			</div>
-			<div class="levels_footer" id="tokens" onClick="change_tokens(0);">
+<!--			<div class="levels_footer" id="tokens" onClick="change_tokens(0);">
 				<span class="label">Fichas</span>
 				<span class="button down" onClick="change_tokens(-5);">5</span>
 				<span class="button down" onClick="change_tokens(-1);">1</span>
 				<span class="counter"></span>
 				<span class="button up" onClick="change_tokens(1);">1</span>
 				<span class="button up" onClick="change_tokens(5);">5</span>
-			</div>
+			</div>-->
 		</div>
 		
 		<div id="game">
@@ -104,21 +104,25 @@
 			<div id="undo" class="button" onClick="play_undo();"></div>
 			
 			<div id="game_footer">
+				<div id="tokens" onClick="change_tokens(0);">
+					<span class="button down" onClick="change_tokens(-5);">5</span>
+					<span class="button down" onClick="change_tokens(-1);">1</span>
+					<span class="counter"></span>
+					<span class="button up" onClick="change_tokens(1);">1</span>
+					<span class="button up" onClick="change_tokens(5);">5</span>
+				</div>
 				<div id="dice" onClick="$('#dice_form').removeClass('hidden');"></div>
 				<div id="cards" onClick="change_cards(0);">
-					<span class="icon"></span>
 					<span class="counter"></span>
-					<span class="buttons"><div class="button down" onClick="change_cards(-1);">-</div><div class="button up" onClick="change_cards(1);">+</div></span>
+					<span class="button down" onClick="change_cards(-1);"></span><span class="button up" onClick="change_cards(1);"></span>
 				</div>
 				<div id="discards_left" onClick="change_discards(0);">
-					<span class="icon"></span>
 					<span class="counter"></span>
-					<span class="buttons"><div class="button down" onClick="change_discards(-1);">-</div><div class="button up" onClick="change_discards(1);">+</div></span>
+					<span class="button down" onClick="change_discards(-1);"></span><span class="button up" onClick="change_discards(1);"></span>
 				</div>
 				<div id="plays_left" onClick="change_plays(0);">
-					<span class="icon"></span>
 					<span class="counter"></span>
-					<span class="buttons"><div class="button down" onClick="change_plays(-1);">-</div><div class="button up" onClick="change_plays(1);">+</div></span>
+					<span class="button down" onClick="change_plays(-1);"></span><span class="button up" onClick="change_plays(1);"></span>
 				</div>
 			</div>
 			
