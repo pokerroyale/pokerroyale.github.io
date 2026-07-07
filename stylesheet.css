@@ -1,9 +1,9 @@
 	:root{
 		--giant: 28px;
-		--big: 22px;
+		--big: 21px;
 		--normal: 18px;
 		--small: 14px;
-		--tiny: 10px;
+		--tiny: 9px;
 		--pm-shadow: 2px 2px 3px #000000;
 		--white-shadow: 0 0 0 #eeeeee, 0 0 3px #eeeeee;
 		--black-shadow: 0 0 0 #000000, 0 0 3px #000000;
@@ -666,9 +666,9 @@
 		grid-column: 1 / 5;
 		display: grid;
 		grid-gap: 0.5%;
-		padding: 0.5% 0;
+		padding: 0.5% 0.25%;
 		background-image: linear-gradient( #ffffaa, #b2882b 50%);
-		grid-template-columns: 24.5% 12% 25% 12% 24.5%;
+		grid-template-columns: 24.25% 12% 25% 12% 24.25%;
 	}
 	div#game div#game_footer div#tokens span.counter{ background: url("img/token.png") 20% center / 30% no-repeat; grid-column: 3; padding-right: 10%; }
 	div#game div#game_footer div#tokens span.counter.negative{ color: #bb0000; }
