@@ -178,7 +178,7 @@
 		height: 100%;
 	}
 	div#levels .hand .sample{
-		width: 38%;
+		width: 39%;
 		background: center center / auto 90% no-repeat;
 		opacity: 0.5;
 	}
@@ -195,8 +195,8 @@
 	div#levels #hand_11 .sample{ background-image: url("img/sample_11.png"); }
 	div#levels #hand_12 .sample{ background-image: url("img/sample_12.png"); }
 	div#levels .hand .label{
-		width: 38%;
-		margin-left: -38%;
+		width: 39%;
+		margin-left: -39%;
 		font-size: var(--big);
 		font-weight: bold;
 		text-shadow: var(--label-shadow);
@@ -205,15 +205,15 @@
 	
 	div#levels .hand .plays{ width: 6%; font-size: var(--small); }
 	div#levels .hand .level{
-		width: 26%;
+		width: 25%;
 		font-size: var(--big);
 		font-weight: bold;
 		opacity: 1;
 		transition: opacity 0.2s 0.2s;
 	}
 	div#levels .hand .buttons{
-		width: 26%;
-		margin-left: -26%;
+		width: 25%;
+		margin-left: -25%;
 		opacity: 0;
 		transition: opacity 0.2s;
 	}
@@ -666,9 +666,9 @@
 		grid-column: 1 / 5;
 		display: grid;
 		grid-gap: 0.5%;
-		padding: 0.5% 0.25%;
+		padding: 0.5% 0;
 		background-image: linear-gradient( #ffffaa, #b2882b 50%);
-		grid-template-columns: 24.25% 12% 25% 12% 24.25%;
+		grid-template-columns: 24.5% 12% 25% 12% 24.5%;
 	}
 	div#game div#game_footer div#tokens span.counter{ background: url("img/token.png") 20% center / 30% no-repeat; grid-column: 3; padding-right: 10%; }
 	div#game div#game_footer div#tokens span.counter.negative{ color: #bb0000; }
